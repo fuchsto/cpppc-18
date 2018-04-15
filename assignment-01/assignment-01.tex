@@ -1,0 +1,383 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+  \newcommand{\euro}{€}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifpackageloaded{hyperref}{}{%
+\ifxetex
+  \usepackage[setpagesize=false, % page size defined by xetex
+              unicode=false, % unicode breaks when used with xetex
+              xetex]{hyperref}
+\else
+  \usepackage[unicode=true]{hyperref}
+\fi
+}
+\@ifpackageloaded{color}{
+    \PassOptionsToPackage{usenames,dvipsnames}{color}
+}{%
+    \usepackage[usenames,dvipsnames]{color}
+}
+\makeatother
+\hypersetup{breaklinks=true,
+            bookmarks=true,
+            pdfauthor={},
+            pdftitle={Assignment 1: Object-Oriented C},
+            colorlinks=true,
+            citecolor=blue,
+            urlcolor=blue,
+            linkcolor=magenta,
+            pdfborder={0 0 0}
+            }
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+\newcommand{\ImportTok}[1]{{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+\newcommand{\BuiltInTok}[1]{{#1}}
+\newcommand{\ExtensionTok}[1]{{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+\newcommand{\RegionMarkerTok}[1]{{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+\newcommand{\NormalTok}[1]{{#1}}
+\usepackage{longtable,booktabs}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+
+\title{Assignment 1: Object-Oriented C}
+\date{}
+
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+\begin{document}
+\maketitle
+
+\textbf{C++ Programming Course, Winter Term 2016}
+
+\section{0: Prerequisites}\label{prerequisites}
+
+\subsection{0-1: GoogleTest}\label{googletest}
+
+Install googletest in your home directory:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{$ }\KeywordTok{mkdir} \NormalTok{~/build}
+\NormalTok{$ }\KeywordTok{mkdir} \NormalTok{~/opt}
+\NormalTok{$ }\KeywordTok{git} \NormalTok{clone https://github.com/google/googletest.git ~/build/googletest.git}
+\NormalTok{$ }\KeywordTok{cd} \NormalTok{~/build/googletest.git}
+\NormalTok{$ }\KeywordTok{cmake} \NormalTok{-DCMAKE_INSTALL_PREFIX=}\OtherTok{$HOME}\NormalTok{/opt/gtest}
+\NormalTok{$ }\KeywordTok{make} \NormalTok{install}
+\NormalTok{$ }\KeywordTok{echo} \StringTok{"export GTEST_BASE=}\OtherTok{$HOME}\StringTok{/opt/gtest"} \KeywordTok{>>} \NormalTok{~/.zshrc}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{0-2: Tools}\label{tools}
+
+On the test system (VM image or SSH account on server), \texttt{tmux}
+and \texttt{vim} (actually \texttt{nvim}) are installed and configured
+nicely. If you have no previous experience with these programs, make
+yourself familiar with both to make your life easier.
+
+\subsection{0-3: Notes on Running Tests}\label{notes-on-running-tests}
+
+Source files for your implementation are located in
+\texttt{assignment-01/solution}. To build and run your code and the test
+suite, use:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{$ }\KeywordTok{cd} \NormalTok{assignment-01/test}
+\NormalTok{$ }\KeywordTok{make} \NormalTok{run}
+\CommentTok{# same as}
+\NormalTok{$ }\KeywordTok{make} \NormalTok{clean }\KeywordTok{;} \KeywordTok{make} \KeywordTok{&&} \KeywordTok{./testsuite.bin}
+\end{Highlighting}
+\end{Shaded}
+
+To run individual test cases, specify the parameter
+\texttt{-\/-gtest\_filter} when running the test suite:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{$ }\KeywordTok{./testsuite.bin} \NormalTok{--gtest_filter=}\StringTok{"VectorTest.StandardConcept"}
+\NormalTok{$ }\KeywordTok{./testsuite.bin} \NormalTok{--gtest_filter=}\StringTok{"StackTest.*"}
+\end{Highlighting}
+\end{Shaded}
+
+Write basic implementations in the \texttt{solution/*.c} files first,
+the build will fail in the linker stage otherwise because of undefined
+references.
+
+If you modify the test suites for debugging, remember to validate your
+solution using the original test implementation before submitting.
+
+\section{\texorpdfstring{1: Classes in C - ``Wax on, Wax
+off''}{1: Classes in C - Wax on, Wax off}}\label{classes-in-c---wax-on-wax-off}
+
+Remember the implementation of the \texttt{String} class presented in
+the last course session. Let's implement some more.
+
+We first define the \texttt{Standard} concept that specifies standard
+operations which must be provided for any type:
+
+\begin{longtable}[c]{@{}ll@{}}
+\toprule
+. & .\tabularnewline
+\midrule
+\endhead
+\texttt{\textless{}T\textgreater{}\_\_new()\ \ \ \ \ \ \ -\textgreater{}\ o}
+& creates a default instance of type \tabularnewline
+\texttt{\textless{}T\textgreater{}\_\_copy(r)\ \ \ \ \ -\textgreater{}\ o}
+& creates a new instance \texttt{o} as a copy of instance
+\texttt{r}\tabularnewline
+\texttt{\textless{}T\textgreater{}\_\_delete(o)} & destroys instance
+\texttt{o} and releases its memory\tabularnewline
+\texttt{\textless{}T\textgreater{}\_\_assign(o,r)\ -\textgreater{}\ o\textquotesingle{}}
+& assigns instance \texttt{r} to instance \texttt{o}\tabularnewline
+\texttt{\textless{}T\textgreater{}\_\_equals(o,r)\ -\textgreater{}\ b} &
+\texttt{1} if \texttt{o} and \texttt{r} are equal, otherwise
+\texttt{0}\tabularnewline
+\bottomrule
+\end{longtable}
+
+Obviously, the functions implementing these operations for a specific
+type are named according to the type, such as \texttt{wombat\_\_new} for
+type \texttt{Wombat}.
+
+\subsection{1-1: Vector Class in C}\label{vector-class-in-c}
+
+Implement a class in C that satisfies the \texttt{Vector} concept with
+the following semantics:
+
+\begin{longtable}[c]{@{}ll@{}}
+\toprule
+. & Semantics \tabularnewline
+\midrule
+\endhead
+\texttt{vector\_\_size(v)\ \ \ \ \ \ -\textgreater{}\ n} & number of
+elements contained in vector \texttt{v}\tabularnewline
+\texttt{vector\_\_empty(v)\ \ \ \ \ -\textgreater{}\ b} & \texttt{0} if
+vector \texttt{v} has no elements, otherwise 1\tabularnewline
+\texttt{vector\_\_begin(v)\ \ \ \ \ -\textgreater{}\ i} & iterator
+\texttt{i} referencing the first element in \texttt{v}\tabularnewline
+\texttt{vector\_\_end(v)\ \ \ \ \ \ \ -\textgreater{}\ i} & iterator
+\texttt{i} referencing past the final element in
+\texttt{v}\tabularnewline
+\texttt{vector\_\_push\_back(v,e)} & append value \texttt{e} as last
+element in vector \texttt{v}\tabularnewline
+\texttt{vector\_\_pop\_back(v)\ \ -\textgreater{}\ e} & append value
+\texttt{e} as last element in vector \texttt{v}\tabularnewline
+\texttt{vector\_\_push\_front(v,e)} & append value \texttt{e} as first
+element in vector \texttt{v}\tabularnewline
+\texttt{vector\_\_pop\_front(v)\ -\textgreater{}\ e} & append value
+\texttt{e} as first element in vector \texttt{v}\tabularnewline
+\texttt{vector\_\_at(v,o)\ \ \ \ \ \ -\textgreater{}\ e} & returns value
+\texttt{e} at offset \texttt{o} in vector \texttt{v}\tabularnewline
+\bottomrule
+\end{longtable}
+
+Validate your implementation with the test specification in test suite
+\texttt{VectorTest}.
+
+Some thoughts on this:
+
+\begin{itemize}
+\tightlist
+\item
+  We use regular pointers as iterators. What if we implemented a list?
+\item
+  Look up the interface of \texttt{std::vector} at
+  http://cppreference.com. The vector concept in the STL does not
+  specify some of the methods above. Which ones? Why? If the answer does
+  not seem obvious to you, implement all methods first. You'll see.
+\end{itemize}
+
+\subsection{1-2: Deque Class in C}\label{deque-class-in-c}
+
+Implement a class in C that satisfies the \texttt{Deque} concept with
+the following semantics:
+
+\begin{longtable}[c]{@{}ll@{}}
+\toprule
+. & Semantics \tabularnewline
+\midrule
+\endhead
+\texttt{deque\_\_size(d)\ \ \ \ \ \ -\textgreater{}\ n} & number of
+elements contained in deque \texttt{d}\tabularnewline
+\texttt{deque\_\_empty(d)\ \ \ \ \ -\textgreater{}\ b} & \texttt{0} if
+deque \texttt{d} has no elements, otherwise 1\tabularnewline
+\texttt{deque\_\_push\_back(d,e)} & append value \texttt{e} as last
+element in deque \texttt{d}\tabularnewline
+\texttt{deque\_\_push\_front(d,e)} & append value \texttt{e} as first
+element in deque \texttt{d}\tabularnewline
+\texttt{deque\_\_pop\_back(d)\ \ -\textgreater{}\ e} & append value
+\texttt{e} as last element in deque \texttt{d}\tabularnewline
+\texttt{deque\_\_pop\_front(d)\ -\textgreater{}\ e} & append value
+\texttt{e} as first element in deque \texttt{d}\tabularnewline
+\bottomrule
+\end{longtable}
+
+Validate your implementation with the test specification in test suite
+\texttt{DequeTest}.
+
+Keep in mind that you already have an implementation of the
+\texttt{Vector} concept that might come handy. Note that it's not about
+efficiency, yet. See bonus assignments below for more on this.
+
+\subsection{1-3: Stack Class in C}\label{stack-class-in-c}
+
+Implement a class in C that satisfies the \texttt{Stack} concept with
+the following semantics:
+
+\begin{longtable}[c]{@{}ll@{}}
+\toprule
+. & Semantics \tabularnewline
+\midrule
+\endhead
+\texttt{stack\_\_size(s)\ \ \ -\textgreater{}\ n} & number of elements
+contained in stack \texttt{s}\tabularnewline
+\texttt{stack\_\_empty(s)\ \ -\textgreater{}\ b} & \texttt{0} if stack
+\texttt{s} has no elements, otherwise 1\tabularnewline
+\texttt{stack\_\_push(s,e)} & put value \texttt{e} on the
+stack\tabularnewline
+\texttt{stack\_\_pop(s)\ \ \ \ -\textgreater{}\ e} & remove value
+\texttt{e} from the stack\tabularnewline
+\bottomrule
+\end{longtable}
+
+Validate your implementation with the test specification in test suite
+\texttt{StackTest}.
+
+\subsection{1-4: Some Thoughts to Meditate
+Over}\label{some-thoughts-to-meditate-over}
+
+Is there a \texttt{stack} container in the STL? How about a
+\texttt{deque} container? Go to \texttt{cppreference.com} and find out.
+
+Now, see if you can find something special about their definitions. Can
+you think of a reason for their differences?
+
+\subsection{1-5: Reverse Algorithm}\label{reverse-algorithm}
+
+This assignment is just about experimenting:
+
+Implement the methods \texttt{vector\_\_reverse(v)},
+\texttt{deque\_\_reverse(v)} and \texttt{stack\_\_reverse} that reverse
+the element order of the respective container instance. For this:
+
+\begin{itemize}
+\tightlist
+\item
+  Try to formulate the semantics of the general reverse operation
+  \texttt{\textless{}T\textgreater{}\_\_reverse} with respect to
+  existing methods specified above.
+\item
+  Extend the test suites by tests of the reverse-methods.
+\item
+  Finally, implement the reverse-methods and run the test suite to check
+  their correctness.
+\end{itemize}
+
+What do you notice about the similarities and differences in your
+implementations of these functions?
+
+Now, have another look at the question in 1-4. If you did not find an
+answer already, can you now think of a reason for the curious definition
+of \texttt{std::stack} in the STL?
+
+\subsection{1-6: Outlook to Upcoming Course
+Session}\label{outlook-to-upcoming-course-session}
+
+Assuming you had to implement the test cases yourself.
+
+What feature are you missing in C that would drastically simplify the
+implementation of the test cases for \texttt{Vector}, \texttt{Deque} and
+\texttt{Stack}?
+
+Hint: You might have noticed that the test suites are quite identical.
+Why? Is there an advantage in this? Can you exploit this in C?
+
+\section{1-X: Bonus Assignment: Efficient Memory
+Management}\label{x-bonus-assignment-efficient-memory-management}
+
+Your implementation of \texttt{Vector} and \texttt{Deque} from
+assignments 1-1 and 1-2 should have correct semantics, but a basic
+``just formally correct'' implementation is quite inefficient with
+respect to memory management.
+
+\begin{itemize}
+\tightlist
+\item
+  Refactor \texttt{deque\_\_push\_front} and
+  \texttt{deque\_\_pop\_front} such that worst-case complexity O(1) is
+  maintained.
+\item
+  Refactor \texttt{vector\_\_push\_back} and
+  \texttt{vector\_\_pop\_back} to improve their average case complexity.
+\item
+  Your modified implementation should still pass the test suites, of
+  course.
+\end{itemize}
+
+As usual, you should have a close look at cppreference.com first.
+
+\end{document}
