@@ -1,0 +1,33 @@
+---
+format: Markdown
+title: Preparations
+categories: cpppc, teaching
+...
+
+**C++ Programming Course Winter Term 2016**
+
+# 0-1: Virtual Machine Setup
+
+1.  Install VirtualBox on your local machine
+
+    - Download and extract the VirtualBox image: [http://coreglit.ch/cpppc/cpppc-vm.zip]() \
+      login: `cpppc` \
+      password: `datacrunching`
+    
+
+    - Start the VM image on your local machine
+
+2.  The virtual machine runs in head-less mode (without GUI). \
+    Connect to the virtual machine via SSH as user `dash` with password `dash`:
+    
+        ssh dash@192.168.178.55
+
+
+# 0-2: References
+
+- [The C++ Online Reference](http://en.cppreference.com/w)
+- Professional C++, Second Edition. Gregoire, Solter, Kleper.
+- Effective Modern C++. Scott Meyers.
+- [What every Programmer should know about Memory](https://people.freebsd.org/~lstewart/articles/cpumemory.pdf)
+- [Is Parallel Programming Hard, And, If So, What Can You Do About It?](https://www.kernel.org/pub/linux/kernel/people/paulmck/perfbook/perfbook-e1.pdf) \
+  Paul McKenney, Linux Technology Center, IBM. 2014.

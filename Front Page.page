@@ -1,0 +1,84 @@
+---
+format: Markdown
+title: Advanced C++ - Summer Term 2018
+...
+
+
+- [Session 01](/session-01/session-01) \
+    Formal Foundations, Value Semantics, Object-oriented C
+
+
+# Literature
+
+- [*Discovering Modern C++ - An Intensive Course for Scientists, Engineers,
+and Programmers*. \
+Peter Gottschling, 2016](http://ptgmedia.pearsoncmg.com/images/9780134383583/samplepages/9780134383583.pdf)
+
+
+# Selected Talks:
+
+- [Jason Jurecka - "Game engine using STD C++ 11"](https://www.youtube.com/watch?v=8AjRD6mU96s) \
+  A broad overview of language features that make C++ 11 the industry's favorite for code that matters
+- [Chandler Carruth - "High Performance Code 201: Hybrid Data Structures"](https://www.youtube.com/watch?v=vElZc6zSIXM&t=132s) \
+  Why custom data structures are key - and how easy it is to implement them
+- [Ben Deane - "Using Types Effectively"](https://www.youtube.com/watch?v=ojZbFIQSdl8) \
+  A gentle introduction to the benefits of a Turing-complete type system
+- [Marshall Clow - "STL Algorithms - why you should use them, and how to write your own"](https://www.youtube.com/watch?v=h4Jl1fk3MkQ) \
+  ... and why your C++ code is more efficient than performance-tuned C 
+- [Jason Turner - "Practical Performance Practices"](https://www.youtube.com/watch?v=uzF4u9KgUWI) \
+  The talk also gives a great and compact recapitulation of
+  construction semantics (copy, move, assign). Jason also explains that constexpr is
+  actually not needed in many cases (something I learned from this talk)
+- [Ivan Cukic - "Functional reactive programming in C++"](https://www.youtube.com/watch?v=a2MmURgc6cU) \
+  All you need to know (for now) about functional programming in C++
+- [Greg Law - “GDB - A Lot More Than You Knew"](https://www.youtube.com/watch?v=-n9Fkq1e6sg) \
+  Pinky swear: learning GDB basics takes 30 minutes and will change your understanding
+  of code and your machine for life - without effort
+
+## Lecturer's Personal Picks
+
+- [Chandler Carruth "Efficiency with Algorithms, Performance with Data Structures"](https://www.youtube.com/watch?v=fHNmRkzxHWs)
+- [The Blaze High Performance Math Library](https://www.youtube.com/watch?v=w-Y22KrMgFE)
+- [Patrick Niedzielski - "Building and Extending the Iterator Hierarchy in a Modern, Multicore World"](https://www.youtube.com/watch?v=N80hpts1SSk)
+- [Fedor Pikus - "The speed of concurrency (is lock-free faster?)"](https://www.youtube.com/watch?v=9hJkWwHDDxs)
+- ["Making C++ better for games, embedded and financial developers"](https://www.youtube.com/watch?v=dMupATOJKWc)
+- [Andrei Alexandrescu - "Variadic Templates are Funadic"](https://channel9.msdn.com/Events/GoingNative/GoingNative-2012/Variadic-Templates-are-Funadic)
+- [Stephan T. Lavavej - "Don't help the compiler."](https://www.youtube.com/watch?v=AKtHxKJRwp4)
+- [Jason Turner "Practical Performance Practices"](https://www.youtube.com/watch?v=uzF4u9KgUWI&t=580s)
+- [Michael Caisse - "Asynchronous IO Using Boost.Asio"](https://www.youtube.com/watch?v=UUiM-KNH69E)
+- [Michael Wong - "A lock-free concurrent toolkit for hazard pointers"](https://www.youtube.com/watch?v=mHwU0TMuwgc)
+- ["A lock-free concurrency toolkit for deferred reclamation and optimistic speculation"](https://www.youtube.com/watch?v=uhgrD_B1RhQ)
+- [Odin Holmes - "Ranges v3 and microcontrollers, a revolution"](https://www.youtube.com/watch?v=dxRDWgLIAZg)
+- [Double-checked locking is fubar](https://youtu.be/lVBvHbJsg5Y?t=13m28s)
+   (it's still taught to students elsewhere around the globe)
+- [The Term Paper](https://www.youtube.com/watch?v=ihCl_IYjrFg)
+
+# Some Useful References
+
+## Real Life C++:
+
+- [Meeting C++](http://meetingcpp.com/)
+- [How To Submit a Proposal for the C++ Standard Library](https://isocpp.org/std/submit-a-proposal)
+
+## Guidelines:
+
+- [ISO C++ Library Design Guidelines](https://isocpp.org/wiki/library_design_guidelines/library-design-guidelines)
+
+## Selected Articles:
+
+- [Resumable Functions: aync, await](http://meetingcpp.com/index.php/br/items/resumable-functions-async-and-await.html)
+- [C++ Ranges are Pure Monadic Goodness](https://bartoszmilewski.com/2014/10/17/c-ranges-are-pure-monadic-goodness/)
+- [The "Double-Checked Locking is Broken" Declaration](https://www.cs.umd.edu/~pugh/java/memoryModel/DoubleCheckedLocking.html)
+
+
+## Technical References
+
+- [C++ Language Standard (official working draft)](http://www.open-std.org/Jtc1/sc22/wg21/docs/papers/2013/n3797.pdf), great index on the last pages!
+
+- [C++ Language Overview](http://en.cppreference.com/w/cpp/language)
+- [Peter Gottschling's Modern C++ Examples](https://github.com/petergottschling/discovering_modern_cpp)
+- [C++ Tutorials by STE||AR group](https://github.com/STEllAR-GROUP/cpp_lectures_2016)
+- [Undefined vs. Unspecified](http://en.cppreference.com/w/cpp/language/ub)
+- [STL Container Overview Poster](/stl_containers.png)
+  ([source](http://en.cppreference.com/w/File:container-library-overview-2012-12-27.pdf))
+

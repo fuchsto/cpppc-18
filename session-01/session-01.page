@@ -1,0 +1,278 @@
+---
+format: Markdown
+title: Session 1 Summary
+categories: cpppc, teaching
+...
+
+**C++ Programming Course, Winter Term 2016, 21. Oct 2016**
+
+# Course Material
+
+## VM Image
+
+VM system is headless (without GUI), so you should login via SSH:
+
+- Open the file CppPC.vbox in VirtualBox.
+- In the Settings tab, enable network adapter 2 under Network and set it to Host-only Adapter. \
+  Ensure that Cable Connected is checked in the Advanced section of the network adapter configuration.
+- Adjust number of CPUs and RAM size in the System tab.
+- Start the virtual machine.
+- Login as user root (Password: crunch123) and enter ifconfig to list the system's IP addresses.
+- Connect to the IP listed for interface enp0s08 via SSH as user cpppc (password: crunch123).
+
+## Server instance at the MNM chair
+
+Note: only accessible from a login node at the CIP pool.
+
+|          | ` ` 
+| -------- | ---------------
+| IP       | `10.153.212.151`
+| Login    | `cpp<last 2 digits of your matr. number>`
+| Password | `crunch<last 2 digits of your matr. number><first letter of family name>`
+
+Example: User "Tobias Fuchs", matr no. 123456:
+
+|          | ` `
+| -------- | ---------------
+| Login    | `cpp56`
+| Password | `crunch56f`
+
+Messing around with user accounts or the system will not be considered a laughing matter. \
+Be responsible and respectful to others.
+
+Now, please test your account. The following build should run without errors:
+
+~~~bash
+$ cd ~/workspaces/dash-development
+$ ./build.dev.sh # Hit ENTER to confirm
+~~~
+      
+If you think there is something wrong with your account configuration (such as ZSH or (n)vim), run:
+
+~~~bash
+$ /opt/reset-home.sh # Confirm with 'y' and ENTER
+$ /opt/init-home.sh
+~~~
+
+
+# Informal Definitions
+
+Object (general)
+:   location in memory with a value of a specific type, (usually) referenced by a named identifier
+
+Type
+:   a classification of data used to communicate the intention of its usage towards the compiler
+
+Class
+:   specifies a type of objects with their data members and operations (methods) that transfer
+    these objects from one well-defined state to another
+
+Instance / Class Object / Object (OOCP)
+:   an object is called an instance of a class if it has been created by a constructor of
+    the class
+
+
+# Object Oriented Programming: Simplified Models
+
+## Functional Style: State is passed between functions
+
+$$
+   method: Type \rightarrow \dots parameters \dots \rightarrow Type
+$$
+
+Which is equivalent to a C signature like:
+
+~~~c
+Type * method(const Type * obj, ... parameters ...);
+// state of obj is not changed by operation, mofidied state is
+// returned as new object
+~~~
+
+For example:
+
+~~~c
+Collection * collection__add_elem(Collection * c, const Element * e);
+
+Collection * c = collection__add(
+                   collection_add(collection__new(), 123),
+                   456);
+~~~
+
+## Imperative Style: State is persisted in objects
+
+~~~c
+void method(Type * obj, ... parameters ...);
+// state of obj is altered after operation
+~~~
+
+For example:
+
+~~~c
+void collection__add_elem(Collection * c, const Element * e);
+
+Collection * c = collection__new();
+collection__add_elem(c, 123);
+collection__add_elem(c, 456);
+~~~
+
+
+Both functional and imperative style illustrated above are object-oriented, they
+just differ in the representation of "state".
+
+
+# Object-Oriented C
+
+## Members and Methods
+
+In C, we can use structs to represent a type as a well-defined organization
+of data: 
+
+~~~c
+typedef struct {
+  unsigned char r;
+  unsigned char g;
+  unsigned char b;
+} RGB;
+
+typedef struct {
+  unsigned int x;
+  unsigned int y;
+  RGB;
+} Pixel;
+
+typedef struct {
+  Pixel line_points[100];
+} DrawLine;
+~~~
+
+**Q: This shows has-a relationships (containment) in the OO sense. \
+     How could we express is-a dependencies?**
+
+The object-oriented paradigm implies that types may be specified to follow the
+Liskov substitution principle: specialized types must be semantically able to
+act as any of their base types.
+
+More precisely, how could we achieve this to work:
+
+~~~c
+Motorboat * m = motorboat__new();
+Astrovan  * a = astrovan__new();
+
+motorboat_max_passengers = vehicle__max_passengers(m);
+astrovan_max_passengers  = vehicle__max_passengers(a);
+~~~
+
+In format terms, a substitution ($b \implies B) / (s \implies S:B$) of an
+instance $b$ with supertype $B$ and subtype $S$ is subject to the constraints:
+
+- Preconditions of $B$ cannot be strengthened in a subtype
+- Postconditions of $B$ cannot be weakened in a subtype
+- Invariants of $B$ are preserved in $S$
+
+**However**, you will soon be convinced that inheritance is far less important
+for sound concept definitions than you might have been told so far
+(see *Composition over Inheritance*).
+
+
+## States and Side-effects
+
+The notion of *side-effects* is common in the functional programming mind set.
+In the conventional mathematical interpretation of the function concept, a
+function call is a *static* mapping between value spaces. As a consequence
+in functional programming, any function call could be replaced by its result.
+Functions that satisfy this property named **referential transparency**
+are called **pure**.
+
+Any persistent, observable effect of a function call would violate referential
+transparency. For example, calls of `printf` could not be replaced by their
+returned result (usually 0) as this would eliminate the intended side-effect
+on the console.
+
+Unfortunately, every operation on a physical computational machine does have
+side-effects. At the very least, the CPU instruction counter is changed.
+Functional programming languages like Haskell therefore classify some
+side-effects as negligible.
+
+Typically, a functional programming runtime environment aims at hiding
+side-effects from the programmer by means of mechanisms like garbage collection.
+Allocating data on the heap is definitely a side-effect, but considered
+irrelevant to functional semantics.
+
+
+
+~~~c
+typedef struct {
+  size_t   _count;
+  double * _values;
+} Vector;
+
+Vector * vector__new    ();
+
+void     vector__push   (Vector * _this, double value);
+double   vector__pop    (Vector * _this);
+double   vector__at     (Vector * _this, int index);
+unsigned vector__size   (Vector * _this);
+double   vector__sum    (Vector * _this);
+~~~
+
+Now consider:
+
+~~~c
+double dummy() {
+  Vector * vectors[10];
+  for (int i = 0; i < 10; i++) {
+    Vector * v = vector__new();
+    vector__push_back(v, i * 123);
+    vectors[i] = v;
+  }
+  // ...
+  return 123;
+}
+~~~
+
+What's the problem with this function?
+
+### Value Semantics and the (classical) Rule of Three
+
+Class objects that maintain ownership of a resource need special definitions
+in their behaviour. The crucial aspects are:
+
+- Taking ownership
+- Sharing ownership
+- Releasing ownership
+- Transferring ownership
+
+... of a resource. In our `Vector` example, we need to define the additional
+methods:
+
+~~~c
+void     vector__copy   (Vector * other);
+void     vector__delete (Vector * _this);
+Vector * vector__assign (Vector * _this, Vector * other);
+~~~
+
+## Standard Object Semantics
+
+**Allocation**
+  : reserves memory for an object
+
+**Initialization**
+: writes initial values to instance members in previously allocated memory
+
+**Construction, Instantiation**
+: allocation and initialization; construction is a public operation, allocation and
+  initialization should not be directly accessible as separate operations
+
+**Copy**
+: special case of construction / instantiation where instance members are initialized
+  with another object's state instead of default values
+
+**Assignment**
+: operation performed at a left-hand side (lhs) object such that its state is updated
+  to a right-hand side (rhs) object; after assignment, equality comparison of lhs and rhs
+  must return true.
+
+**Destruction**
+: Free instance members and release resources
+
+

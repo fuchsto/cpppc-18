@@ -1,0 +1,19 @@
+---
+format: Markdown
+title: Setup Notes
+...
+
+# Debian
+
+See [Debian setup files](/setup/)
+
+# gitit
+
+~~~bash
+$ sudo apt-get update && sudo apt-get install git haskell-platform
+$ cabal update
+$ cabal install Cabal
+$ cabal install cabal-install
+$ cabal install gitit
+~~~
+
