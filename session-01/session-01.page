@@ -4,55 +4,8 @@ title: Session 1 Summary
 categories: cpppc, teaching
 ...
 
-**C++ Programming Course, Winter Term 2016, 21. Oct 2016**
+**C++ Programming Course, Winter Term 2018, 13. April 2018**
 
-# Course Material
-
-## VM Image
-
-VM system is headless (without GUI), so you should login via SSH:
-
-- Open the file CppPC.vbox in VirtualBox.
-- In the Settings tab, enable network adapter 2 under Network and set it to Host-only Adapter. \
-  Ensure that Cable Connected is checked in the Advanced section of the network adapter configuration.
-- Adjust number of CPUs and RAM size in the System tab.
-- Start the virtual machine.
-- Login as user root (Password: crunch123) and enter ifconfig to list the system's IP addresses.
-- Connect to the IP listed for interface enp0s08 via SSH as user cpppc (password: crunch123).
-
-## Server instance at the MNM chair
-
-Note: only accessible from a login node at the CIP pool.
-
-|          | ` ` 
-| -------- | ---------------
-| IP       | `10.153.212.151`
-| Login    | `cpp<last 2 digits of your matr. number>`
-| Password | `crunch<last 2 digits of your matr. number><first letter of family name>`
-
-Example: User "Tobias Fuchs", matr no. 123456:
-
-|          | ` `
-| -------- | ---------------
-| Login    | `cpp56`
-| Password | `crunch56f`
-
-Messing around with user accounts or the system will not be considered a laughing matter. \
-Be responsible and respectful to others.
-
-Now, please test your account. The following build should run without errors:
-
-~~~bash
-$ cd ~/workspaces/dash-development
-$ ./build.dev.sh # Hit ENTER to confirm
-~~~
-      
-If you think there is something wrong with your account configuration (such as ZSH or (n)vim), run:
-
-~~~bash
-$ /opt/reset-home.sh # Confirm with 'y' and ENTER
-$ /opt/init-home.sh
-~~~
 
 
 # Informal Definitions
