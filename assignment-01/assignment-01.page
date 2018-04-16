@@ -4,7 +4,7 @@ title: Assignment 1: Object-Oriented C
 categories: cpppc, teaching
 ...
 
-**C++ Programming Course, Winter Term 2016**
+**C++ Programming Course, Summer Term 2018**
 
 # 0: Prerequisites
 
@@ -187,6 +187,17 @@ implementation of the test cases for `Vector`, `Deque` and `Stack`?
 
 Hint: You might have noticed that the test suites are quite identical.
 Why? Is there an advantage in this? Can you exploit this in C?
+
+
+## 1-7: Conceptual Perfect Pitch
+
+Find definitions of the following terms and explain their implications
+with respect to each other:
+
+- Sequence
+- Interval
+- Range
+- Region
 
 
 # 1-X: Bonus Assignment: Efficient Memory Management
