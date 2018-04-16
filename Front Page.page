@@ -18,6 +18,9 @@ Peter Gottschling, 2016](http://ptgmedia.pearsoncmg.com/images/9780134383583/sam
 
 # Selected Talks:
 
+- [Sean Parent - "Inheritance is the Base Class of Evil"](https://www.youtube.com/watch?v=bIhUE5uUFOA)
+  How polymorphism does not mean what you think, and why inheritance is a bad choice
+  to achieve it
 - [Jason Jurecka - "Game engine using STD C++ 11"](https://www.youtube.com/watch?v=8AjRD6mU96s) \
   A broad overview of language features that make C++ 11 the industry's favorite for code that matters
 - [Chandler Carruth - "High Performance Code 201: Hybrid Data Structures"](https://www.youtube.com/watch?v=vElZc6zSIXM&t=132s) \
