@@ -9,7 +9,22 @@ categories: cpppc, teaching
 [We all were beginners some time](/files/fuchs_recommendation_tum.jpg)
 
 
-# Informal Definitions
+
+> "I am sitting in a garden with a philosopher. Pointing to a nearby tree he says:
+> 'I know that THIS is a tree'! To another man passing by, overhearing this
+> statement, I explain: 'Oh no, he is not insane, we are just philosophing'".\
+> -- Wittgenstein. Über Gewißheit. 1951.
+
+
+
+# This course is not about the C++ programming language
+
+- [Base-level course on the C++ language for comparison](http://www.cis.uni-muenchen.de/kurse/max/C++/aufgaben/cpp-skript.pdf)
+- [Code example of what this course is about](https://github.com/ericniebler/range-v3/blob/master/include/range/v3/view_facade.hpp)
+
+
+
+# Semi-formal Definitions
 
 Object (general)
 :   location in memory with a value of a specific type, (usually) referenced by a named identifier
@@ -17,13 +32,20 @@ Object (general)
 Type
 :   a classification of data used to communicate the intention of its usage towards the compiler
 
-Class
-:   specifies a type of objects with their data members and operations (methods) that transfer
-    these objects from one well-defined state to another
+Class (mathematical)
+:   A collection that is defined based on common properties of its elements.
+
+Class (technical)
+:   specifies a type of objects with their data members and operations (methods) 
+    that transfer these objects from one well-defined state to another
 
 Instance / Class Object / Object (OOCP)
-:   an object is called an instance of a class if it has been created by a constructor of
-    the class
+:   in this course, we use the term *instance* for an object if its type is a
+    class (structured), *class object* is a synonym that emphasizes the
+    class-based mechanisms of an instance
+
+**Q: What is the purpose of formal definitions? How are mathematical definitions
+     and the skill to interpret them related to software engineering?**
 
 
 # Object Oriented Programming: Simplified Models
@@ -45,7 +67,7 @@ Type * method(const Type * obj, ... parameters ...);
 For example:
 
 ~~~c
-Collection * collection__add_elem(Collection * c, const Element * e);
+Collection * collection__add_elem(const Collection * c, const Element * e);
 
 Collection * c = collection__add(
                    collection_add(collection__new(), 123),
@@ -72,6 +94,9 @@ collection__add_elem(c, 456);
 
 Both functional and imperative style illustrated above are object-oriented, they
 just differ in the representation of "state".
+
+Likewise, both notations are **procedural** as the operations in either variant
+take effect in the order they have been stated.
 
 
 # Object-Oriented C
@@ -228,5 +253,54 @@ Vector * vector__assign (Vector * _this, Vector * other);
 
 **Destruction**
 : Free instance members and release resources
+
+
+# Developing Conceptual Perfect Pitch
+
+We discussed *Function* vs. *Method* already, a closer look at *Operator* vs. *Operation*
+is highly revealing as well:
+
+Operator (mathematical)
+: A mapping that acts on elements of a space and produces elements of the
+  same space.
+
+Do you see the implications?
+
+Note how the choice of words in this definition sounds suspiciously uncommon.
+This is because it carefully tries to avoids assumptions on how an operator
+could actually work.
+
+- Why does it say "produce elements" instead of "map to elements"?
+- Why "space" instead of "set"?
+- Why "act on elements" instead of "map elements from"?
+
+Différance!
+(Jacques Derrida: the *difference* of words hidden in their "deference" in a given context)
+
+
+Operation (mathematical)
+: A calculation from zero or more input values (operands) to an output value
+
+The choice of words is very specific here: "value", "calculation", "input" ...
+
+- **Q: Doesn't this sound notably familiar? How is this different from a function?**
+- **Q: Give examples for operators that are not operations**
+
+
+
+
+# Mas sabe el diablo por viejo que por diablo.
+
+When learning to play the piano, there is a specific challenge for adult
+learners. As adults, we are mentally capable to fully understand concepts and
+mechanisms before we achieve the competence to apply them correctly.
+It is not a challenge to understand the principle of a C major chord
+progression. But it will take weeks of daily exercise to transfer this
+knowledge to muscle memory and making a technique second nature.
+
+Likewise, there is mental muscle memory for modeling and programming.
+Take course assignments seriously even if the related concepts seem painfully
+evident.
+
 
 
