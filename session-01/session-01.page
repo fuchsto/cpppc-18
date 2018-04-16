@@ -221,8 +221,13 @@ in their behaviour. The crucial aspects are:
 - Releasing ownership
 - Transferring ownership
 
-... of a resource. In our `Vector` example, we need to define the additional
-methods:
+... of a resource.
+
+Transferring ownership consists of coordinated sharing and releasing ownership.
+But especially in multi-threaded situations it is more complex than doing one
+after the other.
+
+In our `Vector` example, we need to define the additional methods:
 
 ~~~c
 void     vector__copy   (Vector * other);
