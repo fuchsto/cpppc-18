@@ -257,12 +257,13 @@ Vector * vector__assign (Vector * _this, Vector * other);
 
 # Developing Conceptual Perfect Pitch
 
-We discussed *Function* vs. *Method* already, a closer look at *Operator* vs. *Operation*
-is highly revealing as well:
+We discussed *Function* vs. *Method* already. A closer look at *Operator* vs. *Operation* is highly revealing as well.
+
+Let's have a look at their definitions at Wikipedia and see if we agree:
 
 Operator (mathematical)
 : A mapping that acts on elements of a space and produces elements of the
-  same space.
+  same space. [(source)](https://en.wikipedia.org/wiki/Operator_(mathematics))
 
 Do you see the implications?
 
@@ -280,13 +281,29 @@ Différance!
 
 Operation (mathematical)
 : A calculation from zero or more input values (operands) to an output value
+  [(source)](https://en.wikipedia.org/wiki/Operation_(mathematics))
 
 The choice of words is very specific here: "value", "calculation", "input" ...
 
 - **Q: Doesn't this sound notably familiar? How is this different from a function?**
-- **Q: Give examples for operators that are not operations**
 
+Note that in Mathematics, an *Operator* is just a symbol that denotes a specific
+*Operation*. Like we use the name of a function (its declaration) to represent its implementation (the function definition).
+They essentially have the same meaning.
 
+What do we learn for C++ from this?
+
+- Operators in mathematics are essentially functions with closure
+   ($X \dots \mapsto X$).
+- Operators in programming languages are the same as operators in mathematics,
+   plus syntactic sugar.
+- Any function with signature `X fun(X, ...)` could be called "operator"
+- Finally, any method in C++ `X fun(...)` defined in class `X` could be called
+  "operator"
+
+To confuse the Russians, there are
+[accepted definitions of *Operator*](https://www.britannica.com/topic/operator) that 
+explicitly do not imply closure.
 
 
 # Mas sabe el diablo por viejo que por diablo.
