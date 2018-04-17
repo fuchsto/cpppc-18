@@ -311,6 +311,8 @@ What do we learn for C++ from this?
 - Finally, any method in C++ `X fun(...)` defined in class `X` could be called
   "operator"
 
+Right?
+
 To confuse the Russians, there are
 [accepted definitions of *Operator*](https://www.britannica.com/topic/operator) that 
 explicitly do not imply closure.
