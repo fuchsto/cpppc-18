@@ -13,6 +13,15 @@ title: Advanced C++ - Summer Term 2018
     Concepts vs. Types, Type Qualifiers, Polymorphism vs. Inheritance \
     Assignment 02 - due Friday 04. May 13:00 h
 
+
+# Downloads
+
+- [Virtual Machine (VirtualBox)](files.coreglit.ch/DASH-VM.zip) \
+   Pre-configured development environment (use `nvim`).
+   Well-tested setup but current state is from late 2016 and will be updated soon.
+   Until then, feel free to dist-upgrade.
+
+
 # Literature
 
 - [*Discovering Modern C++ - An Intensive Course for Scientists, Engineers,
