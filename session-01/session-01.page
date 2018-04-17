@@ -37,7 +37,7 @@ Class (mathematical)
 
 Class (technical)
 :   specifies a type of objects with their data members and operations (methods) 
-    that transfer these objects from one well-defined state to another
+    that transfer these objects from one valid state to another
 
 Instance / Class Object / Object (OOCP)
 :   in this course, we use the term *instance* for an object if its type is a
@@ -103,8 +103,8 @@ take effect in the order they have been stated.
 
 ## Members and Methods
 
-In C, we can use structs to represent a type as a well-defined organization
-of data: 
+In C, we can use structs to represent a type as a sequential arrangement of data
+in memory: 
 
 ~~~c
 typedef struct {
