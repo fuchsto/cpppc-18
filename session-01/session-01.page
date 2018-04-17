@@ -262,8 +262,11 @@ Vector * vector__assign (Vector * _this, Vector * other);
 
 # Developing Conceptual Perfect Pitch
 
-**NOTE: In the "perfect pitch training" sections I am playing the devil's advocate in places. Be sceptical!**
+> **In the "perfect pitch training" sections I am playing the devil's advocate
+> in places. \
+> Be sceptical!**
 
+\
 We discussed *Function* vs. *Method* already. A closer look at *Operator* vs. *Operation* is highly revealing as well.
 
 Let's have a look at their definitions at Wikipedia and see if we agree:
