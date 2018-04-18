@@ -31,6 +31,8 @@ Peter Gottschling, 2016](http://ptgmedia.pearsoncmg.com/images/9780134383583/sam
 
 # Selected Talks:
 
+- ["Stop writing classes."](https://www.youtube.com/watch?v=o9pEzgHorH0) \
+  Technically the talk is on Python the message is valid in general: Don't marry a paradigm
 - [Sean Parent - "Inheritance is the Base Class of Evil"](https://www.youtube.com/watch?v=bIhUE5uUFOA) \
   How polymorphism does not mean what you think, and why inheritance is a bad choice
   to achieve it
