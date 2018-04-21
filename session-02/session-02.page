@@ -1,0 +1,331 @@
+---
+format: Markdown
+title: Session 2 Summary
+categories: cpppc, teaching
+...
+
+**C++ Programming Course, Summer Term 2018, 20. April 2018**
+
+
+# Of Types, States and Concepts
+
+The C-style representation of strings is notoriously error-prone and causes security
+incidents on a daily basis. The fundamental problem with C-strings is their lack of
+a well-defined type specification.
+
+Briefly, yet formally put: when a function receives a value of C-string type, it
+cannot rely on any semantics that restrict the value to a well-defined state.
+
+If this sounds confusing, consider this example: 
+
+~~~c
+char * stringish; // <- used as string type by convention (not by definition!)
+~~~
+
+The variable `stringish` could denote a pointer to a single character or the start
+address of a dynamically allocated memory range.
+
+Functions like `strlen` in the C standard library expect a string by convention.
+That is to say: there is an informal aggreement between the implementer of the
+function and the programmer calling it that only strings will be passed to this function.
+Should the programmer pass a pointer to a single character, neither the compiler
+nor the runtime can prevent the execution.
+
+This code would compile flawlessly and run perfectly fine until the unevitable
+segmentation / access violation fault:
+
+~~~c
+char * not_a_string    = (char *)(123);        // Oh boy, the C-style cast ...
+int i_will_never_exist = strlen(not_a_string); // *sigh*
+~~~
+
+So at this point, `stringish` has been `declared` but not `defined` yet, as no
+value has been assigned. A *well-defined state* of a C-string variable must contain an 
+address of the start address of an memory range allocated for a string:
+
+~~~c
+stringish = (char *)malloc(nchars);
+~~~
+
+Now, the C-string referenced by `stringish` is *allocated*, but not initialized.
+Passing it to `strlen` would still fail, as a *well-defined state* of a C-string is
+null-terminated: a string of length `n` must occupy a memory range of `n+1` characters
+as a `'\0'` must be assigned after the last character in the string to denote the end
+of the string (see `man 3 strlen`).
+
+~~~c
+stringish[nchars-1] = '\0';
+~~~
+
+Only now is `stringish` a well-defined state of a C-string.
+It still contains nonsensical values no character sequence has been written into
+allocated memory, but it can be safely used in any operation expecting a string.
+
+*Exactly this is the definition of a well-defined state*.
+
+    The state of an object is valid if all operations defined for its type can be
+    executed on the object without breaking the operation semantics.
+
+
+In conclusion, there are three steps to achieve a valid state of an object:
+
+1. Declaration
+2. Allocation
+3. Definition (= Initialization)
+
+In C, these steps are not coupled and it is in the programmer's the responsibility
+to specify them correctly. Compilers got better at detecting "code smells", but
+compiler warnings - if created on a Turing machine - will never help in non-trivial
+cases for well-known reasons.
+
+
+
+## The Tao of Concepts
+
+A practicable solution to this is the definition of types as a unseperable
+coupling of *operations* and *states*.
+In C++, a **category of types** that satisfy common semantics is called `concept`,
+an essential term with specific connotation in C++.
+A concept definition consists of:
+
+
+Valid Expressions
+: A set of syntactically defined interactions that have common behaviour for any
+  type of this concept, for example `(a+b)` for numerals
+
+Semantics
+: Pre-conditions, invariants and post-conditions of these expressions with respect
+  to objects (= states) of the type 
+
+Dependent Types
+: Types provided by a base type that are visible to the user;
+  A list container, for example, must provide a dependent type like `element_type`
+  as the programmer needs a way to determine the type of values returned by
+  operations like `head(list)`
+
+
+Note that there is no mention of "interface" (in the Java sense), "methods" or
+"class members". Concepts are not about function signatures as you know them
+from API documentations. Signatures are a technical necessity, not a formal
+description.
+
+When reasoning about C++ concepts, you should tune your mind set to the fundamentals
+of category theory. This sounds like obscenely acamedic formalese, but have a
+second look at the first paragraph in this section.
+
+For example, the concrete types `list` and `array` are equivalent in several
+aspects but also exhibit peculiar differences.
+
+
+
+# A String Class in C
+
+Enough with the formal boilerplate: what does *coupling states and operations in
+type definitions* actually mean in code?
+
+Considering the string example above, we learned that the three steps towards a
+valid state of a string should be combined in a single operation.
+
+In C++, such "unified" operations are constructors. They make it already
+*syntactically* impossible to create an object with an invalid state.
+
+We can't achieve this ideal in C because its type system is too weak, so we still
+have to resort to convention. But we can specify types that satisfy well-defined
+concepts.
+
+In the listing below, the type `String` is defined as
+
+- A set of properties that specify the string's state, represented as a struct;
+  in the object-oriented sense, an object of this struct type are string *instances*
+
+- Functions that accept instances of `String` and modify its state, better known as
+  `methods` in the object-oriented model
+
+So, what makes a function a method? The term `method` refers to the following crucial
+criterion:
+
+    A method is a function that implements an operation on an object of a specific
+    type that transfers the object from one well-defined state to another.
+
+This definition describes the following conditions:
+
+Pre-Condition
+: Before invoking the method, the object is in a valid state
+
+Post-Condition
+: After executing the method's operation, the object is in a valid state
+
+This also implies the following:
+
+Invariant
+: If an object is in a valid state, invoking any method defined for the object's
+  type results in a semantically correct execution of the method.
+
+Now, **finally**, let's see how the *Rule of Three* for a `String` class could be
+implemented in C:
+
+~~~c
+#include <string.h>
+#include <stdlib.h>
+
+
+typedef struct {
+  char  * data;
+  char    size;
+} String;
+
+String * string_new() {
+   String * target = (String *)(malloc(sizeof(String));
+   target->data = NULL;
+   target->size = 0;
+   return target;
+}
+
+String * string_assign(String * lhs, String * rhs) {
+  if (lhs->size != rhs->size) {
+    lhs->size = rhs->size;
+    lhs->data = realloc(lhs->data, lhs->size);
+  }
+  strcpy(target->data, str);
+  return lhs;
+}
+
+String * string_copy(const String * other) {
+  // see why well-defined methods are useful?
+  String * target = string_new();
+  string_assign(target, other);
+  return target;
+}
+
+void     string_delete(String * str) {
+  free(str->data);
+  free(str);
+}
+~~~
+
+
+# Type Qualifiers, References vs. Pointers
+
+Anatomy of an assignment by example:
+
+~~~c++
+  //     left-hand side       right-hand side
+  //            |                    |
+  //  .---------'---------.     .----'---.
+       const Type * lvalue   =   & rvalue
+  //   |     |    | |            | |
+  //   |     |    | '- named     | '- named or unnamed
+  //   |     |    |              |
+  //   |     |    '- type        '- operator
+  //   |     |
+  //   |     '- referenced type
+  //   |
+  //   '- cvr
+~~~
+
+CVR is short for the qualifier category "const, volatile, restrict".
+
+~~~c++
+  int value = 100;
+~~~
+
+This is the *declaration* of variable p_value. \
+On the left hand side *of a declaration*, `*` refers to a type:
+
+~~~c++
+  int * p_value;
+~~~
+
+This is a *definition* of variable p_value. \
+On the right hand side, & is an operator:
+
+~~~c++
+  p_value = &value;
+~~~
+
+On the left hand side *of an assignment* `*` is the dereference operator:
+
+~~~c++
+  *p_value = 222;
+~~~
+
+You actually can't mix this up (more important, neither can the compiler)
+as `*` is not a complete type:
+
+~~~c++
+  int * inst = NULL; // declaration/definition, int * is complete type
+      * inst = NULL; // assignment of value referenced by pointer
+~~~
+
+Pointer values have no restriction whatsoever. Therefore, they cannot be trusted:
+
+~~~c++
+  p_value = NULL;
+  p_value = (int*)(123); // <-- may I introduce you to the
+                         //     horrible, horrible C-style cast?
+~~~
+
+On the right hand size, `*` is an operator ...
+
+~~~c++
+  int  deref   = *p_value;
+~~~
+
+... except when used within type specifiers like casts, of course:
+
+~~~c++
+  long deref_l = *((long *)p_value);
+  //             ^       ^
+  //             |       |
+  //             |       '- type specifier, casting to "pointer-to-long*
+  //             '- dereference operator
+~~~
+
+On the left hand side, `&` denotes a reference type.
+References must be initialized (= defined) with their declaration.
+Think of references as 'variable aliases'.
+They are always named and can only refer to another named value.
+
+~~~c++
+  int & ref = my_variable;
+~~~
+
+For a mental model, you can consider references as quantum-entangled.
+
+~~~c++
+  ref = 123;
+  assert(value == 123);
+
+  int & one = 1; // <-- nope, `1` is not named
+  one = 2;       // <-- you see the problem?
+~~~
+
+Variables `ref` and `value` are *identical*.
+In C/C++, two variables are *identical* if they represent the same
+address:
+
+~~~c++
+  assert(&ref == &value);
+~~~
+
+*Equality* refers to the *values* of variables. Obviously, identity implies equality.
+
+~~~c++
+  int a, b;
+  a = 12;
+  b = 12; // a equals b
+~~~
+
+In C++ lingo, *named* values are usually called "lvalues", because
+they can be used at the left hand side of an assignment.
+*Unnamed* values are called "rvalues" because they can only be used at
+the right hand side of an assignment.
+
+For example, `123` is an rvalue because a statement like:
+
+~~~c++
+123 = variable;
+~~~
+
+... would be nonsensical.
+
