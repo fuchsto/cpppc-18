@@ -208,6 +208,10 @@ void     string_delete(String * str) {
 
 # Type Qualifiers, References vs. Pointers
 
+[This documented code listing](/session-02/01-references/Cxx_DeclType_References.cc)
+contains the findings discussed in the lab session. This section gives a brief summary.
+
+
 Anatomy of an assignment by example:
 
 ~~~c++
