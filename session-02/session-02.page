@@ -16,7 +16,7 @@ incidents on a daily basis. The fundamental problem with C-strings is their lack
 a well-defined type specification.
 
 Briefly, yet formally put: when a function receives a value of C-string type, it
-cannot rely on any semantics that restrict the value to a well-defined state.
+cannot rely on any semantics that restrict the value to a valid state.
 
 If this sounds confusing, consider this example: 
 
@@ -42,7 +42,7 @@ int i_will_never_exist = strlen(not_a_string); // *sigh*
 ~~~
 
 So at this point, `stringish` has been `declared` but not `defined` yet, as no
-value has been assigned. A *well-defined state* of a C-string variable must contain an 
+value has been assigned. A *valid state* of a C-string variable must contain an 
 address of the start address of an memory range allocated for a string:
 
 ~~~c
@@ -50,7 +50,7 @@ stringish = (char *)malloc(nchars);
 ~~~
 
 Now, the C-string referenced by `stringish` is *allocated*, but not initialized.
-Passing it to `strlen` would still fail, as a *well-defined state* of a C-string is
+Passing it to `strlen` would still fail, as a *valid state* of a C-string is
 null-terminated: a string of length `n` must occupy a memory range of `n+1` characters
 as a `'\0'` must be assigned after the last character in the string to denote the end
 of the string (see `man 3 strlen`).
@@ -59,7 +59,7 @@ of the string (see `man 3 strlen`).
 stringish[nchars-1] = '\0';
 ~~~
 
-Only now is `stringish` a well-defined state of a C-string.
+Only now is `stringish` a valid state of a C-string.
 It still contains nonsensical values no character sequence has been written into
 allocated memory, but it can be safely used in any operation expecting a string.
 
@@ -132,7 +132,7 @@ In C++, such "unified" operations are constructors. They make it already
 *syntactically* impossible to create an object with an invalid state.
 
 We can't achieve this ideal in C because its type system is too weak, so we still
-have to resort to convention. But we can specify types that satisfy well-defined
+have to resort to convention. But we can specify types that satisfy robust
 concepts.
 
 In the listing below, the type `String` is defined as
@@ -147,7 +147,7 @@ So, what makes a function a method? The term `method` refers to the following cr
 criterion:
 
     A method is a function that implements an operation on an object of a specific
-    type that transfers the object from one well-defined state to another.
+    type that transfers the object from one valid state to another.
 
 This definition describes the following conditions:
 
@@ -193,7 +193,7 @@ String * string_assign(String * lhs, String * rhs) {
 }
 
 String * string_copy(const String * other) {
-  // see why well-defined methods are useful?
+  // see why conceptually sound methods are useful?
   String * target = string_new();
   string_assign(target, other);
   return target;
