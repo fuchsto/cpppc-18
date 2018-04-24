@@ -63,7 +63,7 @@ Only now is `stringish` a well-defined state of a C-string.
 It still contains nonsensical values no character sequence has been written into
 allocated memory, but it can be safely used in any operation expecting a string.
 
-*Exactly this is the definition of a well-defined state*.
+*Exactly this is the definition of a valid state*.
 
     The state of an object is valid if all operations defined for its type can be
     executed on the object without breaking the operation semantics.
@@ -73,7 +73,7 @@ In conclusion, there are three steps to achieve a valid state of an object:
 
 1. Declaration
 2. Allocation
-3. Definition (= Initialization)
+3. Definition (implies Initialization)
 
 In C, these steps are not coupled and it is in the programmer's the responsibility
 to specify them correctly. Compilers got better at detecting "code smells", but
@@ -84,7 +84,7 @@ cases for well-known reasons.
 
 ## The Tao of Concepts
 
-A practicable solution to this is the definition of types as a unseperable
+A practicable solution to this is the definition of types as a unseparable
 coupling of *operations* and *states*.
 In C++, a **category of types** that satisfy common semantics is called `concept`,
 an essential term with specific connotation in C++.
@@ -235,14 +235,14 @@ CVR is short for the qualifier category "const, volatile, restrict".
   int value = 100;
 ~~~
 
-This is the *declaration* of variable p_value. \
-On the left hand side *of a declaration*, `*` refers to a type:
+This is the *definition* of variable p_value with its *declaration* on the left
+hand side. \
+On the left hand side or in a *declaration*, `*` refers to a type:
 
 ~~~c++
   int * p_value;
 ~~~
 
-This is a *definition* of variable p_value. \
 On the right hand side, & is an operator:
 
 ~~~c++
