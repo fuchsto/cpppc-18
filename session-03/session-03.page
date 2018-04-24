@@ -1,0 +1,388 @@
+---
+format: Markdown
+title: Session 03
+category: course notes, cpppc
+...
+
+
+# From Pointer to Iterator
+
+In the implementation of `vector` in assignment 2, pointers work nicely to
+iterate vector elements. De-referencing a pointer to a vector element would
+resolve the element's value.
+
+In brief, vector iterators allow the following expressions that are valid
+for any sequential container:
+
+~~~c++
+vector v;
+
+vector_iterator b = v.begin();
+vector_iterator e = v.end();
+
+int v_size = e - b;
+
+vector_iterator v_second = b + 1;
+~~~
+
+
+
+
+# Introduction to C++ Templates
+
+## Class Templates
+
+### Trivia: Class Templates in C
+
+In the last assignment, the implementation of class `Vector` in C used `int`
+as a fixed type of the vector elements.
+
+To add a definition of a vector for elements of type `double`, the vector class
+implementation has to be duplicated with all occurrences of `int` replaced by
+`double`.
+
+In C99, the only way to avoid duplicate code is to use a macro like this:
+
+~~~c++
+/**
+ * Usage:
+ *    DECLARE_GENERIC__VECTOR(ulong, unsigned long);
+ * -> declares Vector_ulong
+ */
+#define DECLARE_GENERIC__VECTOR(QUAL_TYPE, VECTOR_VALUE_TYPE) \
+  typedef VECTOR_VALUE_TYPE \
+          Vector_##QUAL_TYPE##_Value;  \
+  \
+  typedef Vector_##QUAL_TYPE##_Value * \
+          Vector_##QUAL_TYPE##_Iterator; \
+  \
+  typedef struct { \
+    int                          size; \
+    Vector_##QUAL_TYPE##_Value * data; \
+  } Vector_##QUAL_TYPE; \
+
+// ... and so on ...
+~~~
+
+Templates in C++ *in principle* realize the same mechanism. For some compiler
+errors from templates, it helps to keep the code generation aspects in mind.
+
+The overall procedure of template instantiation in C++ involes several stages of
+symbolic (rather than lexical) operations, but you can refer to the macro-based
+variant as a mental model.
+
+But this is just mechanics.
+
+Conceptually, templates are well-defined formal constructs and an essential part
+of the C++ type system.
+
+Templates should be considered as functions that return types.
+
+
+### Class Templates in C++
+
+In C++, the "code generation" of fully qualified types like `Vector_int` and
+`Vector_float` from the C examples above is a built-in compiler function that is
+accessible with the template syntax.
+
+Example: 
+
+~~~c++
+template <typename T>
+class Foo
+{
+
+public:
+
+  void add(const T & value) {
+    _vector.push_back(value);
+  }
+
+  // ...
+
+private:
+
+  Vector<T> _vector;
+
+};
+~~~
+
+In the macro-variant above, `Vector` is not a usable type, as it is not fully
+qualified.
+
+It is, however, usable as a concept: all types created from the `Vector`
+template have identical methods with identical semantics defined, independent from
+the concrete element type.
+
+The concrete definitions `Vector_int` and `Vector_float` are actual type names that
+a programmer can use in code. To the compiler, a type `Vector` simply does not
+exist.
+
+For the same reason, `Foo` is not a type in the C++ example above, but
+`Foo<int>` and `Foo<double>` are. You can think of the symbols `<` and `>` as
+part of the type name just like they were "regular" characters like `_`.
+
+If two classes are named `Foo_string` and `Foo_double`, you would expect that they have
+separate implementations.
+
+And in fact, the implementations of `Foo<int>` and `Foo<double>` might be totally
+different just as well, just like functions `Foo(int)` and `Foo(double)` may have
+specific implementations.
+
+
+### Data Structure vs. Container Concept
+
+The term **Data Structure** refers to the (internal) arrangement of data in
+memory and the mechanisms that maintain this arrangement.
+
+The term **Container** refers to the (public) operations and their semantics
+visible to the user.
+
+Example:
+
+- A *Tree* is a *Data Structure* as it defines the arrangement and connections of
+  data in memory
+- A *Set* is a *Container* that could be based on a *Data Structure* like a tree
+
+But a *Set* could also be based on a dynamic array or a list.
+
+Changing the underlying data structure does not affect semantics of the container.
+Of course, the underlying data structure typically affects the complexity of the
+container's methods, but computational complexity has no effect on semantics.
+
+This conceptual separation can be observed in the STL in many places:
+
+- the class template `std::stack` is not a container, it is a container wrapper
+  that provides adapter methods (push and pop, obviously); \
+  the underlying data structure is specified as template parameter
+- the C++ standard does not specify which data structure should be used to implement
+  STL containers, it only gives recommendations and specifies constraints on
+  computational complexity of operations on containers
+
+
+# The Importance of new and delete
+
+We discussed the definitions of *Allocation*, *Initialization* and *Instantiation*
+in the last session.
+
+In C, you used `malloc` and `free` to *allocate* memory, and called an initialization
+function to fill the allocated memory range with meaningful values (see `vector__new`
+in the last assignment). \
+In C++, these function should be considered as non-existing. There is no valid reason
+to use them, and various reasons not to.
+
+In the last session, we soon came to the conclusion that allocation and initialization
+should not be available as separate operations. To ensure that objects can only be
+created in a well-defined state, they should only be available in conjunction as an *Instantiation* method.
+
+The `new` operator in C++ allocates an object of a specified type on the heap and
+initializes the object by calling a constructor.
+
+Likewise, the `delete` operator first calls the object's destructor before deallocating
+its memory.
+
+
+# The Importance to avoid new and delete
+
+The `new` and `delete` operations should never appear in application code.
+
+There are many good and widely accepted reasons for this guideline that we will
+discuss in upcoming sessions. For now, you only have to be aware of one reason:
+Whenever a resource is acquired in an application, it must be released at some point.
+Now, an armada of additional, non-trivial problems arise: ownership of the resource
+must be well-defined, and the resource must not be released if its is still referenced
+by some part of the program, and so on.
+
+Luckily, the alternatives to `new` and `delete` are straight-forward and conveniently
+apply to resource management in general, like file handles and mutex locks.
+
+
+# Rule of Zero and RAII
+
+If a class follows the Rule of Three (or Rule of Five, see upcoming session), its
+underlying resource management is encapsulated such that instances of the class can
+be used like POD (plain old data):
+
+~~~c++
+if (condition) {
+  // vector instance on stack, vector elements are internally
+  // allocated on heap
+  std::vector<int> v({ 100, 200, 300 });
+  v.push_back(400);
+  std::cout << "vector accumulate: "
+            << std::accumulate(v.begin(), v.end(), 0)
+            << std::endl;
+  // vector instance removed from stack, destructor of std::vector
+  // deallocates elements from heap
+}
+~~~
+
+
+## Must-know: realloc in C++
+
+It is worth mentioning that `malloc/free` and `new/delete` are incompatible mechanisms:
+memory allocated with `malloc` cannot be deallocated using `delete` and calling
+`free` on memory reserved with `new` yields undefined behavior.
+
+Luckily you don't have to care as you won't use either of them.
+
+But what about `realloc`? What is the equivalent operation in C++?
+
+It's simple: **Use `std::vector`**. \
+It provides the best optimized, all-purpose RAII-encapsulation of dynamic memory
+managment and it is nearly impossible to break.
+
+For the same reason you also should avoid `new/delete` and use `std::vector` instead 
+whenever you can.
+
+Consider this example:
+
+~~~c++
+if (foo != 0) {
+  std::vector<double> buf(50); // ~> malloc(50 * sizeof(double));
+  buf.resize(60);              // ~> realloc(buf, 60 * sizeof(double));
+  buf.push_back(12.23);        // ~> int buf_write_index = 0;
+                               //    buf[buf_write_index] = 12.23;
+                               //    buf_write_index++;
+  throw std::runtime_error("What now?");
+  // vector `buf` is removed from stack and its destructor
+  // is called, no memory leak!
+  // If we used an explicit `free` or `delete`, it would not
+  // be reached:
+                               // ~> free(buf); // not called if exception
+                                                // is thrown before
+}
+~~~
+
+
+# Debugging
+
+## gdb
+
+### Installation
+
+Install gdb on the VM:
+
+~~~bash
+$ sudo apt-get update && sudo apt-get install gdb
+# Confirm with <ENTER>
+~~~
+
+### Example
+
+Using test suite as an example for debugging with gdb:
+
+~~~bash
+$ gdb ./testsuite.bin
+~~~
+
+This starts program `testsuite.bin` and halts execution at its entry point (usually the
+`main` function entry point).
+
+
+First, let's switch to a more useful view. In gdb, enter `<CTRL-X> 2`.
+This switches to a TUI (terminal user interface, a GUI in the terminal) consisting of
+three view sections: the source code at the top with assembly below, and the gdb command
+line at the bottom.
+
+Or, write the content of
+[this file](https://raw.githubusercontent.com/gdbinit/Gdbinit/master/gdbinit)
+to `~/.gdbinit` for colored output and overall prettier gdb (incompatible with TUI
+apparently).
+
+Searching for gdb dotfiles on github gives lots of other coder's gdb tweaks like
+[this one](https://github.com/RAttab/dotfiles/blob/master).
+
+Now, enable pretty printing for displaying values:
+
+~~~gdb
+(gdb) set print pretty on
+~~~
+
+You will find the integrated help system of gdb very useful:
+
+~~~gdb
+(gdb) help
+# display help for a command category like "running":
+(gdb) help running
+# display help for a specific command:
+(gdb) help next
+~~~
+
+To debug a specific function like `vector__push_back`, add a break point at the 
+function's entry point using the gdb command `break`.
+
+You can use auto-completion to choose from all functions named 'vector__' like:
+
+~~~gdb
+(gdb) break vector__<TAB><TAB> (select a function name) <ENTER>
+~~~
+
+To run the program, use the gdb command `run`. Execution will halt at the first break
+point.
+
+~~~gdb
+(gdb) run
+~~~
+
+To continue execution in single operations step-by-step, use `next` or `n`:
+
+~~~gdb
+(gdb) n
+~~~
+
+To repeat the last command, just hit `<ENTER>`.
+
+Show the value of a variable with `print` (ensure that pretty-printing is enabled as
+described above):
+
+~~~gdb
+(gdb) print *data
+~~~
+
+## valgrind
+
+Install valgrind on the VM:
+
+~~~bash
+$ sudo apt-get update && sudo apt-get install valgrind
+# Confirm with <ENTER>
+~~~
+
+From the [valgrind quick start tutorial](http://valgrind.org/docs/manual/quick-start.html):
+
+Example program:
+
+~~~c
+  #include <stdlib.h>
+
+  void f(void)
+  {
+     int* x = malloc(10 * sizeof(int));
+     x[10] = 0;        // problem 1: heap block overrun
+  }                    // problem 2: memory leak -- x not freed
+
+  int main(void)
+  {
+     f();
+     return 0;
+  }
+~~~
+
+Using valgrind to check for memory leaks:
+
+~~~bash
+$ valgrind --leak-check=yes myprog [arg1 arg2 ...]
+~~~
+
+Output from memory check:
+
+~~~
+  ==19182== Invalid write of size 4
+  ==19182==    at 0x804838F: f (example.c:6)
+  ==19182==    by 0x80483AB: main (example.c:11)
+  ==19182==  Address 0x1BA45050 is 0 bytes after a block of size 40 alloc'd
+  ==19182==    at 0x1B8FF5CD: malloc (vg_replace_malloc.c:130)
+  ==19182==    by 0x8048385: f (example.c:5)
+  ==19182==    by 0x80483AB: main (example.c:11)
+~~~
