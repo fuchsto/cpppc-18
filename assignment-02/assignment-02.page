@@ -14,6 +14,8 @@ and your implementation of `Vector` from the first assignment to C++.
 You can use the [Heap code example](/session-02/02-copy-assignment/)
 discussed in the last session for reference.
 
+**Pay close attention to const-correctness!**
+
 Implementing methods that require iterators such as
 `vector::begin()`, `vector::end()` is not mandatory, but getting familiar with
 the C++ iterator concept is recommended.
