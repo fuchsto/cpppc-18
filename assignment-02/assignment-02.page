@@ -23,5 +23,6 @@ concept is recommended.
 
 
 See:
+
 - [C++ STL vector container](http://en.cppreference.com/w/cpp/container/vector)
 - [C++ STL iterator concept](http://en.cppreference.com/w/cpp/concept/Iterator)
