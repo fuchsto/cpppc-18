@@ -1,0 +1,24 @@
+---
+format: Markdown
+title: Assignment 2: From Object-Oriented C to C++
+categories: cpppc, teaching
+...
+
+**C++ Programming Course, Summer Term 2018**
+
+# 1: A Vector Class in C++
+
+Port the [vector test suite](/assignment-01/a-01/test/vector_test.cc)
+and your implementation of `Vector` from the first assignment to C++.
+
+You can use the [Heap code example](/session-02/02-copy-assignment/)
+discussed in the last session for reference.
+
+Implementing methods that require iterators such as
+`vector::begin()`, `vector::end()` is not mandatory, but getting familiar with
+the C++ iterator concept is recommended.
+
+See:
+
+- [C++ STL vector container](http://en.cppreference.com/w/cpp/container/vector)
+- [C++ STL iterator concept](http://en.cppreference.com/w/cpp/concept/Iterator)
