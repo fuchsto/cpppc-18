@@ -54,13 +54,18 @@ Expression  | Precondition | Postcondition
 
 Or, using functional notation, like this:
 
-   stack()         = s
-   pop(push(s,v))  = (s,v)
-   size(push(s,v)) = size(s) + 1
-   size(pop(s))    = size(s) - 1
-   size(stack())   = 0
-   pop(stack())    = undefined
-
+$$
+\begin{align}
+     stack \rightarrow Stack \\
+     with\ s : Stack \\
+     \\
+     pop(push(s,v))  &= (s,v)         \\
+     size(push(s,v)) &= size(s) + 1   \\
+     size(pop(s))    &= size(s) - 1   \\
+     size(stack())   &= 0             \\
+     pop(stack())    &= undefined
+\end{align}
+$$
 
 Like any formal definition, this is only useful (to humans) in combination
 with thoughtfully written explanations.
