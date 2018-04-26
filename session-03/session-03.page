@@ -5,6 +5,58 @@ category: course notes, cpppc
 ...
 
 
+# Using Valid Expressions to Define Semantics
+
+As already discussed several times in the previous sessions, a system
+of classes and concrete types is not an ideal mental model for the
+definition of robust and elegant programming abstractions. \
+Of course, we need classes and concrete types to eventually implement
+an abstraction. But for modeling, a class-based approach shifts your
+mind set to the view point of the implementer, not the user of the
+abstraction.
+
+Instead, we think in terms of concepts:
+
+- A concept specifies valid expressions and operation semantics
+- Any type that satisfies the definition of a concept, disregarding
+  how this compliance is achieved, is a **model** of this concept
+
+In less civilized (Java) terms, a concept relates to a model
+(concrete type) like an interface to a class.
+
+Valid Expressions
+: The syntax accepted by the compiler
+
+Semantics
+: How an expression affects the states of objects (invariants,
+  preconditions, postconditions)
+
+In principle, validating an expression happens at compile time.
+Semantics cannot be checked by the compiler and take effect at run time,
+(apart from some expressions that are part of the C++ language itself).
+
+For example, semantics of a stack `s` can be described like this:
+
+Expression  | Precondition | Postcondition
+----------- | ------------ | -------------------------
+`s.push(v)` | none         | `s.pop() == v`
+`s.pop()`   | `!s.empty()` | `s.size() = s.size() - 1`
+
+
+Or, using functional notation, like this:
+
+   stack()         = s
+   pop(push(s,v))  = (s,v)
+   size(push(s,v)) = size(s) + 1
+   size(pop(s))    = size(s) - 1
+   size(stack())   = 0
+   pop(stack())    = undefined
+
+
+Like any formal definition, this is only useful (to humans) in combination
+with good explanations.
+
+
 # From Pointer to Iterator
 
 In the implementation of `vector` in assignment 2, pointers work nicely to
