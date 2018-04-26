@@ -17,7 +17,7 @@ abstraction.
 
 Instead, we think in terms of concepts:
 
-- A concept specifies valid expressions and operation semantics
+- A concept specifies **valid expressions** and **operation semantics**
 - Any type that satisfies the definition of a concept, disregarding
   how this compliance is achieved, is a **model** of this concept
 - Concept semantics must be **well-defined**
@@ -57,7 +57,7 @@ Or, using functional notation, like this:
 
 
 Like any formal definition, this is only useful (to humans) in combination
-with good explanations.
+with thoughtfully written explanations.
 
 So, what about the **well-defined** property in the definition of
 *Concept*? \
@@ -80,7 +80,8 @@ may not have different return types. \
 However, function overloads are well-defined: if more than one overload
 variant is elibible an expression, compilation fails with an
 `ambiguous function call` error.
-Therefore, overloaded functions may have different return types.
+In effect, overloaded functions cannot conflict and therefore
+**may have different return types**.
 
 A simple example:
 
@@ -105,6 +106,19 @@ auto i_sq_d = square(static_cast<double>(3));
 // in our example, same as:
 auto i_sq_d = square(3.0);
 // Deduced type of `i_sq_d` is double.
+~~~
+
+**Q: Explain if/how overload deduction would work here:**
+
+~~~c++
+class Base;
+class A : public Base;
+class B : public Base;
+
+void foo(Base);
+void foo(A);
+
+foo(B()); // no overload `foo(B)` exists
 ~~~
 
 
