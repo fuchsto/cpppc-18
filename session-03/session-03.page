@@ -67,7 +67,26 @@ simply put, it means *unambiguous*:
 > For a valid expression in a well-defined concept, there is exactly
 > one possible interpretation.
 
+I use the non-standard term **Interpretation** for any mechanism
+at compile time that involves deducing a type, chosing between
+implementation variant such as function overloads, and the like.
+
 We will see more on this later.
+
+
+## Trivia: The Most Vexing Parse
+
+Speaking of the compiler interpreting your types, there is a notoriously
+wicked type interpretation *speshulty* in C++:
+**The most vexing parse**
+
+Originally described and named by Scott Meyers
+in Item 6 of his book *Effective STL*,
+[this article on FluentCpp.com](https://www.fluentcpp.com/2018/01/30/most-vexing-parse/) confronts you with a ruthless analysis of this phenomenon.
+
+In summary, this is something we call a *bloody hell of a mess*. \
+Fortunately, you can easily eliminate it in modern C++:
+**Use uniform initialization**.
 
 
 # Function Overloads
@@ -401,22 +420,36 @@ Let's recall the *well-defined* property of concepts:
 > For a valid expression in a well-defined concept, there is exactly
 > one possible interpretation.
 
+Again, I use the non-standard term *interpretation* for any mechanism
+at compile time that involves deducing a type, chosing an implementation
+variant such as function overloads, and the like.
+
 In C++ - *and this is essential* - there also is the inverse rule:
 
 > There must exist exactly one interpretation that resolves to a valid
 > expression.
 
-Why do we need the inverse? Well, it explicitly allows to 
-**define multiple interpretations of an expression**.
-But only and exactly one interpretation must resolve to a valid
-expression. The others are just ignored.
+Why do we need the inverse? Well, it implies that there *may* exist
+multiple interpretations of an expression, however only and exactly
+one of those would make the expression *valid*.
 
+The others are just ignored. \
 Any type deduction that would result in a compiler error is just
 ignored like it never existed.
+
+So there is no restriction on interpretations that would result in
+a compiler error, and this allows to 
+**define multiple, even seemingly conflicting interpretations of an
+expression**.
 
 This prime directive in modern C++ is called
 
 > **SFINAE**: Substitution Failure Is Not An Error
+
+Without SFINAE, *every* interpretation option would be required to
+resolve to a valid expression.
+
+
 
 ## Lecturer's Opinionated Note
 
