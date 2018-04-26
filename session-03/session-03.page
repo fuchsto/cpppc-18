@@ -20,9 +20,12 @@ Instead, we think in terms of concepts:
 - A concept specifies valid expressions and operation semantics
 - Any type that satisfies the definition of a concept, disregarding
   how this compliance is achieved, is a **model** of this concept
+- Concept semantics must be **well-defined**
 
-In less civilized (Java) terms, a concept relates to a model
-(concrete type) like an interface to a class.
+In less civilized (Java) terms, a concept relates to a concrete type
+(model of the concept) like an interface to a class (implementation of
+the interface)
+
 
 Valid Expressions
 : The syntax accepted by the compiler
@@ -56,35 +59,58 @@ Or, using functional notation, like this:
 Like any formal definition, this is only useful (to humans) in combination
 with good explanations.
 
+So, what about the **well-defined** property in the definition of
+*Concept*? \
+There are additional formalese implications of **well-defined**, but
+simply put, it means *unambiguous*:
 
-# From Pointer to Iterator
+> For a valid expression in a well-defined concept, there is exactly
+> one possible interpretation.
 
-In the implementation of `vector` in assignment 2, pointers work nicely to
-iterate vector elements. De-referencing a pointer to a vector element would
-resolve the element's value.
+We will see more on this later.
 
-In brief, vector iterators allow the following expressions that are valid
-for any sequential container:
+
+# Function Overloads
+
+Functions overload each other if they have the same name and different
+parameters.
+
+In the first session, we briefly discussed why function definitions
+may not have different return types. \
+However, function overloads are well-defined: if more than one overload
+variant is elibible an expression, compilation fails with an
+`ambiguous function call` error.
+Therefore, overloaded functions may have different return types.
+
+A simple example:
 
 ~~~c++
-vector v;
-
-vector_iterator b = v.begin();
-vector_iterator e = v.end();
-
-int v_size = e - b;
-
-vector_iterator v_second = b + 1;
+double square(double);
+int    square(int);
 ~~~
 
+It is important to understand that overloads are chosen depending on
+parameters, not return type:
 
+~~~c++
+int  i_sq_i = square(3);   // Literal integers have implicit type `int`
+
+auto a_sq_i = square(4);   // Calls variant `int square(int)`, return
+                           // type is deduced as `int`
+int  i_sq_d = square(3.4); // Calls variant `double square(double)`,
+                           // then casts result to `int`
+
+// Of course, explicit cast can be used to select an overload:
+auto i_sq_d = square(static_cast<double>(3));
+// in our example, same as:
+auto i_sq_d = square(3.0);
+// Deduced type of `i_sq_d` is double.
+~~~
 
 
 # Introduction to C++ Templates
 
-## Class Templates
-
-### Trivia: Class Templates in C
+## Trivia: Class Templates in C
 
 In the last assignment, the implementation of class `Vector` in C used `int`
 as a fixed type of the vector elements.
@@ -131,7 +157,7 @@ of the C++ type system.
 Templates should be considered as functions that return types.
 
 
-### Class Templates in C++
+## Class Templates in C++
 
 In C++, the "code generation" of fully qualified types like `Vector_int` and
 `Vector_float` from the C examples above is a built-in compiler function that is
@@ -180,6 +206,43 @@ separate implementations.
 And in fact, the implementations of `Foo<int>` and `Foo<double>` might be totally
 different just as well, just like functions `Foo(int)` and `Foo(double)` may have
 specific implementations.
+
+
+## Function Templates in C++
+
+
+
+# From Pointer to Iterator
+
+In the implementation of `vector` in assignment 2, pointers work nicely to
+iterate vector elements. De-referencing a pointer to a vector element would
+resolve the element's value.
+
+In brief, vector iterators allow the following expressions that are valid
+for any sequential container:
+
+~~~c++
+vector v;
+
+vector_iterator b = v.begin();
+vector_iterator e = v.end();
+
+int v_size = e - b;
+
+vector_iterator v_second = b + 1;
+~~~
+
+
+## STL Iterator Concepts
+
+## Tag Dispatching
+
+Iterator tags have been introduced in ancient times, long before C++11
+where type deduction has been introduced.
+
+They have been introduced to allow a technique called
+[Tag Dispatching]( http://en.cppreference.com/w/cpp/iterator/iterator_tags#Example)
+which is based on plain old function overloading.
 
 
 ### Data Structure vs. Container Concept
@@ -305,6 +368,43 @@ if (foo != 0) {
                                                 // is thrown before
 }
 ~~~
+
+
+
+# Type Deduction, Substitution and SFINAE
+
+Let's recall the *well-defined* property of concepts:
+
+> For a valid expression in a well-defined concept, there is exactly
+> one possible interpretation.
+
+In C++ - *and this is essential* - there also is the inverse rule:
+
+> There must exist exactly one interpretation that resolves to a valid
+> expression.
+
+Why do we need the inverse? Well, it explicitly allows to 
+**define multiple interpretations of an expression**.
+But only and exactly one interpretation must resolve to a valid
+expression. The others are just ignored.
+
+Any type deduction that would result in a compiler error is just
+ignored like it never existed.
+
+This prime directive in modern C++ is called
+
+> **SFINAE**: Substitution Failure Is Not An Error
+
+## Lecturer's Opinionated Note
+
+Type deduction and SFINAE are the reason why C++ is the most relevant
+programming language in the real world today.
+The distribution of the C++ 11 standard made a multitude of established
+research projects irrelevant (see: X10, UPC).
+
+I hear [*Gloria in excelsis Deo* from Beethoven's Missa Solemnis](https://www.youtube.com/watch?v=d_OQ-UXW2Ec)
+in my head when I think about it, that's how awesome it is.
+
 
 
 # Debugging
