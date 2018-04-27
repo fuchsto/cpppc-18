@@ -14,7 +14,7 @@ title: Advanced C++ - Summer Term 2018
     Concepts vs. Types vs. Classes, Type Qualifiers (Const), References \
     [Assignment 02 - due Wednesday 02. May 13:00 h](/assignment-02/)
 
-- Session 03 \
+- [Session 03](/session-02/session-02) \
     Type Deduction, Templates, Safe Resource Acquisition
 
 - Session 04 \
