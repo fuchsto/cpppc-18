@@ -61,7 +61,6 @@ $$
      \\
      pop(push(s,v))  &= (s,v)         \\
      size(push(s,v)) &= size(s) + 1   \\
-     size(pop(s))    &= size(s) - 1   \\
      size(stack())   &= 0             \\
      pop(stack())    &= undefined
 \end{align}
@@ -78,11 +77,12 @@ simply put, it means *unambiguous*:
 > For a valid expression in a well-defined concept, there is exactly
 > one possible interpretation.
 
-I use the non-standard term **Interpretation** for any mechanism
-at compile time that involves deducing a type, chosing between
-implementation variant such as function overloads, and the like.
+I use the non-standard (!) umbrella term **Interpretation** for any
+compile time mechanism that involves deducing or substituting types,
+selecting implementation variants such as function overloads, and the like.
 
-We will see more on this later.
+We will encounter type theory in nearly every topic in this lab course.
+
 
 
 ## Trivia: The Most Vexing Parse
