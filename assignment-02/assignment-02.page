@@ -26,3 +26,21 @@ See:
 
 - [C++ STL vector container](http://en.cppreference.com/w/cpp/container/vector)
 - [C++ STL iterator concept](http://en.cppreference.com/w/cpp/concept/Iterator)
+
+
+# Additional Remarks
+
+Remember the lesson you learned from the first assignment?
+
+> Concepts can be implemented using existing types.
+
+In the last lab session, we also discovered:
+
+> The best resource/ownership management is the one you delegate.
+
+And remembering the Rule of Zero:
+
+> Ideally, a class only contains members that are either plain old
+> data or implement the Rule of X (X in { 0, 3, 5 }).
+
+You might want to have a look at the documentation of `std::vector`.
