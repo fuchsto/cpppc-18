@@ -37,13 +37,18 @@ title: Advanced C++ - Summer Term 2018
 - [Introduction to Debugging Tools](/notes-debugging)
 
 
-
 # Downloads
 
 - [Virtual Machine (VirtualBox)](http://files.coreglit.ch/DASH-VM.zip) \
    Pre-configured development environment (use `nvim`).
    Well-tested setup but current state is from late 2016 and will be updated soon.
    Until then, feel free to dist-upgrade.
+
+
+# Related Lectures at LMU
+
+- [Type Systems (PD Dr. Ulrich Schöpp)](https://www.tcs.ifi.lmu.de/lehre/ss-2018/typen/typen), with [excellent lab notes](https://gitlab.cip.ifi.lmu.de/schoepp/Typsysteme/tree/master) available
+- [Formal Specification and Verification (Prof. Dr. Dirk Beyer)](https://www.sosy-lab.org/Teaching/2018-SS-FormaleSpezifikationVerifikation/)
 
 
 # Literature
