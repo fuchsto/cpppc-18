@@ -17,7 +17,8 @@ categories: cpppc, teaching
    discussed in the last lab session.
 
      - Remember that all template code must be implemented in headers!
-     - Ensure that `List<T>::iterator` satisfies the
+     - In your implementation, ensure that `List<T>` and `List<T>::iterator`
+       satisfy `std::list<t>` and the
        [STL iterator concepts](http://en.cppreference.com/w/cpp/header/iterator),
        in particular
        [iterator traits](http://en.cppreference.com/w/cpp/iterator/iterator_traits)
