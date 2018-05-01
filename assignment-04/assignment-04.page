@@ -175,7 +175,7 @@ Example:
 
 # 4-X: Challenges
 
-## 4-X-1: Sequence Iterators: Bresenham's Line Algorithm
+## 4-X-1: Bresenham's Line Sequence
 
 Make yourself familiar with
 [Bresenham's Line Algorithm](http://graphics.idav.ucdavis.edu/education/GraphicsNotes/Bresenhams-Algorithm.pdf)
