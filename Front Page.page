@@ -101,16 +101,16 @@ Peter Gottschling, 2016](http://ptgmedia.pearsoncmg.com/images/9780134383583/sam
 
 # Some Useful References
 
-## Real Life C++:
+## Real Life C++
 
 - [Meeting C++](http://meetingcpp.com/)
 - [How To Submit a Proposal for the C++ Standard Library](https://isocpp.org/std/submit-a-proposal)
 
-## Guidelines:
+## Guidelines
 
 - [ISO C++ Library Design Guidelines](https://isocpp.org/wiki/library_design_guidelines/library-design-guidelines)
 
-## Selected Articles:
+## Selected Articles
 
 - [Resumable Functions: aync, await](http://meetingcpp.com/index.php/br/items/resumable-functions-async-and-await.html)
 - [C++ Ranges are Pure Monadic Goodness](https://bartoszmilewski.com/2014/10/17/c-ranges-are-pure-monadic-goodness/)
