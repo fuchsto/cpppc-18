@@ -417,6 +417,11 @@ private:
 };
 ~~~
 
+However, I personally aggree with Scott Meyers who argues that this
+should be understood as the
+[Rule of Five defaults](http://scottmeyers.blogspot.de/2014/03/a-concern-about-rule-of-zero.html).
+
+
 ## Must-know: realloc in C++
 
 It is worth mentioning that `malloc/free` and `new/delete` are
