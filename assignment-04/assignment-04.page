@@ -90,7 +90,9 @@ auto hist_end = cpppc::histogram(v.begin(), v.end());
 ~~~
 
 
-# 4-2: Custom Container / Iterator
+# 4-2: Custom Containers / Iterators
+
+## 4-2-1: Sparse Array
 
 Implement a sparse array (see [https://en.wikipedia.org/wiki/Sparse_array]())
 container that satisfies the `std::array` interface.
@@ -136,10 +138,9 @@ auto found_42 = std::find(sa.begin(), sa.end(), 42);
   underlying array (as it doesn't exist) so method `data()` is not provided.
 
 
+## 4-2-2: Lazy Sequence
 
-# 4-3: Lazy Sequence Container
-
-Implement a sequence container `lazy_sequence` that is initialized with its size
+Implement a sequential container `lazy_sequence` that is initialized with its size
 and a generator function.
 The container does not store any elements, instead the generator function is used
 to create container elements only when they are accessed.
