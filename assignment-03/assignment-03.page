@@ -159,8 +159,9 @@ auto found_42 = std::find(sa.begin(), sa.end(), 42);
 
 ## 3-X-1: Sequence Iterators: Bresenham's Line Algorithm
 
-Make yourself familiar with [Bresenham's Line Algorithm]() and implement
-it as sequential concept:
+Make yourself familiar with
+[Bresenham's Line Algorithm](http://graphics.idav.ucdavis.edu/education/GraphicsNotes/Bresenhams-Algorithm.pdf)
+and implement it as sequential concept:
 
 ~~~c++
 raster_image img(width, height);
