@@ -417,7 +417,7 @@ private:
 };
 ~~~
 
-However, I personally agree with Scott Meyers reasoning that this
+However, I personally agree with Scott Meyer's reasoning that this
 should be understood as the \
 [Rule of Five defaults](http://scottmeyers.blogspot.de/2014/03/a-concern-about-rule-of-zero.html).
 
