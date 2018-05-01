@@ -366,6 +366,8 @@ handles and mutex locks.
 
 # Rule of Zero and RAII
 
+See: [http://en.cppreference.com/w/cpp/language/rule_of_three]()
+
 If a class follows the Rule of Three (or Rule of Five, see upcoming
 session), its underlying resource management is encapsulated such that
 instances of the class can be used like POD (plain old data):
@@ -383,6 +385,10 @@ if (condition) {
   // deallocates elements from heap
 }
 ~~~
+
+Purists (which you should aspire to be) demand that any class which
+needs to implement the Rule of Three should exclusively deal with
+ownership and not serve any other purpose. 
 
 The **Rule of Zero** states that, ideally, a class does not specify any
 assignment, copy constructor or destructor.
