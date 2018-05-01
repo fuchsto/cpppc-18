@@ -384,6 +384,32 @@ if (condition) {
 }
 ~~~
 
+The **Rule of Zero** states that, ideally, a class does not specify any
+assignment, copy constructor or destructor.
+
+This is only possible if any resource ownership is encapsulated in members
+that follow **Resource Acquisition Is Initialization (RAII)**.
+
+In the example below, class `Foo` is a dynamic container and for this
+needs to allocate data on the heap.
+
+As the ownership of allocated memory is encapsulated in an instance of
+`std::vector` (which itself follows the Rule of Three), no assignment,
+copy or destruction has to be specified.
+
+Even the default constructor can be omitted in this case.
+
+~~~c++
+class Foo {
+public:
+  void add(int value) {
+    _vector.push_back(value);
+  }
+
+private:
+  std::vector<int> _vector;
+};
+~~~
 
 ## Must-know: realloc in C++
 
