@@ -12,13 +12,20 @@ categories: cpppc, teaching
 
 # 3-1: Container Template: List
 
-- Complete the implementation of the
-  [List container template](/session-03/04-list/list.h)
-  discussed in the last lab session.\
-  Remember that all template code must be implemented in headers!
+1. Complete the implementation of the
+   [List container template](/session-03/04-list/list.h)
+   discussed in the last lab session.
 
-- Use the test suite of `Vector` you ported to C++ in assignment 2 to
-  test your implementation of the `List` container.
+     - Remember that all template code must be implemented in headers!
+     - Ensure that `List<T>::iterator` satisfies the
+       [STL iterator concepts](http://en.cppreference.com/w/cpp/header/iterator),
+       in particular
+       [iterator traits](http://en.cppreference.com/w/cpp/iterator/iterator_traits)
+       which are based on
+       [iterator tags](http://en.cppreference.com/w/cpp/iterator/iterator_tags).
+
+2. Use the test suite of `Vector` you ported to C++ in assignment 2 to
+   test your implementation of the `List` container.
 
 
 # 3-2: Algorithms / Function Templates
