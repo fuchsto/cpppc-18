@@ -1,16 +1,59 @@
 ---
 format: Markdown
-title: Assignment 3: Iterators, Function Templates
+title: Assignment 3: Introduction to Templates
 categories: cpppc, teaching
 ...
 
 **C++ Programming Course, Summer Term 2018**
 
-
 [Source Code](/assignment-03/a-03/)
 
+# 3-0: Prerequisites
 
-# 3-1: Container Template: List
+## 3-0-1: Iterator Concepts
+
+- Make yourself familiar with the `Iterator` concepts in the STL: \
+  [http://en.cppreference.com/w/cpp/concept/Iterator]()
+- What are the differences between the concepts `ForwardIterator` and
+  `RandomAccessIterator`?
+- What are the differences between the concepts `InputIterator` and
+  `OutputIterator`?
+
+
+## 3-0-2: Sequence Container Concept
+
+Sequence containers implement data structures which can be accessed sequentially.
+Methods `begin()` and `end()` define the iteration space of the container elements.
+
+- Make yourself familiar with *Sequence Container* concept defined in the STL: \
+  [http://en.cppreference.com/w/cpp/concept/SequenceContainer]()
+
+**Excerpt**:
+
+Type                            | Synopsis
+------------------------------- | ------------------------------------------------------
+`typename      value_type`      | the container's element type `T`
+`typename        iterator`      | iterator type referencing a container element
+`typename  const_iterator`      | typically defined as `const iterator`
+`typename       reference`      | type definition for `value_type &`
+`typename const_reference`      | type definition for `const value_type &`
+
+
+Signature                       | Synopsis
+------------------------------- | ------------------------------------------------------
+`iterator begin()            .` | iterator referencing the first element in the \
+                                  container or `end()` if container is empty
+`const_iterator begin()  const` | const iterator referencing the first element in the \
+                                  container or `end()` if container is empty
+`iterator end()              .` | iterator referencing past the final element in \
+                                  the container
+`const_iterator end()    const` | const iterator referencing past the final element in \
+                                  the container
+`size_type size()        const` | number of elements in the container, same as \
+                                  `end() - begin()`
+
+
+# 3-1: List<T> Container Template
 
 1. Complete the implementation of the
    [List container template](/session-03/04-list/list.h)
@@ -29,163 +72,76 @@ categories: cpppc, teaching
    test your implementation of the `List` container.
 
 
-# 3-2: Algorithms / Function Templates
 
-In the following, you will implement two algorithms as function templates.
+# 3-2 : Measurements\<T\> Class Template
 
-Your implementations should be a combination of functions provided by the STL
-and must not contain explicit loops like `for` or `while`.
+Assuming you run a series of benchmarks, each returning a measurement.
+At the end of the test series, the mean, median, standard deviation (sigma) and
+variance should be printed.
 
-You may use any algorithm interface defined in the C++11 standard.
-For example, you may use `std::minmax` (C++11) in your implementations, but not
-`std::for_each_n` (C++17).
+Implement the class template `Measurements<T>` representing a sequence container
+that allows to collect measurement data as single values and provides methods to
+obtain the mean, median, standard deviation and variance of the container elements.
 
-References:
 
-- Talk by Marshall Clow: “STL Algorithms - why you should use them, and how to write your own"
-  [https://www.youtube.com/watch?v=h4Jl1fk3MkQ]()
-- C++ Algorithm Library:
-  [http://en.cppreference.com/w/cpp/algorithm]()
-- C++ Iterator Library:
-  [http://en.cppreference.com/w/cpp/header/iterator]()
+## Measurements Container Concept
 
-## 3-2-1: find_mean_rep
+In addition to the Sequence Container Concept:
 
-Implement a function template `cpppc::find_mean_rep` which accepts a range specified
-by two iterators in the `InputIterator` category and returns an iterator to the
-element in the range that is closest to the mean of the range.
+Signature                       | Synopsis
+------------------------------- | ------------------------------------------------------
+`T median()             const ` | returns the median of the elements in the container \
+                                  or `0` if the container is empty.
+`double mean()          const ` | returns the mean of the elements in the container
+`double variance()      const ` | returns the population variance of the elements in \
+                                  the container
+`double sigma()         const ` | returns the standard deviation of the elements in \
+                                  the container
 
-Your implementation should be automatically more efficient for random access iterator
-ranges without specialization.
 
-**Function interface:**
+## Example:
 
 ~~~c++
-template <typename InputIter>
-InputIter find_mean_rep(InputIter first, InputIter last);
+Measurements<int> m1;
+m1.insert(10);
+m1.insert(34);
+
+m1.size(); // = 2
+
+Measurements<double> m2;
+std::vector<double> v({ 36, 37, 10 });
+m2.insert(v.begin(), v.end());
+
+m1.insert(m2.begin(), m2.end())
+
+m1.size(); // = 5
+
+int    median = m1.median();
+double mean   = m1.mean();
+double sdev   = m1.sigma();
+double var    = m1.variance();
 ~~~
 
-**Example:**
+Define a class template `Measurements<T>` that satisfies the Sequence Container
+concept ([http://en.cppreference.com/w/cpp/concept/SequenceContainer]()) and the
+Measurements Container concept defined above.
 
-~~~c++
-std::vector<int> v { 1, 2, 3, 30, 40, 50 }; // mean: 21
-auto closest_to_mean_it = cpppc::find_mean_rep(v.begin(), v.end());
-// -> iterator at index 3 (|21-30| = 9)
-~~~
+You may ignore the `emplace` methods for now.
 
-## 3-2-2: histogram (RandomAccessIterator)
-
-Implement a function template `cpppc::histogram` which accepts a range specified
-by two iterators in the `InputIterator` category and replaces each value by the
-number of its occurrences in the range.
-Values are unique in the result histogram and ordered by their first occurrence
-in the range.
-The function returns an iterator past the final element in the histogram.
-
-Only integer values (int, long, size_t, ...) have to be supported.
-
-**Function interface:**
-
-~~~c++
-template <typename RAIt>
-RAIt histogram(RAIt first, RAIt last);
-~~~
-
-**Example:**
-
-~~~c++
-std::vector<int> v { 1, 5, 5, 3, 4, 1, 5, 7 };
-auto hist_end = cpppc::histogram(v.begin(), v.end());
-// -> 1: 2 occurences
-//    5: 3 occurences
-//    5: skipped
-//    ...
-// -> { 2, 3, 1, 1, 1 }  <- occurrences
-//      ^  ^  ^  ^  ^
-//      |  |  |  |  |
-//      1  5  3  4  7    <- value
-//
-// -> returns iterator at position 5
-~~~
+The solution uses `std::vector` as a starting point, but you may use any underlying
+data structure in your implementation of `cpppc::Measurements<T>`.
 
 
-# 3-3: Custom Container / Iterator
+# 3-X: Improve Efficiency
 
-Implement a sparse array (see [https://en.wikipedia.org/wiki/Sparse_array]())
-container that satisfies the `std::array` interface.
+- Refactor your implementation of `Measurements<T>` such that all methods in the
+  *Measurements* concept maintain constant computational complexity $O(c)$
+- There are arithmetic solutions, possibly at the cost of numeric stability, and
+  approaches focusing on the underlying data structure
 
-A sparse array is a usually large array with most elements set to a default
-value like 0. Instead of allocating memory for all values, only
-non-default values are actually allocated.
+## Hints
 
-Different from vectors, arrays are static containers so their size does not
-change after instantiation. The values of its elements can be iterated and
-changed, but elements cannot be added or removed.
-
-
-References:
-
-- std::array in the C++ Standard Template Library:
-  [http://en.cppreference.com/w/cpp/container/array]()
-
-~~~c++
-int default = 0;
-cpppc::sparse_array<int, 10000> sa(default);
-// no actual values in `sa` yet, all set to default
-size_t sa_size = sa.size(); // -> 10000
-assert(sa[345] == 0);       // returns `default` if no value
-                            // set at position
-
-sa[230] = 23;
-assert(sa[230] == 23);
-
-sa[420] = 42;
-// two values stored in `sa`
-
-// Must be compatible with STL algorithms:
-
-auto found_42 = std::find(sa.begin(), sa.end(), 42);
-// -> iterator at 'virtual' position 420 (the second 'real' value)
-~~~
-
-**Notes:**
-
-- Your implementation has to detect assignment of a value reference. Try a
-  temporary proxy: [https://en.wikibooks.org/wiki/More_C++_Idioms/Temporary_Proxy]().
-- Obviously, the `sparse_array` cannot provide direct access to its
-  underlying array (as it doesn't exist) so method `data()` is not provided.
-
-
-# 3-X: Challenges
-
-## 3-X-1: Sequence Iterators: Bresenham's Line Algorithm
-
-Make yourself familiar with
-[Bresenham's Line Algorithm](http://graphics.idav.ucdavis.edu/education/GraphicsNotes/Bresenhams-Algorithm.pdf)
-and implement it as sequential concept:
-
-~~~c++
-raster_image img(width, height);
-
-raster_point p_from = img[{x0, y0}];
-raster_point p_to   = img[{x1, y1}];
-
-raster_line_seq = raster_line_sequence(raster_image, p_from, p_to);
-
-for (auto line_point : raster_line_seq) {
-  img[line_point].color = black;
-}
-~~~
-
-
-## 3-X-2: Skip List
-
-Implement a class template `cpppc::map` that satisfies the `std::map` container
-interface based on a Skip List data structure.
-
-References: 
-
-- Specification of std::map: [http://en.cppreference.com/w/cpp/container/map]()
-- *Skip Lists: A Probabilistic Alternative to Balanced Trees*. W. Pugh, 1990.
-  [http://cpppc.pub.lab.nm.ifi.lmu.de/docs/skiplist.pdf]()
-
+- Just for fun, have a look at
+  [https://en.wikipedia.org/wiki/Standard_deviation#Rapid_calculation_methods]()
+- Review trustworthy (!) references for **multi-index containers**
+- DrDobbs is a very trustworthy reference

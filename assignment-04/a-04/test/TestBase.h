@@ -28,10 +28,18 @@ extern void ColoredPrintf(
   const char * filebase = strrchr(filepath, '/'); \
   const char * filename = (filebase != 0) ? filebase + 1 : filepath; \
   sprintf(buffer, __VA_ARGS__); \
-  testing::internal::ColoredPrintf( \
-    testing::internal::COLOR_YELLOW, \
+  printf( \
     "[=   LOG  =] %*s :%*d | %s \n", \
     24, filename, 4, __LINE__, buffer); \
 } while(0)
+
+// Fancy way to output a sequence of values to a string:
+template <typename Iter>
+std::string range_to_string(Iter first, Iter last) {
+  std::ostringstream oss;
+  std::copy(first, last,
+            std::ostream_iterator<int>(oss, " "));
+  return oss.str();
+}
 
 #endif // CPPPC__TEST__TEST_BASE_H_
