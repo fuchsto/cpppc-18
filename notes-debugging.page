@@ -1,0 +1,138 @@
+---
+title: Introduction to Debugging
+format: Markdown
+...
+
+
+# GNU Debugger - gdb
+
+## Installation
+
+Install gdb on the VM:
+
+~~~bash
+$ sudo apt-get update && sudo apt-get install gdb
+# Confirm with <ENTER>
+~~~
+
+## Example
+
+Using test suite as an example for debugging with gdb:
+
+~~~bash
+$ gdb ./testsuite.bin
+~~~
+
+This starts program `testsuite.bin` and halts execution at its entry
+point (usually the `main` function entry point).
+
+
+First, let's switch to a more useful view. In gdb, enter `<CTRL-X> 2`.
+This switches to a TUI (terminal user interface, a GUI in the terminal)
+consisting of three view sections: the source code at the top with
+assembly below, and the gdb command line at the bottom.
+
+Or, write the content of
+[this file](https://raw.githubusercontent.com/gdbinit/Gdbinit/master/gdbinit)
+to `~/.gdbinit` for colored output and overall prettier gdb
+(incompatible with TUI apparently).
+
+Searching for gdb dotfiles on github gives lots of other coder's gdb
+tweaks like [this one](https://github.com/RAttab/dotfiles/blob/master).
+
+Now, enable pretty printing for displaying values:
+
+~~~gdb
+(gdb) set print pretty on
+~~~
+
+You will find the integrated help system of gdb very useful:
+
+~~~gdb
+(gdb) help
+# display help for a command category like "running":
+(gdb) help running
+# display help for a specific command:
+(gdb) help next
+~~~
+
+To debug a specific function like `vector__push_back`, add a break
+point at the  function's entry point using the gdb command `break`.
+
+You can use auto-completion to choose from all functions named
+'vector__' like:
+
+~~~gdb
+(gdb) break vector__<TAB><TAB> (select a function name) <ENTER>
+~~~
+
+To run the program, use the gdb command `run`. Execution will halt
+at the first break point.
+
+~~~gdb
+(gdb) run
+~~~
+
+To continue execution in single operations step-by-step, use `next`
+or `n`:
+
+~~~gdb
+(gdb) n
+~~~
+
+To repeat the last command, just hit `<ENTER>`.
+
+Show the value of a variable with `print` (ensure that
+pretty-printing is enabled as described above):
+
+~~~gdb
+(gdb) print *data
+~~~
+
+
+# Memory Debugging: valgrind
+
+Install valgrind on the VM:
+
+~~~bash
+$ sudo apt-get update && sudo apt-get install valgrind
+# Confirm with <ENTER>
+~~~
+
+From the [valgrind quick start tutorial](http://valgrind.org/docs/manual/quick-start.html):
+
+Example program:
+
+~~~c
+  #include <stdlib.h>
+
+  void f(void)
+  {
+     int* x = malloc(10 * sizeof(int));
+     x[10] = 0;        // problem 1: heap block overrun
+  }                    // problem 2: memory leak -- x not freed
+
+  int main(void)
+  {
+     f();
+     return 0;
+  }
+~~~
+
+Using valgrind to check for memory leaks:
+
+~~~bash
+$ valgrind --leak-check=yes myprog [arg1 arg2 ...]
+~~~
+
+Output from memory check:
+
+~~~
+  ==19182== Invalid write of size 4
+  ==19182==    at 0x804838F: f (example.c:6)
+  ==19182==    by 0x80483AB: main (example.c:11)
+  ==19182==  Address 0x1BA45050 is 0 bytes after a block of size 40 alloc'd
+  ==19182==    at 0x1B8FF5CD: malloc (vg_replace_malloc.c:130)
+  ==19182==    by 0x8048385: f (example.c:5)
+  ==19182==    by 0x80483AB: main (example.c:11)
+~~~

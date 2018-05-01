@@ -7,11 +7,28 @@ title: Advanced C++ - Summer Term 2018
 
 - [Session 01](/session-01/session-01) \
     Formal Foundations, Value Semantics, Object-oriented C \
-    [Assignment 01 - due Wednesday 25. April 13:00 h](/assignment-01/)
+    [Assignment 01 - due Wednesday 25. April 13:00 h](/assignment-01/) \
+    Submissions of all participants accepted!
 
 - [Session 02](/session-02/session-02) \
     Concepts vs. Types vs. Classes, Type Qualifiers (Const), References \
     [Assignment 02 - due Wednesday 02. May 13:00 h](/assignment-02/)
+
+- Session 03 \
+    Type Deduction, Templates, Safe Resource Acquisition
+
+- Session 04 \
+    Containers, Iterators and Algorithms
+
+- Session 05 \
+    Moving and Perfect Forwarding
+
+
+
+# Technical Lab Notes
+
+- [Introduction to Debugging Tools](/notes-debugging)
+
 
 
 # Downloads
