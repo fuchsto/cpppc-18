@@ -10,7 +10,20 @@ categories: cpppc, teaching
 [Source Code](/assignment-03/a-03/)
 
 
-# 3-1: Algorithms / Function Templates
+# 3-1: Container Template: List
+
+- Complete the implementation of the
+  [List container template](/session-03/04-list/list.h)
+  discussed in the last lab session.\
+  Remember that all template code must be implemented in headers!
+
+- Use the test suite of `Vector` you ported to C++ in assignment 2 to
+  test your implementation of the `List` container.
+
+
+# 3-2: Algorithms / Function Templates
+
+In the following, you will implement two algorithms as function templates.
 
 Your implementations should be a combination of functions provided by the STL
 and must not contain explicit loops like `for` or `while`.
@@ -28,7 +41,7 @@ References:
 - C++ Iterator Library:
   [http://en.cppreference.com/w/cpp/header/iterator]()
 
-## 3-1-1: find_mean_rep
+## 3-2-1: find_mean_rep
 
 Implement a function template `cpppc::find_mean_rep` which accepts a range specified
 by two iterators in the `InputIterator` category and returns an iterator to the
@@ -52,7 +65,7 @@ auto closest_to_mean_it = cpppc::find_mean_rep(v.begin(), v.end());
 // -> iterator at index 3 (|21-30| = 9)
 ~~~
 
-## 3-1-2: histogram (RandomAccessIterator)
+## 3-2-2: histogram (RandomAccessIterator)
 
 Implement a function template `cpppc::histogram` which accepts a range specified
 by two iterators in the `InputIterator` category and replaces each value by the
@@ -88,7 +101,7 @@ auto hist_end = cpppc::histogram(v.begin(), v.end());
 ~~~
 
 
-# 3-2: Custom Container / Iterator
+# 3-3: Custom Container / Iterator
 
 Implement a sparse array (see [https://en.wikipedia.org/wiki/Sparse_array]())
 container that satisfies the `std::array` interface.
@@ -135,12 +148,18 @@ auto found_42 = std::find(sa.begin(), sa.end(), 42);
   underlying array (as it doesn't exist) so method `data()` is not provided.
 
 
-# 3-3: Sequence Iterators: Bresenham's Line Algorithm
+# 3-X: Challenges
+
+## 3-X-1: Sequence Iterators: Bresenham's Line Algorithm
+
+Make yourself familiar with [Bresenham's Line Algorithm]() and implement
+it as sequential concept:
 
 ~~~c++
 raster_image img(width, height);
-raster_point p_from(x0, y0);
-raster_point p_to(x1, y1);
+
+raster_point p_from = img[{x0, y0}];
+raster_point p_to   = img[{x1, y1}];
 
 raster_line_seq = raster_line_sequence(raster_image, p_from, p_to);
 
@@ -150,7 +169,7 @@ for (auto line_point : raster_line_seq) {
 ~~~
 
 
-# 3-X: Skip List
+## 3-X-2: Skip List
 
 Implement a class template `cpppc::map` that satisfies the `std::map` container
 interface based on a Skip List data structure.
