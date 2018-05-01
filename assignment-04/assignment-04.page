@@ -103,7 +103,6 @@ Different from vectors, arrays are static containers so their size does not
 change after instantiation. The values of its elements can be iterated and
 changed, but elements cannot be added or removed.
 
-
 References:
 
 - std::array in the C++ Standard Template Library:
@@ -135,6 +134,43 @@ auto found_42 = std::find(sa.begin(), sa.end(), 42);
   temporary proxy: [https://en.wikibooks.org/wiki/More_C++_Idioms/Temporary_Proxy]().
 - Obviously, the `sparse_array` cannot provide direct access to its
   underlying array (as it doesn't exist) so method `data()` is not provided.
+
+
+
+# 4-3: Lazy Sequence Container
+
+Implement a sequence container `lazy_sequence` that is initialized with its size
+and a generator function.
+The container does not store any elements, instead the generator function is used
+to create container elements only when they are accessed.
+
+Example:
+
+```c++
+  lazy_sequence<int> seq(10,
+                        [](int i) {
+                          return (100 + i * i);
+                        });
+
+  // `seq` does not contain any elements at this point, but it satisfies the
+  // STL Sequence Container concept:
+
+  std::cout << "sequence size: " << seq.size() << '\n';
+
+  auto it = seq.begin();
+  // still nothing computed
+
+  int first = *it; // <-- returns value from generator(it._pos)
+
+  for (auto e : seq) {
+    // generates values one by one:
+    std::cout << e << " ";
+  }
+  std::cout << std::endl;
+  // prints:
+  // 100 101 104 109 116 125 136 149 164 181
+```
+
 
 
 # 4-X: Challenges
