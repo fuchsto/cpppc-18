@@ -15,14 +15,14 @@ title: Advanced C++ - Summer Term 2018
     [Assignment 02 - due Wednesday 02. May 13:00 h](/assignment-02/)
 
 - [Session 03](/session-03/session-03) \
-    Containers, Templates, Iterators, Rule of Three \
+    Containers, Templates, Iterators, Rule of Three / Zero \
     [Assignment 03 - due Friday 11. May 13:00 h](/assignment-03/)
 
 - Session 04 \
-    Containers, Iterators and Algorithms
+    STL Overview, Specialization vs. Overloading, constexpr
 
 - Session 05 \
-    Moving and Perfect Forwarding
+    Moving and Perfect Forwarding, Rule of Five / Zero (revisited)
 
 
 
