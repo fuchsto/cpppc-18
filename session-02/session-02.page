@@ -335,3 +335,5 @@ For example, `123` is an rvalue because a statement like:
 
 ... would be nonsensical.
 
+
+![](/figures/cxx_class_anatomy__basic_ro3.svg)
