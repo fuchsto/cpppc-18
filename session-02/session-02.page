@@ -9,6 +9,9 @@ categories: cpppc, teaching
 **[Code discussed in this session](/session-02/)**
 
 
+![](/figures/cxx_class_anatomy__basic_ro3.svg)
+
+
 # Of Types, States and Concepts
 
 The C-style representation of strings is notoriously error-prone and causes security
@@ -336,4 +339,8 @@ For example, `123` is an rvalue because a statement like:
 ... would be nonsensical.
 
 
-![](/figures/cxx_class_anatomy__basic_ro3.svg)
+# References 
+
+- [Anatomy of the Assignment Operator](http://icu-project.org/docs/papers/cpp_report/the_anatomy_of_the_assignment_operator.html) \
+  The article predates modern C++ (version 11 and later) but is still very correct
+  and a recommended read!
