@@ -236,6 +236,16 @@ void     vector__delete (Vector * _this);
 Vector * vector__assign (Vector * _this, Vector * other);
 ~~~
 
+And indeed, there is a fundamental law (rules, rather) behind this:
+
+**If the implementation of a type requires to specify one of the operations
+for copying, assignment or destruction, all three of those must be specified.**
+
+This is called the Rule of Three (later: Rule of Five and Rule of Zero).
+
+See: [http://en.cppreference.com/w/cpp/language/rule_of_three]()
+
+
 ## Standard Object Semantics
 
 **Allocation**
