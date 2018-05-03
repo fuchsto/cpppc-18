@@ -32,6 +32,10 @@ title: Advanced C++ - Summer Term 2018
 
 - Session 12
 
+# Where and Why C++ Matters
+
+- [Why Instagram ported Apache Cassandra to C++](/files/Cassandra_Java_to_Cxx.pdf)
+
 
 # Technical Lab Notes
 
@@ -147,7 +151,6 @@ Peter Gottschling, 2016](http://ptgmedia.pearsoncmg.com/images/9780134383583/sam
 
 ## Selected Articles
 
-- [Dijkstra: *Why numbering should start at 0*](/files/Cassandra_Java_to_Cxx.pdf)
 - [Resumable Functions: aync, await](http://meetingcpp.com/index.php/br/items/resumable-functions-async-and-await.html)
 - [C++ Ranges are Pure Monadic Goodness](https://bartoszmilewski.com/2014/10/17/c-ranges-are-pure-monadic-goodness/)
 - [The "Double-Checked Locking is Broken" Declaration](https://www.cs.umd.edu/~pugh/java/memoryModel/DoubleCheckedLocking.html)
