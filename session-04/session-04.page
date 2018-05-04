@@ -224,11 +224,6 @@ Further references:
 - [Tag dispatching with iterator traits](http://en.cppreference.com/w/cpp/iterator/iterator_tags)
 - [std::enable_if examples](http://en.cppreference.com/w/cpp/types/enable_if)
 
-# Template Parameter Deduction
-
-- Template parameters deduced from parameter types
-- Return value deduced from result type
-
 
 # Custom Iterators
 
