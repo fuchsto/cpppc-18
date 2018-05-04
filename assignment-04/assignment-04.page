@@ -9,6 +9,18 @@ categories: cpppc, teaching
 
 [Source Code](/assignment-04/a-04/)
 
+A talk at ACCU has just been published on YouTube that summarizes the relevance
+of STL algorithms and explains the mental model behind them really well:
+
+[105 STL Algorithms in Less Than an Hour - Jonathan Boccara](https://www.youtube.com/watch?v=bXkWuUe9V2I)
+
+Everything in this talk agrees with the discussion of STL algorithms in our
+lab sessions, and the presentation is stellar. 
+
+> There is a trap that lies right at the beginning of the path to STL algorithms,
+> and this trap is called for_each.
+
+
 
 # 4-1: Algorithms / Function Templates
 
