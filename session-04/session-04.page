@@ -85,7 +85,7 @@ Operation    | Name                                         | Category
 
 So if your code doesn't use operations apart from these: great! Your code will
 work with just any iterator.
-z
+
 The next category is `ForwardIterator`. It includes all operations of the
 `InputIterator` category and also provides:
 
