@@ -17,6 +17,11 @@ lab sessions, and the presentation is stellar.
 > There is a trap that lies right at the beginning of the path to STL algorithms,
 > and this trap is called for_each.
 
+In another talk, Marshall Clow gives an introduction and some hints on how to
+implement good STL algorithm abstractions:
+
+- [Marshall Clow: STL Algorithms - why you should use them, and how to write your own](https://www.youtube.com/watch?v=h4Jl1fk3MkQ)
+
 
 # Rule of Zero
 
