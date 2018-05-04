@@ -6,9 +6,10 @@ categories: cpppc, teaching
 
 **C++ Programming Course, Summer Term 2018**
 
-# 4-0: Watch this talk
-
 [Source Code](/assignment-04/a-04/)
+
+
+# 4-0: Watch this talk
 
 A talk at ACCU has just been published on YouTube that summarizes the relevance
 of STL algorithms and explains the mental model behind them really well:
