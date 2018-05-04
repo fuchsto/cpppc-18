@@ -166,6 +166,43 @@ public:
 // ...
 };
 
+
+Assuming we have an algorithm `algo` that should provide different
+implementations depending on the category of the iterators passed
+as arguments.
+
+The best practice approach is a technique called *tag dispatching*.\
+It works like this:
+
+~~~c++
+
+// Non-public implementation detail
+//
+namespace detail {
+   template <typename Iter>
+   Iter algo_impl(Iter first, Iter last, std::random_access_iterator_tag) {
+      // Implementation for random access iterators
+   }
+
+   template <typename Iter>
+   Iter algo_impl(Iter first, Iter last, std::forward_iterator_tag) {
+      // Implementation for forward iterators
+   }
+}
+
+template <typename Iter>
+Iter algo(Iter first, Iter last) {
+   return detail::algo_impl(
+            first,
+            last,
+            // value of this parameter is irrelevant,
+            // we only need it to select the matching
+            // overloaded function definition:
+            typename first::iterator_category());
+} 
+~~~
+
+
 // Algorithm uses `std::enable_if` (or tag dispatching, in earlier days):
 template <typename FwdIter>
 std::enable_if<
