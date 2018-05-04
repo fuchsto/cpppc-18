@@ -165,7 +165,7 @@ public:
    using iterator_category = std::forward_iterator_tag;
 // ...
 };
-
+~~~
 
 Assuming we have an algorithm `algo` that should provide different
 implementations depending on the category of the iterators passed
