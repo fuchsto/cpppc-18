@@ -203,7 +203,10 @@ Iter algo(Iter first, Iter last) {
 ~~~
 
 
-// Algorithm uses `std::enable_if` (or tag dispatching, in earlier days):
+You could also exploit SFINAE to enable / disable variants of an 
+algorithm, for example using `std::enable_if`:
+
+~~~c++
 template <typename FwdIter>
 std::enable_if<
   // condition:
