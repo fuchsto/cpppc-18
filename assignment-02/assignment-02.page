@@ -12,10 +12,13 @@ Port the [vector test suite](/assignment-01/a-01/test/vector_test.cc)
 and your implementation of `Vector` from the first assignment to C++.
 
 You can use the [Heap code example](/session-02/02-copy-assignment/)
-discussed in the last session for reference.
+discussed in the last session for reference. **READ IT**.
 
 - **Pay close attention to const-correctness!**
 - **Use references instead of pointers where possible!**
+
+To state the obvious, we want a **C++ class**, not C code that happens to be
+compiled as C++.
 
 You may use pointers instead of a nested iterator class for methods such as
 `vector::begin()`, `vector::end()` but getting familiar with the C++ iterator
@@ -26,3 +29,21 @@ See:
 
 - [C++ STL vector container](http://en.cppreference.com/w/cpp/container/vector)
 - [C++ STL iterator concept](http://en.cppreference.com/w/cpp/concept/Iterator)
+
+
+# Additional Remarks
+
+Remember the lesson you learned from the first assignment?
+
+> Concepts can be implemented using existing types.
+
+In the last lab session, we also discovered:
+
+> The best resource/ownership management is the one you delegate.
+
+And remembering the Rule of Zero:
+
+> Ideally, a class only contains members that are either plain old
+> data or implement the Rule of X (X in { 0, 3, 5 }).
+
+You might want to have a look at the documentation of `std::vector`.
