@@ -6,6 +6,13 @@ category: course notes, cpppc
 
 [Code Examples for Session 04](/session-04/)
 
+Just some weeks ago, a talk at ACCU has been published on YouTube
+that summarizes the relevance of STL algorithms really well.
+It is highly recommended to watch, especially for assignment 4:
+
+- [105 STL Algorithms in Less Than an Hour - Jonathan Boccara](https://www.youtube.com/watch?v=bXkWuUe9V2I)
+
+
 # Rule of Zero
 
 We do not need to follow the *Rule of Three* in class template
