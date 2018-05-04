@@ -31,9 +31,9 @@ In the following, you will implement two algorithms as function templates.
 Your implementations should be a combination of functions provided by the STL
 and must not contain explicit loops like `for` or `while`.
 
-You may use any algorithm interface defined in the C++11 standard.
-For example, you may use `std::minmax` (C++11) in your implementations, but not
-`std::for_each_n` (C++17).
+You may use any algorithm interface defined in the C++14 standard.
+For example, you may use `std::minmax` (since C++11) in your implementations,
+but not `std::for_each_n` (C++17).
 
 References:
 
