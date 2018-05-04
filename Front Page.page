@@ -12,14 +12,13 @@ title: Advanced C++ - Summer Term 2018
 
 - [Session 02](/session-02/session-02) \
     Concepts vs. Types vs. Classes, Type Qualifiers (const), References \
-    [Assignment 02 - due ~~Wednesday 02. May 13:00 h~~](/assignment-02/) \
-    **Submission deadline postponed to 04. May 23:59 - no mercy for future assignments**
+    [Assignment 02 - due ~~Friday 04. May 13:00 h~~](/assignment-02/)
 
 - [Session 03](/session-03/session-03) \
     Containers, Class Templates, Iterators, Rule of X, Type Deduction \
     [Assignment 03 - due Friday 11. May 13:00 h](/assignment-03/)
 
-- Session 04 \
+- [Session 04](/session-04/session-04) \
     Invocation Order, Function Templates, Algorithm Concepts \
     [Assignment 04 - due Friday 18. May 13:00 h](/assignment-04/)
 
