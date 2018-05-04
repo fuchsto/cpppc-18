@@ -12,9 +12,9 @@ We do not need to follow the *Rule of Three* in class template
 `Measurements` in [assigment 3](/assignment-03/) because all
 resource management is encapsulated in the `std::vector` member.
 
-As `std::vector` respects the *Rule of Five*, we can safely
-assume that its resources will be acquired and released
-automatically.
+As `std::vector` respects the *Rule of Five* which includes the
+Rule of Three, we can safely assume that its resources will be
+acquired and released automatically and correctly.
 
 We will discuss the [Rule of Zero and move assignment](http://en.cppreference.com/w/cpp/language/move_assignment)
 in an upcoming lab session.
