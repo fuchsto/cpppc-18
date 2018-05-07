@@ -1,0 +1,99 @@
+---
+format: Markdown
+title: Hints on Assignment 03
+...
+
+# Your Questions
+
+## Q: I see compiler errors about "dependent type" or "nested-name-specifier"
+
+For example, a compiler error like this:
+
+~~~
+../solution/list.h:16:25: error: expected nested-name-specifier
+            typedef typename list<ValueT, default_value> list_t;
+                                          ^~~~~~~~~~~~~~~~~
+~~~
+
+Well, the problem is the circular dependency between `list<T,val>` and `list<T,val>::iterator`:
+
+~~~c++
+template <
+    typename ValueT,
+    ValueT   default_value = ValueT()>
+  class list {
+    typedef list<ValueT, default_value> self_t;
+  public:
+    class iterator {
+       typedef typename
+         list<ValueT, default_value> list_t;
+         // |
+         // `--- this requires declaration of type list<ValueT, default_value>
+
+    // ...
+
+    }; // <-- list<ValueT, default_value>::iterator is only
+       //     declared after this line
+
+  // ...
+}; // <-- list<ValueT, default_value> is only
+   //     declared after this line
+~~~
+
+
+To break the dependency circle, note that only the **declaration** of either
+type is required. A type is only declared once the semicolon at the end of
+one of its declarations has been reached. \
+There may be multiple (identical) declarations of the same type but only one
+definition.
+
+So, as 
+
+`list<ValueT, default_value>::iterator`
+
+requires the declaration of
+
+`list<ValueT, default_value>`
+
+we just add the declaration of `list` somewhere at the beginning of the
+header.
+
+This is called a **forward declaration**.
+You will find lots of references on this term, as usual, use cppreference as
+a starting point:
+
+- [http://en.cppreference.com/w/cpp/language/class]()
+
+In our example, this could look like this:
+
+~~~c++
+// Fwd-declare
+//  `---------- adding a comment like this is good style
+template <
+    typename ValueT,
+    ValueT   default_value = ValueT()>
+class List; // <-- this semicolon concludes the declaration,
+            //     so after this line, list<T,val> is declared.
+
+template <
+    typename ValueT,
+    ValueT   default_value = ValueT()>
+  class list {
+    typedef list<ValueT, default_value> self_t;
+  public:
+    class iterator {
+       typedef typename
+         list<ValueT, default_value> list_t;
+         // |
+         // `--- Forward-declaration of list<ValueT, default_value>
+         //      used here
+
+    // ...
+
+    }; // <-- list<ValueT, default_value>::iterator is only
+       //     declared after this line
+
+  // ...
+};
+~~~
+
