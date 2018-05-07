@@ -121,6 +121,7 @@ Peter Gottschling, 2016](http://ptgmedia.pearsoncmg.com/images/9780134383583/sam
 
 ## Selected Articles
 
+- [Teach Yourself Demoscene in 14 Days](https://github.com/psenough/teach_yourself_demoscene_in_14_days) (not really)
 - [Resumable Functions: aync, await](http://meetingcpp.com/index.php/br/items/resumable-functions-async-and-await.html)
 - [C++ Ranges are Pure Monadic Goodness](https://bartoszmilewski.com/2014/10/17/c-ranges-are-pure-monadic-goodness/)
 - [The "Double-Checked Locking is Broken" Declaration](https://www.cs.umd.edu/~pugh/java/memoryModel/DoubleCheckedLocking.html)
