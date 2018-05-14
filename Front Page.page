@@ -28,14 +28,16 @@ title: Advanced C++ - Summer Term 2018
     Iterator Concept Hierarchy, Function Templates, Algorithm Concepts \
     [Assignment 04 - due Friday 18. May 13:00 h](/assignment-04/)
 
-- **No lab session on 11. May 2018**
-
 - Session 05 \
-    Moving and Perfect Forwarding, Rule of Five / Zero (revisited)
+    Moving and Perfect Forwarding, Rule of Five, Rule of Zero (revisited)
+
+- Session 06 \
+    Threads, Thread Safety of STL Containers, Atomics, Shared Ownership
 
 - ...
 
 - Session 12
+
 
 # Where and Why C++ Matters
 
