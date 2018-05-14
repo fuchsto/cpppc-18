@@ -156,10 +156,10 @@ auto found_42 = std::find(sa.begin(), sa.end(), 42);
 
 ## 4-2-2: Lazy Sequence
 
-Implement a sequential container `lazy_sequence` that is initialized with its size
+Implement a sequence concept `lazy_sequence` that is initialized with its size
 and a generator function.
-The container does not store any elements, instead the generator function is used
-to create container elements only when they are accessed.
+A lazy sequence does not store any elements (unlike containers), instead a
+generator function is used to create values only when they are accessed.
 
 Example:
 
