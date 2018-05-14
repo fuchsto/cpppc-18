@@ -85,6 +85,33 @@ double val_b = sarray[463];
 ~~~
 
 
+# Value Categories
+
+[Full formal reference](http://en.cppreference.com/w/cpp/language/value_category)
+
+Each C++ expression is characterized by two independent properties: a type and a value category. \
+The three primary value categories are:
+
+prvalue (pure rvalue)
+: Either computes the value of the operand of an operator or initializes an object \
+  Example: result of calling a function whose return type is not a reference
+
+xvalue (expiring value)
+: An object whose resources can be reused
+
+lvalue (left-value)
+: a function or object, historically named *lvalues* as they could appear on the
+  left-hand side of an assignment expression
+
+Naming and definitions of value categories have changed in the C++ standard's
+history.
+
+An **rvalue** (right-value) is a **prvalue** or **xvalue**. \
+A **glvalue** (generalized lvalue) is an **lvalue** or **xvalue**.
+
+Consequently, *xvalue* can refer to either *rvalue* or *lvalue*.
+
+
 # Move Semantics
 
 ## Rule of 5: Rule of 3 + Move Semantics
