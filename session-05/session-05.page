@@ -85,17 +85,38 @@ double val_b = sarray[463];
 ~~~
 
 
+# Move Semantics
+
+## Rule of 5
+
+
+## References
+
+- [Article on Move Assignment on cppreference](http://en.cppreference.com/w/cpp/language/move_assignment)
+- [Article on rvalue References and Move Semantics](http://www.cprogramming.com/c++11/rvalue-references-and-move-semantics-in-c++11.html)
+
+- Very gentle and friendly (and correct) recap of lvalues vs. rvalues:
+      - <https://www.youtube.com/watch?v=cO1lb2MiDr8>
+      - <https://www.youtube.com/watch?v=UTUdhjzws5g>
+
+- Test and train your code literacy and "perfect formal pitch":
+      - <https://github.com/electronicarts/EASTL>
+      - <https://github.com/ericniebler/range-v3/blob/master/include/range/v3/view_facade.hpp>
+
+
+
 # Value Categories
 
-We learned that some expressions are not allowed on the left-hand side of an
-assignment.
+In [session 2](http://cpppc.coreglit.ch/session-02/session-02#type-qualifiers-references-vs.pointers),
+we discussed expressions which are not allowed on the left-hand side of an assignment.
+A brief example to summarize our findings:
 
 ~~~c++
-int x = 5; // ok
-5     = x; // wrong
-
-const int & a = x; // ok
-const int & a = 5; // wrong
+int & a = x; // ok
+int & a = 5; // wrong
+// because:
+int x   = 5; // ok
+5       = x; // wrong
 ~~~
 
 Historically, the term **lvalue** was used for expressions that are allowed on
@@ -134,25 +155,4 @@ Consequently, *xvalue* can refer to either *rvalue* or *lvalue*.
 
 - [Full formal reference](http://en.cppreference.com/w/cpp/language/value_category)
 - [Stroustrup's notes on value categories](http://www.stroustrup.com/terminology.pdf)
-
-
-# Move Semantics
-
-## Rule of 5: Rule of 3 + Move Semantics
-
-
-
-
-## References
-
-- [Article on Move Assignment on cppreference](http://en.cppreference.com/w/cpp/language/move_assignment)
-- [Article on rvalue References and Move Semantics](http://www.cprogramming.com/c++11/rvalue-references-and-move-semantics-in-c++11.html)
-
-- Very gentle and friendly (and correct) recap of lvalues vs. rvalues:
-      - <https://www.youtube.com/watch?v=cO1lb2MiDr8>
-      - <https://www.youtube.com/watch?v=UTUdhjzws5g>
-
-- Test and train your code literacy and "perfect formal pitch":
-      - <https://github.com/electronicarts/EASTL>
-      - <https://github.com/ericniebler/range-v3/blob/master/include/range/v3/view_facade.hpp>
 
