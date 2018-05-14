@@ -1,0 +1,106 @@
+---
+format: Markdown
+title: Session 05 Summary
+category: course notes, cpppc
+...
+
+[Code Examples for Session 05](/session-05/)
+
+
+# Demystifying the Sparse Array Implementation
+
+The full implementation of the sparse array container from assignment 04 only
+has about 300 lines, but only a few code sections are actually relevant.
+Let's implement it step by step.
+
+We start by defining the container interface and do not care about its
+implementation for now.
+
+The template parameters are specified already, and obviously the container has
+to define `iterator` and `const_iterator` types.
+
+As mentioned in the assignment, you can copy the interface of `std::array` for
+a starting point. As `sparse_array` is a drop-in replacement for `std::array`,
+their method signatures must be identical anyways.
+
+This section only discusses the non-trivial aspects of the implementation that
+differ from `std::array`.
+
+~~~c++
+template <class T, std::size_t N>
+class sparse_array
+{
+public:
+  typedef detail::sparse_array_iterator<self_t>              iterator;
+  typedef detail::sparse_array_iterator<const self_t>  const_iterator;
+
+  typedef T       &       reference;
+  typedef const T & const_reference;
+
+  /**
+   * Non-modifying access for expressions:
+   *
+   *   T value = sparse_array[i]
+   */
+  const_reference operator[](const size_t pos) const;
+
+  /**
+   * Modifying access for expressions:
+   *
+   *   sparse_array[i] = value;
+   */
+  reference operator[](const size_t pos);
+
+  iterator       begin();
+  const_iterator begin() const;
+
+  iterator       end();
+  const_iterator end() const;
+};
+~~~
+
+The method interface is very concise. Arrays are static containers so the only
+essential operations are:
+
+- Iterating container elements: the usual `begin` and `end` methods
+- Element access: `operator[]`
+
+Both must be defined in `const` and non-`const` variants to specialize read-
+and write access.
+
+For `sparse_array`, these are the crucial part. The non-`const` variant of
+`operator[]` must detect element write access:
+
+~~~c++
+// Value to return for unspecified elements:
+double default_val = 3.1415
+// No data in array yet, container size only has logical relevance:
+sparse_array<double, 102400000> sarray(defaul_val);
+// Return default value if element at offset is unspecified:
+double val_a = sarray[1240]; // -> 3.1415
+// Add one element to array at specified logical offset:
+sarray[463] = 1.234;
+// Return the registered value:
+double val_b = sarray[463];
+~~~
+
+
+# Move Semantics
+
+## Rule of 5: Rule of 3 + Move Semantics
+
+- [Article on Move on cppreference](http://en.cppreference.com/w/cpp/language/move_assignment)
+
+
+
+
+## References
+
+- Very gentle and friendly (and correct) recap of lvalues vs. rvalues:
+      - <https://www.youtube.com/watch?v=cO1lb2MiDr8>
+      - <https://www.youtube.com/watch?v=UTUdhjzws5g>
+
+- Test and train your code literacy and "perfect formal pitch":
+      - <https://github.com/electronicarts/EASTL>
+      - <https://github.com/ericniebler/range-v3/blob/master/include/range/v3/view_facade.hpp>
+
