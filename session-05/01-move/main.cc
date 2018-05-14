@@ -28,37 +28,43 @@
  * -------------------------
  *
  *      T & operator[](int) const
- * 
- *      int x = myinst[3];
- *      myinst[3] = 30;
+ *          ^
+ *          |
+ *          |
+ *          '---- what do you assume about the
+ *                return type of this function?
+ *                rvalue? lvalue?
+ *                :
+ *        ________:______________
+ *      _(                       )._
+ *     (.  remember:                )._
+ *      (.                             ).
+ *       (   int x     = myinst[3];     _)
+ *      _(   myinst[3] = 30;           ).
+ *     (.    int & r   = myinst[3];    _)
+ *      (    r         = 30;          )
+ *       '.__________________________.'
  *
- *
- *
- *             
- *                  ^
- *                  '---- what do you assume about the
- *                        return type of this function?
- *                        rvalue? lvalue?
- * 
  *
  *    Now let's pretend you just started a new job at
  *    WormCan Tech Inc. and you find this code snippet
  *    in their codebase:
- *
- *    <
- *    > // Making it const so the reference
- *    > // cannot be redirected:
- *    < Schwifty & const shwing; <--.
- *    > -.-.-.-.     ,^             |
- *    >             /     ^     .---'-----------------.
- *                  :     '-----| does this cause you |
- *                  \           | pain? Describe your |
- *                   '----------| pain. Where does it |
- *                              | hurt most?          |
- *                              '---------------------'
- *
- *
- *
+ *     ______________________________________
+ *    /_:                                    :
+ *    |                                      |
+ *    | // Making it const so the reference  |
+ *    | // cannot be redirected:             |
+ *    | Schwifty & const shwing; <--.        |
+ *    '____   ^      ,^             |   _____'
+ *            |     /     ^     .---'-----------------.
+ *            |     :     '-----| does this cause you |
+ *            |     \           | pain? Describe your |
+ *            |      '----------| pain. Where does it |
+ *            |                 | hurt most?          |
+ *            |                 '---------------------'
+ *            |
+ *            |
+ *            |
  *           .-------------------------.
  *           | I did not make this up. |
  *           '----------------.--------'
@@ -85,15 +91,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
 template <class Iter>
 std::ostream & operator<<(
   std::ostream                & os,
@@ -113,9 +110,10 @@ template <class Iter, class Val>
 Iter fill_rand(
   Val  min,
   Iter begin,
-  Iter end) {
-  // Q: How random is this really? We'll discuss
-  //    this in detail next week
+  Iter end)
+{
+  // Q: How random is this really?
+  //
   std::fill(begin, end, min + std::rand() % 15);
   return end;
 }
