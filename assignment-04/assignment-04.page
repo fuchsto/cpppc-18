@@ -73,8 +73,11 @@ auto closest_to_mean_it = cpppc::find_mean_rep(v.begin(), v.end());
 ## 4-1-2: histogram (RandomAccessIterator)
 
 Implement a function template `cpppc::histogram` which accepts a range specified
-by two iterators in the `InputIterator` category and replaces each value by the
+by two iterators in the `InputIterator` category and **replaces** each value by the
 number of its occurrences in the range.
+
+Note that values of the input range are modified.
+
 Values are unique in the result histogram and ordered by their first occurrence
 in the range.
 The function returns an iterator past the final element in the histogram.
@@ -156,12 +159,33 @@ auto found_42 = std::find(sa.begin(), sa.end(), 42);
 
 ## 4-2-2: Lazy Sequence
 
-Implement a sequence concept `lazy_sequence` that is initialized with its size
-and a generator function.
-A lazy sequence does not store any elements (unlike containers), instead a
-generator function is used to create values only when they are accessed.
+Write a class template `lazy_sequence` that implements the sequence concept and
+is initialized with its size and a generator function.
 
-Example:
+A lazy sequence does not store elements (unlike containers), instead a
+generator function is used to create values only when they are accessed.
+It is not modifiable, similar to `const` sequential containers.
+
+We define the `Sequence` concept, for an instance `s` of sequence type `S`:
+
+Type            | Synopsis
+--------------- | -------------------------------------------------------------------
+`S::value_type` | Values in the sequence
+`S::iterator`   | Iterator to `const S::value_type`, satisfies `RandomAccessIterator`
+`S::size_type`  | Type to represent sequence size (length, number of values)
+
+Expression      | Returns                            | Synopsis
+--------------- | ---------------------------------- | --------------------------
+`s.begin()`     | `const S::iterator`                | Iterator on first value
+`s.end()`       | `const S::const_iterator`          | Iterator past final value
+`s.size()`      | `S::size_type`                     | `s.end() - s.begin()`
+`s[i]`          | `const S::value_type &`            | `*(s.begin() + i)`
+
+
+As usual, all types have value semantics (assignment, copy, comparison, ...).
+
+
+**Example:**
 
 ```c++
   lazy_sequence<int> seq(10,
@@ -187,6 +211,9 @@ Example:
   // prints:
   // 100 101 104 109 116 125 136 149 164 181
 ```
+
+Strictly speaking, there is no *Sequence* concept in C++ or the STL. \
+We will encounter the concept category *Range* for this soon. 
 
 
 
