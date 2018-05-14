@@ -22,11 +22,11 @@ title: Advanced C++ - Summer Term 2018
 
 - [Session 03](/session-03/session-03) \
     Containers, Class Templates, Iterators, Rule of X, Type Deduction \
-    [Assignment 03 - due Friday 11. May 13:00 h](/assignment-03/)
+    [Assignment 03 - due Friday 18. May](/assignment-03/)
 
 - [Session 04](/session-04/session-04) \
     Iterator Concept Hierarchy, Function Templates, Algorithm Concepts \
-    [Assignment 04 - due Friday 18. May 13:00 h](/assignment-04/)
+    [Assignment 04 - due Friday 18. May](/assignment-04/)
 
 - Session 05 \
     Moving and Perfect Forwarding, Rule of Five, Rule of Zero (revisited)
