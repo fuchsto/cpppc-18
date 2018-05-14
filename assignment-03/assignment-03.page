@@ -6,7 +6,14 @@ categories: cpppc, teaching
 
 **C++ Programming Course, Summer Term 2018**
 
-[Source Code](/assignment-03/a-03/)
+# References
+
+- [Source Code](/assignment-03/a-03/)
+
+- [STL Concepts (full index)](http://en.cppreference.com/w/cpp/concept)
+    - [STL Sequence Container Concept](http://en.cppreference.com/w/cpp/concept/SequenceContainer)
+    - [STL Iterator Concepts](http://en.cppreference.com/w/cpp/concept/Iterator)
+
 
 # 3-0: Prerequisites
 
@@ -61,7 +68,9 @@ Signature                       | Synopsis
 
      - Remember that all template code must be implemented in headers!
      - In your implementation, ensure that `List<T>` and `List<T>::iterator`
-       satisfy `std::list<t>` and the
+       satisfy `std::forward_list<t>`
+       (see [reference](http://en.cppreference.com/w/cpp/container/forward_list))
+       and the
        [STL iterator concepts](http://en.cppreference.com/w/cpp/header/iterator),
        in particular
        [iterator traits](http://en.cppreference.com/w/cpp/iterator/iterator_traits)
@@ -82,6 +91,11 @@ variance should be printed.
 Implement the class template `Measurements<T>` representing a sequence container
 that allows to collect measurement data as single values and provides methods to
 obtain the mean, median, standard deviation and variance of the container elements.
+
+You *do not* have to implement all operations listed in the specification of
+[Sequence Container](http://en.cppreference.com/w/cpp/concept/SequenceContainer),
+only those that are used in test cases and examples.
+For example, `emplace` methods are not required.
 
 
 ## Measurements Container Concept
