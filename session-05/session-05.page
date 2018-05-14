@@ -87,13 +87,32 @@ double val_b = sarray[463];
 
 # Value Categories
 
-[Full formal reference](http://en.cppreference.com/w/cpp/language/value_category)
+We learned that some expressions are not allowed on the left-hand side of an
+assignment.
+
+~~~c++
+int x = 5; // ok
+5     = x; // wrong
+
+const int & a = x; // ok
+const int & a = 5; // wrong
+~~~
+
+Historically, the term **lvalue** was used for expressions that are allowed on
+the left-hand side of assignments and **rvalues** on the right-hand size,
+respectively.
+
+With the advent of *move semantics* in the C++11 standard, the terminology had
+to be refined.
+
+## Terminology
 
 Each C++ expression is characterized by two independent properties: a type and a value category. \
 The three primary value categories are:
 
 prvalue (pure rvalue)
-: Either computes the value of the operand of an operator or initializes an object \
+: Either computes the value of the operand of an operator or an expression that
+  initializes an object \
   Example: result of calling a function whose return type is not a reference
 
 xvalue (expiring value)
@@ -110,6 +129,11 @@ An **rvalue** (right-value) is a **prvalue** or **xvalue**. \
 A **glvalue** (generalized lvalue) is an **lvalue** or **xvalue**.
 
 Consequently, *xvalue* can refer to either *rvalue* or *lvalue*.
+
+## References
+
+- [Full formal reference](http://en.cppreference.com/w/cpp/language/value_category)
+- [Stroustrup's notes on value categories](http://www.stroustrup.com/terminology.pdf)
 
 
 # Move Semantics
