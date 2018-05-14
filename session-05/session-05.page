@@ -158,6 +158,7 @@ For example, `a ? b : c` is an *xvalue*.
 
 ## References
 
-- [Full formal reference](http://en.cppreference.com/w/cpp/language/value_category)
+- [Reference initialization](http://en.cppreference.com/w/cpp/language/reference_initialization)
+- [Complete formal specification of value categories](http://en.cppreference.com/w/cpp/language/value_category) (not your go-to reference)
 - [Stroustrup's notes on value categories](http://www.stroustrup.com/terminology.pdf)
 
