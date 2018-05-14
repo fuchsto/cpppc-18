@@ -43,6 +43,27 @@ title: Advanced C++ - Summer Term 2018
   [Open-sourcing a 10x reduction in Apache Cassandra tail latency](/files/Cassandra_Java_to_Cxx.pdf)
 
 
+# Literature
+
+- [*Discovering Modern C++ - An Intensive Course for Scientists, Engineers,
+and Programmers*. \
+Peter Gottschling, 2016](http://ptgmedia.pearsoncmg.com/images/9780134383583/samplepages/9780134383583.pdf)
+
+
+## Technical References
+
+- [STL Concepts: Complete Index](http://en.cppreference.com/w/cpp/concept)
+- [STL Container Overview Poster](/stl_containers.png)
+  ([source](http://en.cppreference.com/w/File:container-library-overview-2012-12-27.pdf))
+
+- [C++ Language Standard (official working draft)](http://www.open-std.org/Jtc1/sc22/wg21/docs/papers/2013/n3797.pdf), great index on the last pages!
+
+- [C++ Language Overview](http://en.cppreference.com/w/cpp/language)
+- [Peter Gottschling's Modern C++ Examples](https://github.com/petergottschling/discovering_modern_cpp)
+- [C++ Tutorials by STE||AR group](https://github.com/STEllAR-GROUP/cpp_lectures_2016)
+- [Undefined vs. Unspecified](http://en.cppreference.com/w/cpp/language/ub)
+
+
 # Technical Lab Notes
 
 - [Introduction to Debugging Tools](/notes-debugging)
@@ -61,12 +82,6 @@ title: Advanced C++ - Summer Term 2018
 - [Type Systems (PD Dr. Ulrich Schöpp)](https://www.tcs.ifi.lmu.de/lehre/ss-2018/typen/typen), with [excellent lab notes](https://gitlab.cip.ifi.lmu.de/schoepp/Typsysteme/tree/master) available
 - [Formal Specification and Verification (Prof. Dr. Dirk Beyer)](https://www.sosy-lab.org/Teaching/2018-SS-FormaleSpezifikationVerifikation/)
 
-
-# Literature
-
-- [*Discovering Modern C++ - An Intensive Course for Scientists, Engineers,
-and Programmers*. \
-Peter Gottschling, 2016](http://ptgmedia.pearsoncmg.com/images/9780134383583/samplepages/9780134383583.pdf)
 
 
 # Selected Talks:
@@ -132,16 +147,4 @@ Peter Gottschling, 2016](http://ptgmedia.pearsoncmg.com/images/9780134383583/sam
 - [Resumable Functions: aync, await](http://meetingcpp.com/index.php/br/items/resumable-functions-async-and-await.html)
 - [C++ Ranges are Pure Monadic Goodness](https://bartoszmilewski.com/2014/10/17/c-ranges-are-pure-monadic-goodness/)
 - [The "Double-Checked Locking is Broken" Declaration](https://www.cs.umd.edu/~pugh/java/memoryModel/DoubleCheckedLocking.html)
-
-
-## Technical References
-
-- [C++ Language Standard (official working draft)](http://www.open-std.org/Jtc1/sc22/wg21/docs/papers/2013/n3797.pdf), great index on the last pages!
-
-- [C++ Language Overview](http://en.cppreference.com/w/cpp/language)
-- [Peter Gottschling's Modern C++ Examples](https://github.com/petergottschling/discovering_modern_cpp)
-- [C++ Tutorials by STE||AR group](https://github.com/STEllAR-GROUP/cpp_lectures_2016)
-- [Undefined vs. Unspecified](http://en.cppreference.com/w/cpp/language/ub)
-- [STL Container Overview Poster](/stl_containers.png)
-  ([source](http://en.cppreference.com/w/File:container-library-overview-2012-12-27.pdf))
 
