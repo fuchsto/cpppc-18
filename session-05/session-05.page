@@ -119,7 +119,7 @@ int x   = 5; // ok
 5       = x; // wrong
 ~~~
 
-Historically, the term **lvalue** was used for expressions that are allowed on
+Historically, the term **lvalue** was used for **expressions** that are allowed on
 the left-hand side of assignments and **rvalues** on the right-hand size,
 respectively.
 
@@ -150,6 +150,11 @@ An **rvalue** (right-value) is a **prvalue** or **xvalue**. \
 A **glvalue** (generalized lvalue) is an **lvalue** or **xvalue**.
 
 Consequently, *xvalue* can refer to either *rvalue* or *lvalue*.
+
+Note that **value categories refer to expressions**, not just to variables or
+values, despite their naming. \
+For example, `a ? b : c` is an *xvalue*.
+
 
 ## References
 
