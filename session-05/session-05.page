@@ -37,14 +37,14 @@ public:
   typedef T       &       reference;
   typedef const T & const_reference;
 
-  /**
+  /*
    * Non-modifying access for expressions:
    *
    *   T value = sparse_array[i]
    */
   const_reference operator[](const size_t pos) const;
 
-  /**
+  /*
    * Modifying access for expressions:
    *
    *   sparse_array[i] = value;
