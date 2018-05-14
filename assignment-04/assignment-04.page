@@ -171,15 +171,15 @@ We define the `Sequence` concept, for an instance `s` of sequence type `S`:
 Type            | Synopsis
 --------------- | -------------------------------------------------------------------
 `S::value_type` | Values in the sequence
-`S::iterator`   | Iterator to `const S::value_type`, satisfies `RandomAccessIterator`
+`S::iterator`   | Iterator to `S::value_type`, satisfies `RandomAccessIterator`
 `S::size_type`  | Type to represent sequence size (length, number of values)
 
-Expression      | Returns                            | Synopsis
---------------- | ---------------------------------- | --------------------------
-`s.begin()`     | `const S::iterator`                | Iterator on first value
-`s.end()`       | `const S::const_iterator`          | Iterator past final value
-`s.size()`      | `S::size_type`                     | `s.end() - s.begin()`
-`s[i]`          | `const S::value_type &`            | `*(s.begin() + i)`
+Expression      | Returns                                    | Synopsis
+--------------- | ------------------------------------------ | --------------------------
+`s.begin()`     | `S::iterator`                              | Iterator on first value
+`s.end()`       | `S::const_iterator`                        | Iterator past final value
+`s.size()`      | `S::size_type`                             | `s.end() - s.begin()`
+`s[i]`          | `const S::value_type &` or `S::value_type` | `*(s.begin() + i)`
 
 
 As usual, all types have value semantics (assignment, copy, comparison, ...).
