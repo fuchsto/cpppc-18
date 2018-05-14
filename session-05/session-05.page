@@ -89,12 +89,13 @@ double val_b = sarray[463];
 
 ## Rule of 5: Rule of 3 + Move Semantics
 
-- [Article on Move on cppreference](http://en.cppreference.com/w/cpp/language/move_assignment)
-
 
 
 
 ## References
+
+- [Article on Move Assignment on cppreference](http://en.cppreference.com/w/cpp/language/move_assignment)
+- [Article on rvalue References and Move Semantics](http://www.cprogramming.com/c++11/rvalue-references-and-move-semantics-in-c++11.html)
 
 - Very gentle and friendly (and correct) recap of lvalues vs. rvalues:
       - <https://www.youtube.com/watch?v=cO1lb2MiDr8>
