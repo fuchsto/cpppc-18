@@ -92,6 +92,7 @@ double val_b = sarray[463];
 
 ## References
 
+- [FluentCpp: lvalues, rvalues and their references](https://www.fluentcpp.com/2018/02/06/understanding-lvalues-rvalues-and-their-references/)
 - [Article on Move Assignment on cppreference](http://en.cppreference.com/w/cpp/language/move_assignment)
 - [Article on rvalue References and Move Semantics](http://www.cprogramming.com/c++11/rvalue-references-and-move-semantics-in-c++11.html)
 
