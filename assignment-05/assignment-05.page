@@ -62,8 +62,10 @@ Analyze the following simplified variant of the
 [example discussed in session 5](/session-05/01-move/)
 in [compiler explorer](http://godbolt.org).
 
-How does it help you to check if move semantics of `ArrayWrapper` are working
+How does it help you to check if move semantics of `ArrayWrapper` work
 as expected?
+
+(Hint: You don't need read assembly)
 
 
 ~~~c++
