@@ -6,22 +6,11 @@ categories: cpppc, teaching
 
 **C++ Programming Course, Summer Term 2018**
 
-# 5-0 Prerequisites
-
-## 5-0-1 cppinsights.io
+# 5-0 Have a Cookie
 
 - Have a look at [cppinsights.io](https://cppinsights.io/).
 - Understand what the tool does, experiment with it a bit.
 - Rejoice.
-
-## 5-0-2 Analyze Example Code
-
-Paste the [example code](/session-05/01-move/) discussed in
-[session 5](/session-05/session-05)
-into cppinsights.io and use it to understand where and why the compiler creates
-(moved) temporaries.
-
-Take a screenshot of a situation you find interesting and elaborate on it a bit.
 
 
 # 5-1 Containers Revisited
