@@ -1,0 +1,53 @@
+---
+format: Markdown
+title: Assignment 5: Move Semantics
+categories: cpppc, teaching
+...
+
+**C++ Programming Course, Summer Term 2018**
+
+# 5-0 Prerequisites
+
+## 5-0-1 cppinsights.io
+
+- Have a look at [cppinsights.io](http://www.cppinsights.io).
+- Understand what the tool does, experiment with it a bit.
+- Rejoice.
+
+## 5-0-2 Analyze Example Code
+
+Paste the [example code](session-05/01-move/) discussed in
+[session 5](session-05/session-05)
+into cppinsights.io and use it to understand where and why the compiler creates
+(moved) temporaries.
+
+Take a screenshot of a situation you find interesting and elaborate on it a bit.
+
+
+# 5-1 Containers Revisited
+
+## 5-1-1 list<T> Move Semantics
+
+- Add a test case to the test suite of `List<T>` from
+  [assignment 3](assignment-03/) to validate
+  moving / copy elision of temporary `List<T>` objects.
+- Validate that your test case in fact creates / copies / assigns temporary
+  `List<T>` instances (gdb, [cppinsights.io](http://www.cppinsights.io),
+  logging ... anything that works for you).
+- Extend your implementation of `List<T>` from assignment 3 by move semantics.
+- Validate that temporary instances are moved (use techniques from step 2).
+
+## 5-1-2 sparse_array<T,N> Move Semantics
+
+Same as 5-1-1 for `sparse_array<T,N>`:
+
+- Add a test case to the test suite of `sparse_array<T,N>` from
+  [assignment 4](assignment-04/) to
+  validate moving / copy elision of temporary `sparse_array<T,N>` objects.
+- Validate that your test case in fact creates / copies / assigns temporary
+  `sparse_array<T,N>` instances (gdb, [cppinsights.io](http://www.cppinsights.io),
+  logging ... anything that works for you).
+- Extend your implementation of `sparse_array<T,N>` from assignment 4 by move 
+  semantics.
+- Validate that temporary instances are moved (use techniques from step 2).
+
