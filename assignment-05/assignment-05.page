@@ -25,7 +25,7 @@ References:
 Watch these talks:
 
 - [Don't Help the Compiler](https://www.youtube.com/watch?v=AKtHxKJRwp4)
-- [Practical Performance Practices](https://www.youtube.com/watch?v=uzF4u9KgUWI)
+- [The strange details of std::string at Facebook](https://www.youtube.com/watch?v=kPR8h4-qZdk)
 
 These talks address a rather experienced (5+ years in industry) audience.
 Pay close attention, pause, think, rewatch. It will be overwhelming, that's okay. 
