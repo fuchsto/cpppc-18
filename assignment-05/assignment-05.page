@@ -65,7 +65,7 @@ in [compiler explorer](http://godbolt.org).
 How does it help you to check if move semantics of `ArrayWrapper` work
 as expected?
 
-(Hint: You don't need read assembly)
+(Hint: You don't need to read assembly)
 
 
 ~~~c++
