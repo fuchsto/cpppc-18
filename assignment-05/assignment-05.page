@@ -17,7 +17,7 @@ categories: cpppc, teaching
 
 References:
 
-- [Session 5 notes](/session-05)
+- [Session 5 notes](/session-05/)
 - [Common misconception with C++ move semantics](https://pagefault.blog/2018/03/01/common-misconception-with-cpp-move-semantics/)
 
 ## 5-1-1 list<T> Move Semantics
