@@ -20,6 +20,17 @@ References:
 - [Session 5 notes](/session-05/) and [discussed example](/session-05/01-move/)
 - [Common misconception with C++ move semantics](https://pagefault.blog/2018/03/01/common-misconception-with-cpp-move-semantics/)
 
+## 5-1-0 CppCon and Chill
+
+Watch these talks:
+
+- [Don't Help the Compiler](https://www.youtube.com/watch?v=AKtHxKJRwp4)
+- [Practical Performance Practices](https://www.youtube.com/watch?v=uzF4u9KgUWI)
+
+These talks address a rather experienced (5+ years in industry) audience.
+Pay close attention, pause, think, rewatch. It will be overwhelming, that's okay. 
+
+
 ## 5-1-1 list<T> Move Semantics
 
 - Add a test case to the test suite of `List<T>` from
