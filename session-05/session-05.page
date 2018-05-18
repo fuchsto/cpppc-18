@@ -108,6 +108,8 @@ double val_b = sarray[463];
 
 # Value Categories
 
+**NOTE**: This section is provided for the sake of completeness. I do neither expect nor encourage you to deep-dive into value category formalities (yet).
+
 In [session 2](http://cpppc.coreglit.ch/session-02/session-02#type-qualifiers-references-vs.pointers),
 we discussed expressions which are not allowed on the left-hand side of an assignment.
 A brief example to summarize our findings:
