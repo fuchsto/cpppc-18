@@ -85,9 +85,7 @@ double val_b = sarray[463];
 ~~~
 
 
-# Move Semantics
-
-## Rule of 5
+# Move Semantics and Rule of 5
 
 
 ## References
