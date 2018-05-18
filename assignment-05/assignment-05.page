@@ -56,3 +56,120 @@ Same as 5-1-1 for `sparse_array<T,N>`:
   semantics.
 - Validate that temporary instances are moved (use techniques from step 2).
 
+# 5-2 Compiler Explorer
+
+Analyze this simplified variant of the
+[example discussed in session 5](/session-05/01-move/)
+in [compiler explorer](http://godbolt.org):
+
+~~~c++
+#include <string>
+
+#define LOG(scope, msg) do { \
+} while(0)
+
+
+template <class T>
+class ArrayWrapper {
+  typedef ArrayWrapper<T> self_t;
+
+public:
+  typedef T   value_type;
+  typedef T * iterator;
+
+public:
+
+  ArrayWrapper()
+  : _data(new T[64]),
+    _size(64),
+    _name("d") {
+    LOG("ArrayWrapper()",
+        "ooo --- default construct " << _name);
+  }
+
+  ArrayWrapper(int n, std::string name)
+  : _data(new T[n]),
+    _size(n),
+    _name(name) {
+    LOG("ArrayWrapper(n,s)",
+        "*** --- create " << _name);
+  }
+
+  // move constructor
+  ArrayWrapper(self_t && other)
+      : _data(other._data),
+        _size(other._size),
+        _name(std::move(other._name)) {
+    LOG("ArrayWrapper(self &&)",
+        "((( --- move  * <-- " << _name);
+    other._data = NULL;
+    other._size = 0;
+  }
+
+  // copy constructor
+  ArrayWrapper(const self_t & other)
+  : _data(new T[other._size]),
+    _size(other._size),
+    _name(other._name) {
+    LOG("ArrayWrapper(const self &)",
+        "=== --- create copy of " << _name);
+    for (int i = 0; i < _size; ++i) {
+      _data[i] = other._data[i];
+    }
+    LOG("ArrayWrapper(const self &)",
+        "=== --- copied " << _size << " values *_*'");
+  }
+
+  ~ArrayWrapper() {
+    LOG("~ArrayWrapper()",
+        "xxx --- destroy " << _name << (
+          ((NULL != _data) ? " and free data" : " and go home")));
+    delete[] _data;
+  }
+
+  iterator begin() const {
+    return _data;
+  }
+
+  iterator end() const {
+    return _data + _size;
+  }
+
+  int size() const {
+    return _size;
+  }
+
+ private:
+  T               * _data;
+  int               _size;
+  const std::string _name;
+};
+
+
+ArrayWrapper<int>
+return_array_by_value(
+  int         size,
+  std::string name) {
+  if (size % 2 == 0) {
+    return ArrayWrapper<int>(size / 2, name);
+  } else {
+    return ArrayWrapper<int>(size * 2, name);
+  }
+}
+
+int
+accept_array_by_value(
+  ArrayWrapper<int> a) {
+  ArrayWrapper<int> mine(std::move(a));
+  mine.begin()[0] = 345;
+  return mine.begin()[0];
+}
+
+int main() {
+  accept_array_by_value(
+     return_array_by_value(234, "X")
+  );
+
+  return 0;
+}
+~~~
