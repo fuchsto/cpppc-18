@@ -58,9 +58,13 @@ Same as 5-1-1 for `sparse_array<T,N>`:
 
 # 5-2 Compiler Explorer
 
-Analyze this simplified variant of the
+Analyze the following simplified variant of the
 [example discussed in session 5](/session-05/01-move/)
-in [compiler explorer](http://godbolt.org):
+in [compiler explorer](http://godbolt.org).
+
+How does it help you to check if move semantics of `ArrayWrapper` are working
+as expected?
+
 
 ~~~c++
 #include <string>
