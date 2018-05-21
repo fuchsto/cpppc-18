@@ -18,6 +18,7 @@ int
 accept_array_by_value(
   ArrayWrapper<int> a)
 {
+  // std::move(x) ==== std::static_cast<T &&>(a);
   ArrayWrapper<int> mine(std::move(a));
 
   mine.begin()[0] = 345;

@@ -23,6 +23,16 @@
  *
  *
  *      const T & operator[](int) const
+ *      // works:
+ *      const T & my_cref = foo[23];
+ *      T         my_copy = foo[23];
+ *
+ *      T operator[](int) const
+ *      // fails:
+ *      const T & my_cref = foo[23];
+ *      // works:
+ *      T         my_copy = foo[23];
+ *
  *      T & operator[](int)
  *
  * -------------------------
