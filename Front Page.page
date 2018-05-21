@@ -12,30 +12,44 @@ title: Advanced C++ - Summer Term 2018
 
 ---
 
+\
+**Events**
+
+- [MobiSys Hackathon](https://github.com/mobisys18hackathon/challenges/wiki) \
+  A shameless recruiting / "make students hack our stuff for free" scheme,
+  still looks like a good way to get your foot in the door
+
+---
+
 - [Session 01](/session-01/session-01) \
     Formal Foundations, Value Semantics, Object-oriented C \
-    [Assignment 01 - due Wednesday 25. April 13:00 h](/assignment-01/)
+    [Assignment 01 - due Wednesday 25. April](/assignment-01/)
 
 - [Session 02](/session-02/session-02) \
     Concepts vs. Types vs. Classes, Type Qualifiers (const), References \
-    [Assignment 02 - due Friday 04. May 13:00 h](/assignment-02/)
+    [Assignment 02 - due Friday 04. May](/assignment-02/)
 
 - [Session 03](/session-03/session-03) \
     Containers, Class Templates, Iterators, Rule of X, Type Deduction \
-    [Assignment 03 - due Friday 11. May 13:00 h](/assignment-03/)
+    [Assignment 03 - due Friday 18. May](/assignment-03/)
 
 - [Session 04](/session-04/session-04) \
     Iterator Concept Hierarchy, Function Templates, Algorithm Concepts \
-    [Assignment 04 - due Friday 18. May 13:00 h](/assignment-04/)
+    [Assignment 04 - due Friday 18. May](/assignment-04/)
 
-- **No lab session on 11. May 2018**
+- [Session 05](/session-05/session-05) \
+    Move Semantics, Rule of Five, Rule of Zero (revisited)
 
-- Session 05 \
-    Moving and Perfect Forwarding, Rule of Five / Zero (revisited)
+- Session 06 \
+    Move Semantics (continued), Perfect Forwarding, Shared Ownership
+
+- Session 07 \
+    Threads, Thread Safety of STL Containers, Atomics
 
 - ...
 
 - Session 12
+
 
 # Where and Why C++ Matters
 
@@ -131,6 +145,14 @@ Peter Gottschling, 2016](http://ptgmedia.pearsoncmg.com/images/9780134383583/sam
 - [The Term Paper](https://www.youtube.com/watch?v=ihCl_IYjrFg)
 
 # Some Useful References
+
+## Websites on C++
+
+- [FluentCpp](https://www.fluentcpp.com/) \
+  A reasonably trustworthy resource, my daily read on the bus
+- [CppPatterns](https://cpppatterns.com/) \
+  Beware: platform allows public contribution 
+
 
 ## Real Life C++
 
