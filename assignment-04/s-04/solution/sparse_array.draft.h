@@ -1,29 +1,12 @@
 
 
-void foo_nonconst_ref(int & val) {
-  // val = 23;
-}
-void foo_const_ref(const int & val) {
-  // val = 323;
-}
-
-foo_nonconst_ref(42); // No.
-foo_const_ref(42);    // Ok.
-
-int & a       = 34;   // No.  a = 23;
-const int & a = 34;   // No.
-
-int & x;
-
-
-
 
 namespace cpppc {
 
-  // T _default_value;
-  // _map { index -> non-default-value }
-  //
-  // T at(i) { return (map[i]) ? map[i] : default_value }
+// T _default_value;
+// _map { index -> non-default-value }
+//
+// T at(i) { return (map[i]) ? map[i] : default_value }
 template <class T, std::size_t N>
 class sparse_array {
 
