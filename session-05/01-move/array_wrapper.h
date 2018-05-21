@@ -43,7 +43,7 @@ public:
   ArrayWrapper(self_t && other)
       : _data(other._data),
         _size(other._size),
-        _name(other._name) {
+        _name(std::move(other._name)) {
     LOG("ArrayWrapper(self &&)",
         "((( --- move  * <-- " << _name);
     other._data = NULL;
