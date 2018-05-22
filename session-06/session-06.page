@@ -3,7 +3,14 @@ format: Markdown
 title: Session 6 Summary
 ...
 
-# Move Semantics
+# Move Semantics Continued
+
+
+## Perfect Forwarding
+
+
+## Universal Reference
+
 
 ## Move-only Types
 
@@ -11,12 +18,6 @@ Types that only provide move construction and move assignment and forbid any
 other instantiation method are called *move-only types*.
 In effect, a move-only object, and in effect its resources, cannot be cloned
 to another owner or shared between objects.
-
-
-## Perfect Forwarding
-
-
-## Universal Reference
 
 
 # Smart Pointers and Move Semantics
