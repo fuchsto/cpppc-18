@@ -41,8 +41,8 @@ title: Advanced C++ - Summer Term 2018
     Move Semantics, Rule of Five, Rule of Zero (revisited) \
     [Assignment 05 - due Friday 25. May](/assignment-05/)
 
-- Session 06 \
-    Move Semantics (continued), Perfect Forwarding, Shared Ownership
+- [Session 06](/session-06/session-06) \
+    Perfect Forwarding, Move-only Types, Ranges, constexpr
 
 - Session 07 \
     Threads, Thread Safety of STL Containers, Atomics
