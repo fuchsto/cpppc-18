@@ -31,7 +31,11 @@ It is therefore a move-only type: moving a `std::unique_ptr` transfers ownership
 from the source pointer to the destination pointer.
 
 
-# Full-Throttle Expressions
+# Views and Ranges
+
+Shameless plug:
+
+- [Tobias Fuchs - "The Point of Views: Multidimensional Ranges for HPC"](https://www.youtube.com/watch?v=JsGsgRnbIpU)
 
 
 # Idioms - Patterns for the Sophisticated
