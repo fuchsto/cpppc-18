@@ -1,0 +1,66 @@
+---
+format: Markdown
+title: Session 11 (03. Feb 2016)
+...
+
+# Move Semantics
+
+## Move-only Types
+
+Types that only provide move construction and move assignment and forbid any
+other instantiation method are called *move-only types*.
+In effect, a move-only object, and in effect its resources, cannot be cloned
+to another owner or shared between objects.
+
+
+## Perfect Forwarding
+
+
+## Universal Reference
+
+
+# Smart Pointers
+
+## unique_ptr
+
+`std::unique_ptr` maintains exclusive ownership semantics.
+A non-null `std::unique_ptr` always owns what it points to. Consequently, copying it
+must be forbidden as all owners would assume exclusive access to the encapsulated
+object.
+It is therefore a move-only type: moving a `std::unique_ptr` transfers ownership
+from the source pointer to the destination pointer.
+
+
+# Full-Throttle Expressions
+
+
+# Idioms - Patterns for the Sophisticated
+
+Much like design patterns, idioms are common techniques that have been proven
+beneficial for common situations.
+We already discussed several idioms along the way, but there are just way too
+many to cover all of them in a single semester.
+
+Some idioms we encountered so far: 
+
+- Tag dispatching
+- Iterator pairs
+- [Metafunctions](http://www.artima.com/cppsource/metafunctions.html), Type Generators
+  and [Type Selection](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Type_Selection)
+- [RAII](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Resource_Acquisition_Is_Initialization), of course
+- Just recently, [Computational Constructors](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Computational_Constructor)
+
+... and many more.
+
+[Others](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Generic_Container_Idioms), 
+mostly those related to allocation, have been intentionally skipped.
+
+The following related idioms have not been discussed so far and deserve an explicit
+mention.
+
+
+## Policies
+
+## Curiously Recurring Pattern Template
+
+
