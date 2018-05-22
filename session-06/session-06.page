@@ -19,7 +19,9 @@ to another owner or shared between objects.
 ## Universal Reference
 
 
-# Smart Pointers
+# Smart Pointers and Move Semantics
+
+## shared_ptr
 
 ## unique_ptr
 
