@@ -50,7 +50,7 @@ and
     [Assignment 05 - due Friday 25. May](/assignment-05/)
 
 - [Session 06](/session-06/session-06) \
-    Perfect Forwarding, Move-only Types, Ranges, constexpr
+    Expressions revisited, Move-only Types, Smart Pointer, CRTP
 
 - Session 07 \
     Threads, Thread Safety of STL Containers, Atomics
