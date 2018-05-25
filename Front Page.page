@@ -52,7 +52,7 @@ and
 - [Session 06](/session-06/session-06) \
     Expressions revisited, Move-only Types, Smart Pointer, CRTP
 
-- Session 07 \
+- [Session 07](/session-07/session-07) \
     Threads, Thread Safety of STL Containers, Atomics
 
 - ...
