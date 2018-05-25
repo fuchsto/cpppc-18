@@ -7,7 +7,11 @@ category: course notes, cpppc
 [Code Examples for Session 07](/session-07/)
 
 
-# Move Semantics Continued (final part)
+# Move Semantics Continued (part 3/3)
+
+References:
+
+- [Perfect Forwarding and Universal References](https://eli.thegreenplace.net/2014/perfect-forwarding-and-universal-references-in-c/)
 
 
 ## Universal Reference
