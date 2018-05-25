@@ -40,6 +40,8 @@ from the source pointer to the destination pointer.
 
 ## std::shared_ptr
 
+[Reference to std::unique_ptr](http://en.cppreference.com/w/cpp/memory/shared_ptr)
+
 
 # Idioms - Patterns for the Sophisticated
 
