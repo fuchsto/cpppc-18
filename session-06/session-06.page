@@ -10,7 +10,7 @@ title: Session 6 Summary
 # Discussing an Implementation of sparse_array<T,N>
 
 - [Submitted code](https://github.com/dinnatintin/cpppc/blob/94fb7dc7518b028643cde62de4e28dad985832ea/a-04/solution/sparse_array.h)
-- [Iterator- and reference expressions](/session-06/00-ref-iter-expr.h)
+- [Iterator- and reference expressions](/session-06/00-ref-iter-expr/reference-iterator-expr.h)
 
 
 
