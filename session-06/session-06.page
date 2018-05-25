@@ -3,8 +3,9 @@ format: Markdown
 title: Session 6 Summary
 ...
 
-# Move Semantics Continued
+# Idiom: Curiously Recurring Template Pattern
 
+# Move Semantics Continued
 
 
 ## Universal Reference
@@ -29,8 +30,6 @@ void wrapper_rval(Foo && rval_ref);
 template <class T>
 void wrapper_univ(T && univ_ref);
 ~~~
-
-
 
 
 ## Perfect Forwarding
