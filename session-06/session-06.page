@@ -3,13 +3,8 @@ format: Markdown
 title: Session 6 Summary
 ...
 
-# Idiom: Curiously Recurring Template Pattern
 
-- [Article on FluentCpp](https://www.fluentcpp.com/2017/05/12/curiously-recurring-template-pattern/)
-- [Implementation by fuchsto in DASH](https://github.com/dash-project/dash/blob/development/dash/include/dash/iterator/internal/IteratorBase.h)
-
-
-# Move Semantics Continued
+# Move Semantics Continued (part 2/3)
 
 
 ## Move-only Types
@@ -63,6 +58,9 @@ mention.
 
 ## Policies
 
+
 ## Curiously Recurring Pattern Template
 
+- [Article on FluentCpp](https://www.fluentcpp.com/2017/05/12/curiously-recurring-template-pattern/)
+- [Implementation by fuchsto in DASH](https://github.com/dash-project/dash/blob/development/dash/include/dash/iterator/internal/IteratorBase.h)
 
