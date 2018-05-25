@@ -47,9 +47,9 @@ to another owner or shared between objects.
 
 # Smart Pointers and Move Semantics
 
-## shared_ptr
+## std::unique_ptr
 
-## unique_ptr
+[Reference to std::unique_ptr](http://en.cppreference.com/w/cpp/memory/unique_ptr)
 
 `std::unique_ptr` maintains exclusive ownership semantics.
 A non-null `std::unique_ptr` always owns what it points to. Consequently, copying it
@@ -58,6 +58,7 @@ object.
 It is therefore a move-only type: moving a `std::unique_ptr` transfers ownership
 from the source pointer to the destination pointer.
 
+## std::shared_ptr
 
 # Views and Ranges
 
