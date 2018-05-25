@@ -7,6 +7,46 @@ category: course notes, cpppc
 [Code Examples for Session 07](/session-07/)
 
 
+# Move Semantics Continued (final part)
+
+
+## Universal Reference
+
+In [the last session](/session-05/session-05), we learned declarations of `rvalue` references (actually: `xvalue`):
+
+~~~c++
+void wrapper(Foo && foo) {
+   func(foo);
+}
+~~~
+
+To tell whether you need `std::move` or not, just remember that it is equivalent to `static_cast<Foo &&>(foo)`. In this example, `foo` already is an `rvalue` reference so there is no need to `std::move`. It would not hurt but just have no effect.
+
+Now I need you to relax and remember that high blood pressure leads to serious disease, so try not to get upset.
+
+In the following example, parameters `rval_ref` and `univ_ref` do not have the same type category:
+
+~~~c++
+void wrapper_rval(Foo && rval_ref);
+
+template <class T>
+void wrapper_univ(T && univ_ref);
+~~~
+
+
+## Perfect Forwarding
+
+
+
+# Views and Ranges
+
+Shameless plug:
+
+- [Tobias Fuchs - "The Point of Views: Multidimensional Ranges for HPC"](https://www.youtube.com/watch?v=JsGsgRnbIpU)
+
+
+
+
 # Functional Programming in C++
 
 Recommended talk: [Ivan Cukic: Functional reactive programming in C++](https://www.youtube.com/watch?v=a2MmURgc6cU)
