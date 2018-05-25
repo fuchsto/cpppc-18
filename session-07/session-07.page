@@ -17,7 +17,7 @@ References:
 
 ## Universal Reference
 
-In [the last session](/session-05/session-05), we learned declarations of `rvalue` references (actually: `xvalue`):
+In [lab session 5](/session-05/session-05), we learned declarations of `rvalue` references (actually: `xvalue`):
 
 ~~~c++
 void wrapper(Foo && foo) {
