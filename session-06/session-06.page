@@ -19,6 +19,8 @@ title: Session 6 Summary
 
 ## Move-only Types
 
+- [Discussed minimal example](/session-06/02-move-only/move_only.h)
+
 Types that only provide move construction and move assignment and forbid any
 other instantiation method are called *move-only types*.
 In effect, a move-only object, and in effect its resources, cannot be cloned
