@@ -18,7 +18,7 @@ There are good references on CRTP around
 Again [compiler explorer](http://godbolt.org) and [CppInsights](http://cppinsights.io) are very useful.
 
 
-# 6-1 CRTP: Random Access Iterator Base
+# 6-1 CRTP: Iterator Base
 
 ## 6-1-1 Reference Implementation
 
