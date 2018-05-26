@@ -1,0 +1,35 @@
+---
+format: Markdown
+title: Assignment 6: Move Semantics
+categories: cpppc, teaching
+...
+
+**C++ Programming Course, Summer Term 2018**
+
+
+# 6-0 References and Prerequisites
+
+We discussed the basic principle of the Curiously Recurring Template Pattern (CRTP).
+
+Experiment with this [minimal example](/session-06/01-static-virtual/static_polymorph.h), make sure you understand the type-related mechanisms behind this technique. \
+Again [compiler explorer](http://godbolt.org) and [CppInsights](http://cppinsights.io) could be useful.
+
+
+# 6-1 CRTP: Random Access Iterator Base
+
+Study the `IteratorBase` class template in DASH:
+
+- [IteratorBase](https://github.com/dash-project/dash/blob/development/dash/include/dash/iterator/internal/IteratorBase.h)
+    - Note that it is subclassing `std::iterator` - don't do this. \
+      This is because DASH is an STL implementation so we wanted our iterators to
+      type-match STL iterators, but this is deprecated style
+      (see note [N3931 on open-std.org](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2014/n3931.html#52))
+    - Default constructor is deleted to forbid direct instantiation of
+     `IteratorBase`. Derived iterator classes should be default-constructible.
+
+- [Usage of IteratorBase](https://github.com/dash-project/dash/blob/development/dash/include/dash/view/IndexSet.h) \
+  Search for `IndexSetIterator`. It is not default-constructible for rather peculiar
+  reasons, don't imitate this.
+
+
+
