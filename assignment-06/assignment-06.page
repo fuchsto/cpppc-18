@@ -17,6 +17,8 @@ Again [compiler explorer](http://godbolt.org) and [CppInsights](http://cppinsigh
 
 # 6-1 CRTP: Random Access Iterator Base
 
+## 6-1-1 Reference Implementation
+
 Study the `IteratorBase` class template in DASH:
 
 - [IteratorBase](https://github.com/dash-project/dash/blob/development/dash/include/dash/iterator/internal/IteratorBase.h)
@@ -32,4 +34,13 @@ Study the `IteratorBase` class template in DASH:
   reasons, don't imitate this.
 
 
+## 6-1-2 Iterator Base Classes for list<T,x> and sparse_array<T,N>
+
+Implement CRTP iterator base class templates:
+
+- `RandomAccessIteratorBase<...>`
+- `ForwardIteratorBase<...>`
+
+Use them as base class of the iterators in your implementation of `list<T,x>`
+and `sparse_array<T,N>`. Test cases do not have to be extended but should pass.
 
