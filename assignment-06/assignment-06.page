@@ -13,7 +13,8 @@ We discussed the basic principle of the Curiously Recurring Template Pattern (CR
 
 Experiment with this [minimal example](/session-06/01-static-virtual/static_polymorph.h), make sure you understand the type-related mechanisms behind this technique.
 
-There are good references on CRTP around, the explanations in [this video](https://www.youtube.com/watch?v=2AwZRWt2suc) should help you a lot.
+There are good references on CRTP around
+(also see [session 6](/session-06/session-06)), the explanations in [this video](https://www.youtube.com/watch?v=2AwZRWt2suc) should help you a lot.
 Again [compiler explorer](http://godbolt.org) and [CppInsights](http://cppinsights.io) are very useful.
 
 
