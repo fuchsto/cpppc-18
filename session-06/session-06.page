@@ -80,7 +80,10 @@ mostly those related to allocation, have been intentionally skipped.
       This is because DASH is an STL implementation so we wanted our iterators to
       type-match STL iterators, but this is deprecated style
       (see note [N3931 on open-std.org](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2014/n3931.html#52))
-    - Default constructor is deleted: this is a bug, don't imitate it.
+    - Default constructor is deleted to forbid direct instantiation of
+     `IteratorBase`. Derived iterator classes should be default-constructible.
 
 - [Usage of IteratorBase](https://github.com/dash-project/dash/blob/development/dash/include/dash/view/IndexSet.h) \
-  Search for `IndexSetIterator`
+  Search for `IndexSetIterator`. It is not default-constructible for rather peculiar
+  reasons, don't imitate this.
+
