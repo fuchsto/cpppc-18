@@ -1,6 +1,6 @@
 ---
 format: Markdown
-title: Assignment 6: Move Semantics
+title: Assignment 6: CRTP
 categories: cpppc, teaching
 ...
 
