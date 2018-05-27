@@ -9,7 +9,7 @@ title: Advanced C++ - Summer Term 2018
 
 - **[CppPC Livestreams on YouTube](https://www.youtube.com/channel/UCPpWJiykrqqm5N_OLApbO2w)**
     - [\#01: Getting started with sparse_array](https://www.youtube.com/watch?v=BRzWQTYMUtw)
-    - \#02: Lazy Sequence and Custom Iterators
+    - \#02: Forward List, Lazy Sequence
     - \#03: Debugging, Assembly Analysis, Benchmarking, Profiling
     - \#04: Static Polymorphism (CRTP)
     - \#05: STL Container Thread Safety, STL Parallelism Concepts
