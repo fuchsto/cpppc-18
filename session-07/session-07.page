@@ -64,6 +64,10 @@ void wrapper_univ(T && univ_ref);
 
 Recommended talk: [Ivan Cukic: Functional reactive programming in C++](https://www.youtube.com/watch?v=a2MmURgc6cU)
 
+## std::function
+
+Article: [Avoiding the performance Hazards of std::function](https://blog.demofox.org/2015/02/25/avoiding-the-performance-hazzards-of-stdfunction/)
+
 # Threads
 
 Creating threads is easy:
