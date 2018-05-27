@@ -60,15 +60,6 @@ void wrapper_univ(T && univ_ref);
 
 
 
-# Views and Ranges
-
-Shameless plug:
-
-- [Tobias Fuchs - "The Point of Views: Multidimensional Ranges for HPC"](https://www.youtube.com/watch?v=JsGsgRnbIpU)
-
-
-
-
 # Functional Programming in C++
 
 Recommended talk: [Ivan Cukic: Functional reactive programming in C++](https://www.youtube.com/watch?v=a2MmURgc6cU)
