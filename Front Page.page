@@ -4,7 +4,10 @@ title: Advanced C++ - Summer Term 2018
 ...
 
 
+
 **[GitHub Repository](https://github.com/fuchsto/cpppc-18/)**
+
+**[CppPC Livestreams on YouTube](https://www.youtube.com/channel/UCPpWJiykrqqm5N_OLApbO2w)**
 
 - [Course website](http://www.mnm-team.org/teaching/Praktika/2018ss/cpppc/)
 - [My homepage at LMU](http://www.mnm-team.org/~fuchst)
@@ -12,22 +15,18 @@ title: Advanced C++ - Summer Term 2018
 
 ---
 
-
-
-Remember: the western world
-[needs you](/Obama_Computer_Science.mp4)
-and
-[C++](/Merkel_Cpp.mp4).
-
-
+\
 
 **Events**
 
 - [MobiSys Hackathon](https://github.com/mobisys18hackathon/challenges/wiki) \
-  A shameless recruiting / "make students hack our stuff for free" scheme,
-  still looks like a good way to get your foot in the door
+  Recruiting event, still might help to get your foot in the door. \
+  ( ... but from personal experience, all you need for top jobs is a degree and a
+  well-maintained GitHub repository. Yes, pants are optional.)
+
 
 ---
+
 
 - [Session 01](/session-01/session-01) \
     Formal Foundations, Value Semantics, Object-oriented C \
@@ -63,6 +62,9 @@ and
 
 
 # Where and Why C++ Matters
+
+- The western world [needs you](/Obama_Computer_Science.mp4) and
+  [C++](/Merkel_Cpp.mp4).
 
 - Why Instagram ported Apache Cassandra from Java to C++: \
   [Open-sourcing a 10x reduction in Apache Cassandra tail latency](/files/Cassandra_Java_to_Cxx.pdf)
