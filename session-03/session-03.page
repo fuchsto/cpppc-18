@@ -421,8 +421,29 @@ However, I personally agree with Scott Meyer's reasoning that this
 should be understood as the \
 [Rule of Five defaults](http://scottmeyers.blogspot.de/2014/03/a-concern-about-rule-of-zero.html).
 
+## Safe Heap-Allocation of Single Objects
 
-## Must-know: realloc in C++
+> **Use std::make_shared or std::make_unique**
+
+These are helpers for the smart-pointer templates `std::shared_ptr` and
+`std::unique_ptr`.
+
+Not only do these employ RAII to ensure that heap-allocated memory will be
+released at the end of the owner's lifetime, they also specify robust
+ownership semantics.
+
+A `std::unique_ptr` is move-only and cannot be copied. Memory allocated using
+`std::make_unique` has exactly one owner at any time and will be released
+depending on the owner's lifetime.
+
+If the allocated memory is shared, `std::shared_ptr` uses reference counting
+to ensure that it will only be released when the last referencing object
+is destroyed.
+
+
+## Safe Heap-Allocation of Object Arrays
+
+> **Use std::vector**
 
 It is worth mentioning that `malloc/free` and `new/delete` are
 incompatible mechanisms: memory allocated with `malloc` cannot be
@@ -459,6 +480,7 @@ if (foo != 0) {
 }
 ~~~
 
+## 
 
 
 # Type Deduction, Substitution and SFINAE
