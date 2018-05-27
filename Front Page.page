@@ -7,7 +7,13 @@ title: Advanced C++ - Summer Term 2018
 
 **[GitHub Repository](https://github.com/fuchsto/cpppc-18/)**
 
-**[CppPC Livestreams on YouTube](https://www.youtube.com/channel/UCPpWJiykrqqm5N_OLApbO2w)**
+- **[CppPC Livestreams on YouTube](https://www.youtube.com/channel/UCPpWJiykrqqm5N_OLApbO2w)**
+    - [\#01: Getting started with sparse_array](https://www.youtube.com/watch?v=BRzWQTYMUtw)
+    - \#02: Lazy Sequence and Custom Iterators
+    - \#03: Debugging, Assembly Analysis, Benchmarking, Profiling
+    - \#04: Static Polymorphism (CRTP)
+    - \#05: STL Container Thread Safety, STL Parallelism Concepts
+    - \#06: View Concepts and constexpr
 
 - [Course website](http://www.mnm-team.org/teaching/Praktika/2018ss/cpppc/)
 - [My homepage at LMU](http://www.mnm-team.org/~fuchst)
