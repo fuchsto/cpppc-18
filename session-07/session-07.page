@@ -201,7 +201,7 @@ function the same:
 
 ```c++
 int accum = 0;
-mutex accum_mutex;
+std::mutex accum_mutex;
 
 void square(int x) {
     int temp = x * x;
@@ -211,15 +211,40 @@ void square(int x) {
 }
 ```
 
-Try running the program repeatedly again and the problem should now be
-fixed. The first thread that calls lock() gets the lock. During this
-time, all other threads that call lock(), will simply halt, waiting at
+The problem should now be fixed.
+The first thread that calls `lock()` gets the lock. During this
+time, all other threads that call `lock()`, will simply halt, waiting at
 that line for the mutex to be unlocked. It is important to introduce the
-variable temp, since we want the x * x calculations to be outside the
+variable temp, since we want the `x * x` calculations to be outside the
 lock-unlock block, otherwise we would be hogging the lock while we're
 running our calculations.
 
+As a final polish, you should use `std::lock_guard`, a mutex wrapper that
+provides a convenient RAII-style mechanism for owning a mutex for the
+duration of a scoped block.
+
+In the following variant, you also have unambiguous control over the
+locked section and obvious prevention of reordering:
+
+
+```c++
+int accum = 0;
+std::mutex accum_mutex;
+
+void square(int x) {
+    int temp = x * x;
+    {
+      std::lock_guard<std::mutex> lock(accum_mutex);
+      accum += temp;
+    }
+}
+```
+
+
 ## Atomic
+
+Recommended Talk:
+[C++ atomics, from basic to advanced. What do they really do?](https://www.youtube.com/watch?v=ZQFzMfHIxng)
 
 C++11 offers even nicer abstractions to solve this problem. For
 instance, the atomic
@@ -228,14 +253,14 @@ container:
 ```c++
 #include <atomic>
 
-atomic<int> accum(0);
+std::atomic<int> accum(0);
 
 void square(int x) {
     accum += x * x;
 }
 ```
 
-We don't need to introduce temp here, since x * x will be evaluated
+We don't need to introduce temp here, since `x * x` will be evaluated
 before handed off to accum, so it will be outside the atomic event.
 
 ## Tasks
