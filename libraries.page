@@ -53,6 +53,15 @@ Algorithms: all STL algorithms, task-parallel implementations with robust scalab
 The high performance math library. A real gem!
 
 
+# Machine Learning
+
+## Tensorflow
+
+Of course.
+
+
+
+
 # Python Bindings
 
 Writing Python modules in C++ is a breeze thanks to `pybind11`. \
