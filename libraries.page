@@ -1,0 +1,53 @@
+---
+format: Markdown
+title: C++ Libraries
+...
+
+
+# OpenCV
+
+Computer vision library.
+
+
+
+# High Performance Computing
+
+## DASH
+
+A Partitioned Global Address Space library, mimicking STL for high performance
+computing clusters. \
+Containers: array, unordered_map, list, narray (n-dim. array) \
+Algorithms: essential STL equivalents, some use cases under development, great scalability for distributed sorting
+
+## HPX
+
+Similar to DASH, task-parallel programming model. \
+Containers: no STL-compliant containers (no global random access or not distributed) 
+\
+Algorithms: all STL algorithms, task-parallel implementations with robust scalability
+
+
+
+## Blaze
+
+The high performance math library. A real gem!
+
+
+
+# C libraries
+
+## FFTW
+
+The "Fastest Fourier Transformation of the West", a must-have.
+
+## ffmpeg
+
+Video and audio encoder/decoder library. Second to none.
+
+
+# Python Bindings
+
+Writing Python modules in C++ is a breeze thanks to `pybind11`. \
+Python owes its success in HPC and data science to modules implemented in C++ for
+performance, like scipy and numpy.
+
