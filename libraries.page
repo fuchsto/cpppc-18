@@ -29,6 +29,13 @@ The "Fastest Fourier Transformation of the West", a must-have.
 Video and audio encoder/decoder library. Second to none.
 
 
+# GPU Rendering
+
+- [Granite](https://github.com/Themaister/Granite) \
+  [related blog article](http://themaister.net/blog/2017/08/15/render-graphs-and-vulkan-a-deep-dive/)
+- [DirectX Examples](https://github.com/Microsoft/DirectX-Graphics-Samples)
+- [Vulkan Memory Allocator](https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator)
+
 
 # High Performance Computing
 
