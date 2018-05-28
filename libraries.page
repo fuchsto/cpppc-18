@@ -4,9 +4,19 @@ title: C++ Libraries
 ...
 
 
-# OpenCV
+# Signal Processing
+
+## OpenCV
 
 Computer vision library.
+
+## FFTW (C library)
+
+The "Fastest Fourier Transformation of the West", a must-have.
+
+## ffmpeg (C library)
+
+Video and audio encoder/decoder library. Second to none.
 
 
 
@@ -31,18 +41,6 @@ Algorithms: all STL algorithms, task-parallel implementations with robust scalab
 ## Blaze
 
 The high performance math library. A real gem!
-
-
-
-# C libraries
-
-## FFTW
-
-The "Fastest Fourier Transformation of the West", a must-have.
-
-## ffmpeg
-
-Video and audio encoder/decoder library. Second to none.
 
 
 # Python Bindings
