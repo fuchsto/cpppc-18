@@ -45,12 +45,15 @@ auto   w_a2 = Widget(4);
 
 
 
-# Move Semantics Continued (part 3/3)
+# Perfect Forwarding
 
 References:
 
 - [Perfect Forwarding and Universal References](https://eli.thegreenplace.net/2014/perfect-forwarding-and-universal-references-in-c/)
 - [Beware of Perfect Forwarding Constructors](https://mpark.github.io/programming/2014/06/07/beware-of-perfect-forwarding-constructors/)
+
+
+## The Problem
 
 
 ## Universal Reference
@@ -77,12 +80,7 @@ void wrapper_univ(T && univ_ref);
 ~~~
 
 
-## Perfect Forwarding
-
-### The Problem
-
-
-### The Solution
+## The Solution
 
 First, we have to recognize that the following *Reference Collapsing Rules*
 exist since C++11:
