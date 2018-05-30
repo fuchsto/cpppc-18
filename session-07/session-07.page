@@ -52,6 +52,7 @@ References:
 - [Perfect Forwarding and Universal References](https://eli.thegreenplace.net/2014/perfect-forwarding-and-universal-references-in-c/)
 - [Beware of Perfect Forwarding Constructors](https://mpark.github.io/programming/2014/06/07/beware-of-perfect-forwarding-constructors/)
 - [Scott Meyers: Adventures in Perfect Forwarding](http://aristeia.com/TalkNotes/Facebook2012_PerfectForwarding.pdf)
+- [Faster C++ Move Construction and Perfect Forwarding](https://www.gdcvault.com/play/1015458/Faster-C-Move-Construction-and)
 
 ## The Problem
 
