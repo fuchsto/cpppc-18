@@ -16,6 +16,7 @@ title: Advanced C++ - Summer Term 2018
     - \#06: View Concepts and constexpr
 
 - [Course website](http://www.mnm-team.org/teaching/Praktika/2018ss/cpppc/)
+- [Internal Area on Course Website](http://www.mnm-team.org/teaching/Praktika/2018ss/cpppc/internal)
 - [My homepage at LMU](http://www.mnm-team.org/~fuchst)
 - [My Github account](http://github.com/fuchsto)
 
@@ -90,9 +91,14 @@ title: Advanced C++ - Summer Term 2018
 
 # Literature
 
+**See [Internal Area on Course Website](http://www.mnm-team.org/teaching/Praktika/2018ss/cpppc/internal)**
+
 - [*Discovering Modern C++ - An Intensive Course for Scientists, Engineers,
 and Programmers*. \
 Peter Gottschling, 2016](http://ptgmedia.pearsoncmg.com/images/9780134383583/samplepages/9780134383583.pdf)
+- [Effective Modern C++]()
+- [Effective STL]()
+- [Professional C++]()
 
 
 ## Technical References
