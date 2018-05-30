@@ -33,14 +33,14 @@ using `auto` by convention is actually considered a good practice.
 Let's discuss the following declarations:
 
 ~~~c++
-Widget w0;
+Widget w_dc_1;
+Widget w_dc_2 = Widget();
 
-Widget w1   = Widget();
+Widget w_il_1 = { 2 };
+Widget w_il_2   { 2 };
 
-Widget w2   = { 2 };
-
-auto   w_a1 = Widget();
-auto   w_a2 = Widget(4);
+auto   w_a_1  = Widget();
+auto   w_a_2  = Widget(4);
 ~~~
 
 
