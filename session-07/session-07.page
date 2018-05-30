@@ -58,6 +58,38 @@ void wrapper_univ(T && univ_ref);
 
 ## Perfect Forwarding
 
+### The Problem
+
+
+### The Solution
+
+First, we have to recognize that the following *Reference Collapsing Rules*
+exist since C++11:
+
+~~~c++
+A&  &  -> A&
+A&  && -> A&
+A&& &  -> A&
+A&& && -> A&&
+~~~
+
+Secondly, there is a template argument deduction rule for function templates
+that take an argument by *rvalue reference* to a template argument:
+
+~~~c++
+template<typename T>
+void foo(T &&);
+~~~
+
+The following rules apply:
+
+- When foo is called on an lvalue of type A: \
+    $\Rightarrow$  T resolves to A& \
+    $\Rightarrow$ reference collapsed: A&
+- When foo is called on an rvalue of type A: \
+    $\Rightarrow$ T resolves to A \
+    $\Rightarrow$ A&&
+
 
 
 # Functional Programming in C++
