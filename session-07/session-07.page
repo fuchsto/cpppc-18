@@ -56,6 +56,18 @@ References:
 
 ## The Problem
 
+~~~c++
+#include <utility>
+
+template<typename T, typename U>
+std::pair<T, U> make_pair_wrapper(T && t, U && u) {
+  return std::make_pair(std::forward<T>(t),
+                        std::forward<U>(u));
+}
+
+int  a = 0;
+auto p = make_pair_wrapper(a, 3);
+~~~
 
 ## Universal Reference
 
