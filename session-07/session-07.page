@@ -24,6 +24,27 @@ Rockstar system programming: showcasing the swaggiest of reasons to learn C++
 - [EmPatch](https://www.youtube.com/watch?v=NKjqfiVlfJ4)
 
 
+# Guideline: "always almost auto"
+
+Using `auto` when you supposedly know the eventual type of a variable might
+appear sloppy and lazy to you. But quite the opposite is the case:
+using `auto` by convention is actually considered a good practice.
+
+Let's discuss the following declarations:
+
+~~~c++
+Widget w0;
+
+Widget w1   = Widget();
+
+Widget w2   = { 2 };
+
+auto   w_a1 = Widget();
+auto   w_a2 = Widget(4);
+~~~
+
+
+
 # Move Semantics Continued (part 3/3)
 
 References:
