@@ -24,6 +24,16 @@ Rockstar system programming: showcasing the swaggiest of reasons to learn C++
 - [EmPatch](https://www.youtube.com/watch?v=NKjqfiVlfJ4)
 
 
+# Polymorphism
+
+
+## Static Polymorphism (CRTP)
+
+
+## Dynamic Polymorphism (virtual)
+
+
+
 # Perfect Forwarding
 
 **References**
