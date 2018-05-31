@@ -150,7 +150,7 @@ auto p = make_pair_wrapper(a, 3);
 ~~~
 
 
-# Guideline: "always almost auto" (aaa)
+# Guideline: "almost always auto" (aaa)
 
 Using `auto` when you supposedly know the eventual type of a variable might
 appear sloppy and lazy to you. But quite the opposite is the case:
