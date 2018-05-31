@@ -106,8 +106,6 @@ double val_b = sarray[463];
 
 # Value Categories
 
-**NOTE**: This section is provided for the sake of completeness. I do neither expect nor encourage you to deep-dive into value category formalities (yet).
-
 In [session 2](http://cpppc.coreglit.ch/session-02/session-02#type-qualifiers-references-vs.pointers),
 we discussed expressions which are not allowed on the left-hand side of an assignment.
 A brief example to summarize our findings:
@@ -124,10 +122,27 @@ Historically, the term **lvalue** was used for **expressions** that are allowed 
 the left-hand side of assignments and **rvalues** on the right-hand size,
 respectively.
 
+Essentially, rvalue references allow to select a function overload at compile
+time depending on whether it is used as *lvalue* or *rvalue* in an expression.
+
+In practice, the following suffices (see
+[this article by Scott Meyers](https://isocpp.org/blog/2012/11/universal-references-in-c11-scott-meyers)):
+
+- If you can take the address of an expression, the expression is an lvalue.
+- If the type of an expression is an lvalue reference (e.g., `T&` or
+  `const T&`, etc.), that expression is an lvalue.
+- Otherwise, the expression is an rvalue. \
+  Conceptually (and typically also in fact), rvalues correspond to temporary
+  objects, such as those returned from functions or created through implicit
+  type conversions. Most literal values (e.g., `10` and `5.3`) are also rvalues.
+
 With the advent of *move semantics* in the C++11 standard, the terminology had
 to be refined.
 
+
 ## Terminology
+
+**NOTE**: This subsection is provided for the sake of completeness. I do neither expect nor encourage you to deep-dive into value category formalities (yet).
 
 Each C++ expression is characterized by two independent properties: a type and a value category. \
 The three primary value categories are:
