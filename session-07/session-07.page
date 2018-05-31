@@ -135,8 +135,6 @@ void wrapper_univ(T && univ_ref);
 
 # Idiom: Function Template Wrappers
 
-
-
 ~~~c++
 std::pair<int, int> one;
 std::pair<int, int> two;
@@ -179,13 +177,19 @@ auto   w_a_2  = Widget(4);
 ~~~
 
 
-# Compile-Time Evaluation
+# Compile-Time Evaluation of Expressions
+
+## decltype
+
+## Expression Templates
 
 **Code Examples by Peter Gottschling:**
 
 - [Expression Template Example](https://github.com/petergottschling/discovering_modern_cpp/blob/master/c%2B%2B14/expression_template_example.cpp)
 - [Compile-Time Algorithms](https://github.com/petergottschling/discovering_modern_cpp/blob/master/c%2B%2B14/is_prime.cpp)
 - [Compile-Time Throw](https://github.com/petergottschling/discovering_modern_cpp/blob/master/c%2B%2B14/value_range_vector.cpp)
+
+## constexpr
 
 
 # Views and Ranges
