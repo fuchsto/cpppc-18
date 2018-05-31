@@ -178,7 +178,7 @@ Recommended talk: [Ivan Cukic: Functional reactive programming in C++](https://w
 
 Article: [Avoiding the performance Hazards of std::function](https://blog.demofox.org/2015/02/25/avoiding-the-performance-hazzards-of-stdfunction/)
 
-# Threads
+# Multithreading and Parallelism
 
 Creating threads is easy:
 
@@ -199,11 +199,10 @@ int main() {
 }
 ```
 
-# Race Conditions
+## Race Conditions
 
 Let us imagine that x * x is a very costly operation and we want to
-calculate the sum
-of squares up to a certain number.
+calculate the sum of squares up to a certain number.
 It would make sense to parallelize the calulation of each square across
 threads.
 
@@ -256,35 +255,27 @@ of the object.
 Now, run this. Chances are it spits out 2870, which is the correct
 answer.
 
-Let's use our bash shell to run it a few more times (assuming you
-compiled it to a.out):
-
-$$
-\text{for} \, (i \in \{1 \dots 40\} ; \quad \text{do} \quad \text{./a.out}; \quad \text{done}
-$$
-
-See any inconsistencies yet? Better yet, let's list all distinct outputs
-from 1000
-separate runs, including the count for each output:
+Let's list all distinct outputs from 1000 separate runs, including the count
+for each output:
 
 $$
 \text{for} \, (i \in \{1 \dots 1000\} ; \quad \text{do} \quad \text{./a.out}; \quad \text{done} \, | \, sort \, | \, uniq -c
 $$
 
-You should definitely see plenty of incorrect answers, even though most
-of the time it gets it right. This is because of something called 
-a race condition.
-When the compiler processes accum += x * x;, reading the current value
-of accum and setting the updated value is not an atomic (meaning
-indivisible) event. Let's re-write square to capture this:
+We should see several runs with incorrect results.
+
+When the compiler processes `accum += x * x`, this expression is non-atomic and
+consists of machine-level instructions equivalent to this:
+
+~~~c++
+int temp = x * x;
+temp    += accum;
+accum    = temp;
+~~~
+
+With two threads interleaving, it could look like this:
 
 ```c++
-int temp = accum;
-temp += x * x;
-accum = temp;
-Now, let's say the first two threads are interleaved over time, giving
-us something like this:
-
 // Thread 1             // Thread 2
 int temp1 = accum;      int temp2 = accum;          // temp1 = temp2 = 0
                         temp2 += 2 * 2;             // temp2 = 4
