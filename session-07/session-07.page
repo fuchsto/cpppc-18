@@ -26,13 +26,21 @@ Rockstar system programming: showcasing the swaggiest of reasons to learn C++
 
 # Perfect Forwarding
 
-References:
+**References**
 
+- [Thomas Becker: rvalue References](http://thbecker.net/articles/rvalue_references/section_01.html) \
+  Highly recommended, excellent in-depth series on rvalues, move semantics and
+  perfect forwarding
+- [Scott Meyers: Universal References in C++11](https://isocpp.org/blog/2012/11/universal-references-in-c11-scott-meyers)
 - [Perfect Forwarding and Universal References](https://eli.thegreenplace.net/2014/perfect-forwarding-and-universal-references-in-c/)
+
+
+**Secondary References**
+
 - [Beware of Perfect Forwarding Constructors](https://mpark.github.io/programming/2014/06/07/beware-of-perfect-forwarding-constructors/)
 - [Scott Meyers: Adventures in Perfect Forwarding](http://aristeia.com/TalkNotes/Facebook2012_PerfectForwarding.pdf)
 - [Faster C++ Move Construction and Perfect Forwarding](https://www.gdcvault.com/play/1015458/Faster-C-Move-Construction-and)
-- [THBecker: rvalue References](http://thbecker.net/articles/rvalue_references/section_01.html)
+
 
 We used *rvalue references* to implement move semantics (move-construction and
 move-assignments) in classes. Any function can be overloaded for rvalue
@@ -72,6 +80,7 @@ You see where this is going.
 
 
 ## The Solution
+
 
 First, we have to recognize that the following *Reference Collapsing Rules*
 exist since C++11:
