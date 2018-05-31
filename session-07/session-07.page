@@ -212,174 +212,6 @@ int main() {
 }
 ```
 
-## Race Conditions
-
-Let us imagine that x * x is a very costly operation and we want to
-calculate the sum of squares up to a certain number.
-It would make sense to parallelize the calulation of each square across
-threads.
-
-We can do something like this:
-
-```c++
-#include <iostream>
-#include <vector>
-#include <thread>
-using namespace std;
-
-int accum = 0;
-
-void square(int x) {
-    accum += x * x;
-}
-
-int main() {
-    vector<thread> ths;
-    for (int i = 1; i <= 20; i++) {
-        ths.push_back(thread(&square, i));
-    }
-
-    for (auto& th : ths) {
-        th.join();
-    }
-    cout << "accum = " << accum << endl;
-    return 0;
-}
-```
-
-This should sum all squares up to and including 20. We iterate up to
-20, and launch a new thread in each iteration that we give the
-assignment to. After this, we call join() on all our threads, which
-is a blocking operation that waits for the thread to finish, before
-continuing the execution.
-
-This is important to do before we print accum, since otherwise our
-threads might not be done yet. You should always join your threads
-before leaving main, if you haven't already.
-
-Before moving on, also note that C++11 offers more terse iteration
-syntax of the vector class, very close in syntax to Java.
-We are also using the keyword auto instead of specifying the data
-type thread, which we can do whenever the compiler can unambiguously
-guess what the correct type should be. We added an & to retrieve a
-reference and not a copy of the object, since join changes the nature
-of the object.
-
-Now, run this. Chances are it spits out 2870, which is the correct
-answer.
-
-Let's list all distinct outputs from 1000 separate runs, including the count
-for each output:
-
-$$
-\text{for} \, (i \in \{1 \dots 1000\} ; \quad \text{do} \quad \text{./a.out}; \quad \text{done} \, | \, sort \, | \, uniq -c
-$$
-
-We should see several runs with incorrect results.
-
-When the compiler processes `accum += x * x`, this expression is non-atomic and
-consists of machine-level instructions equivalent to this:
-
-~~~c++
-int temp = x * x;
-temp    += accum;
-accum    = temp;
-~~~
-
-With two threads interleaving, it could look like this:
-
-```c++
-// Thread 1             // Thread 2
-int temp1 = accum;      int temp2 = accum;          // temp1 = temp2 = 0
-                        temp2 += 2 * 2;             // temp2 = 4
-temp1 += 1 * 1;                                     // temp1 = 1
-                        accum = temp1;              // accum = 1
-accum = temp2;                                      // accum = 4
-```
-
-We end up with accum as 4, instead of the correct 5.
-
-Exercise:
-
-Before we fix the race condition, since keeping accum as a global
-variable is poor style, we would rather pass it into the thread.
-Add a parameter `int& accum` to `square`. It is important that it's a
-reference, since we want to be able to change the accumulator.
-However, we can't simply call `thread(&square, accum, i)`, since it
-will make a copy of accum and then call `square` with that copy.
-To fix this, we wrap `accum` in `ref()`, making it
-`thread(&square, ref(accum), i)`.
-
-
-## Mutex
-
-A mutex (mutual exlusion) allows us to encapsulate blocks of code that
-should only be executed in one thread at a time. Keeping the main
-function the same:
-
-```c++
-int accum = 0;
-std::mutex accum_mutex;
-
-void square(int x) {
-    int temp = x * x;
-    accum_mutex.lock();
-    accum += temp;
-    accum_mutex.unlock();
-}
-```
-
-The problem should now be fixed.
-The first thread that calls `lock()` gets the lock. During this
-time, all other threads that call `lock()`, will simply halt, waiting at
-that line for the mutex to be unlocked. It is important to introduce the
-variable temp, since we want the `x * x` calculations to be outside the
-lock-unlock block, otherwise we would be hogging the lock while we're
-running our calculations.
-
-As a final polish, you should use `std::lock_guard`, a mutex wrapper that
-provides a convenient RAII-style mechanism for owning a mutex for the
-duration of a scoped block.
-
-In the following variant, you also have unambiguous control over the
-locked section and obvious prevention of reordering:
-
-
-```c++
-int accum = 0;
-std::mutex accum_mutex;
-
-void square(int x) {
-    int temp = x * x;
-    {
-      std::lock_guard<std::mutex> lock(accum_mutex);
-      accum += temp;
-    }
-}
-```
-
-
-## Atomic
-
-Recommended Talk:
-[C++ atomics, from basic to advanced. What do they really do?](https://www.youtube.com/watch?v=ZQFzMfHIxng)
-
-C++11 offers even nicer abstractions to solve this problem. For
-instance, the atomic
-container:
-
-```c++
-#include <atomic>
-
-std::atomic<int> accum(0);
-
-void square(int x) {
-    accum += x * x;
-}
-```
-
-We don't need to introduce temp here, since `x * x` will be evaluated
-before handed off to accum, so it will be outside the atomic event.
 
 ## Tasks
 
@@ -490,7 +322,176 @@ your CPU cores will start switching its attention
 between different threads. Each switch is called a context switch and
 comes with an overhead that will hurt performance.
 
-## Condition Variables
+## Shared Access
+
+Let us imagine that x * x is a very costly operation and we want to
+calculate the sum of squares up to a certain number.
+It would make sense to parallelize the calulation of each square across
+threads.
+
+We can do something like this:
+
+```c++
+#include <iostream>
+#include <vector>
+#include <thread>
+using namespace std;
+
+int accum = 0;
+
+void square(int x) {
+    accum += x * x;
+}
+
+int main() {
+    vector<thread> ths;
+    for (int i = 1; i <= 20; i++) {
+        ths.push_back(thread(&square, i));
+    }
+
+    for (auto& th : ths) {
+        th.join();
+    }
+    cout << "accum = " << accum << endl;
+    return 0;
+}
+```
+
+This should sum all squares up to and including 20. We iterate up to
+20, and launch a new thread in each iteration that we give the
+assignment to. After this, we call join() on all our threads, which
+is a blocking operation that waits for the thread to finish, before
+continuing the execution.
+
+This is important to do before we print accum, since otherwise our
+threads might not be done yet. You should always join your threads
+before leaving main, if you haven't already.
+
+Before moving on, also note that C++11 offers more terse iteration
+syntax of the vector class, very close in syntax to Java.
+We are also using the keyword auto instead of specifying the data
+type thread, which we can do whenever the compiler can unambiguously
+guess what the correct type should be. We added an & to retrieve a
+reference and not a copy of the object, since join changes the nature
+of the object.
+
+Now, run this. Chances are it spits out 2870, which is the correct
+answer.
+
+Let's list all distinct outputs from 1000 separate runs, including the count
+for each output:
+
+$$
+\text{for} \, (i \in \{1 \dots 1000\} ; \quad \text{do} \quad \text{./a.out}; \quad \text{done} \, | \, sort \, | \, uniq -c
+$$
+
+We should see several runs with incorrect results.
+
+When the compiler processes `accum += x * x`, this expression is non-atomic and
+consists of machine-level instructions equivalent to this:
+
+~~~c++
+int temp = x * x;
+temp    += accum;
+accum    = temp;
+~~~
+
+With two threads interleaving, it could look like this:
+
+```c++
+// Thread 1             // Thread 2
+int temp1 = accum;      int temp2 = accum;          // temp1 = temp2 = 0
+                        temp2 += 2 * 2;             // temp2 = 4
+temp1 += 1 * 1;                                     // temp1 = 1
+                        accum = temp1;              // accum = 1
+accum = temp2;                                      // accum = 4
+```
+
+We end up with accum as 4, instead of the correct 5.
+
+Exercise:
+
+Before we fix the race condition, since keeping accum as a global
+variable is poor style, we would rather pass it into the thread.
+Add a parameter `int& accum` to `square`. It is important that it's a
+reference, since we want to be able to change the accumulator.
+However, we can't simply call `thread(&square, accum, i)`, since it
+will make a copy of accum and then call `square` with that copy.
+To fix this, we wrap `accum` in `ref()`, making it
+`thread(&square, ref(accum), i)`.
+
+
+### Mutex
+
+A mutex (mutual exlusion) allows us to encapsulate blocks of code that
+should only be executed in one thread at a time. Keeping the main
+function the same:
+
+```c++
+int accum = 0;
+std::mutex accum_mutex;
+
+void square(int x) {
+    int temp = x * x;
+    accum_mutex.lock();
+    accum += temp;
+    accum_mutex.unlock();
+}
+```
+
+The problem should now be fixed.
+The first thread that calls `lock()` gets the lock. During this
+time, all other threads that call `lock()`, will simply halt, waiting at
+that line for the mutex to be unlocked. It is important to introduce the
+variable temp, since we want the `x * x` calculations to be outside the
+lock-unlock block, otherwise we would be hogging the lock while we're
+running our calculations.
+
+As a final polish, you should use `std::lock_guard`, a mutex wrapper that
+provides a convenient RAII-style mechanism for owning a mutex for the
+duration of a scoped block.
+
+In the following variant, you also have unambiguous control over the
+locked section and obvious prevention of reordering:
+
+
+```c++
+int accum = 0;
+std::mutex accum_mutex;
+
+void square(int x) {
+    int temp = x * x;
+    {
+      std::lock_guard<std::mutex> lock(accum_mutex);
+      accum += temp;
+    }
+}
+```
+
+
+### Atomic
+
+Recommended Talk:
+[C++ atomics, from basic to advanced. What do they really do?](https://www.youtube.com/watch?v=ZQFzMfHIxng)
+
+C++11 offers even nicer abstractions to solve this problem. For
+instance, the atomic
+container:
+
+```c++
+#include <atomic>
+
+std::atomic<int> accum(0);
+
+void square(int x) {
+    accum += x * x;
+}
+```
+
+We don't need to introduce temp here, since `x * x` will be evaluated
+before handed off to accum, so it will be outside the atomic event.
+
+### Condition Variables
 
 It is a common scenario to have one thread wait for another thread
 to finish processing, essentially sending a signal between the threads.
@@ -546,4 +547,8 @@ int main() {
     return 0;
 }
 ```
+
+
+## Shared Ownership
+
 
