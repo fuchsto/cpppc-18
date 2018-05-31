@@ -443,27 +443,25 @@ comes with an overhead that will hurt performance.
 
 ## Condition Variables
 
-If we return to threads, it would be useful to be able to have one
-thread wait for another
-thread to finish processing something, essentially sending a signal
-between the threads.
-This can be done with mutexes, but it would be awkward. It can also be
-done using a global
-boolean variable called notified that is set to true when we want to
-send the signal.
+It is a common scenario to have one thread wait for another thread
+to finish processing, essentially sending a signal between the threads.
 
-The other thread would then run a for loop that checks if notified is
-true and stops
-looping when that happens. Since setting notified to true is atomic and
-in this example
-we're only setting it once, we don't even need a mutex. However, on the
-receiving thread
-we are running a for loop at full speed, wasting a lot of CPU time. We
-could add a short
-`sleep_for` inside the for loop, making the CPU idle most of the time.
+This can be done with mutexes, but it would be awkward.
+It can also be done using a global boolean "ready flag" that is set by
+one thread and polled by the other.
 
-A more principled way however is to add a call to wait for a condition
-variable inside the for loop.
+Since setting notified to true is atomic, this would not need a
+`std::atomic` or a mutex. However, reacting on a flag with low latency
+requires a busy loop, pumping CPU load to 100% in the thread.
+We could add a sleep inside the polling loop to reduce CPU load, but
+this effectively sets latency to the sleep period length.
+
+A more principled way however is to add a call to wait for a
+condition variable inside the for loop.
+
+Condition variables can be spuriously awaken, so we still need a `ready`
+flag. 
+
 
 ```c++
 #include <iostream>
@@ -472,30 +470,26 @@ variable inside the for loop.
 #include <mutex>
 #include <chrono>
 #include <queue>
-using namespace std;
 
-condition_variable cond_var;
-mutex m;
+std::condition_variable cond_var;
+std::mutex m;
 
 int main() {
-    int value = 100;
-    bool notified = false;
-    thread reporter([&]() {
-        /*
-        unique_lock<mutex> lock(m);
-        while (!notified) {
+    int value  = 100;
+    bool ready = false;
+
+    std::thread consumer([&]() {
+        std::unique_lock<std::mutex> lock(m);
+        while (!ready) {
             cond_var.wait(lock);
         }
-        */
         cout << "The value is " << value << endl;
     });
 
-    thread assigner([&]() {
+    std::thread producer([&]() {
         value = 20;
-        /*
-        notified = true;
+        ready = true;
         cond_var.notify_one();
-        */
     });
 
     reporter.join();
@@ -504,35 +498,6 @@ int main() {
 }
 ```
 
-First of all, we're using some new syntax from C++11, that enables us to define the
-thread functions in-place as anynomous functions. They are implicitly passed the local
-scope, so they can read and write value and notified. If you compile it as it is, it
-will output 100 most of the time. However, we want the reporter thread to wait for the
-assigner thread to give it the value 20, before outputting it. You can do this by
-uncommenting the two /* ... */ blocks in either thread function. In the assigner thread,
-it will set notified to true and send a signal through the condition variable cond_var.
-In the reporter thread, we're looping as long as notified is false, and in each
-iteration we wait for a signal. Try running it, it should work.
 
-But wait, if cond_var can send a signal that will make the call cond_var.wait(lock)
-blocking until it receives it, why are we still using notified and a for loop? Well,
-that's because the condition variable can be spuriously awaken even if we didn't call
-notify_one, and in those cases we need to fall back to checking notified. This for loop
-will iterate that many times.
-
-This is a simplified description since we are also giving wait the object lock, which
-is associated with a mutex m. What happens is that when wait is called, it not only
-waits for a notification, but also for the mutex m to be unlocked. When this happens,
-it will acquire the lock itself. If cond_var has acquired a lock and wait is called
-again, it will be unlocked as long as it's waiting to acquire it again. This gives us
-some structure of mutual exclusion between the two threads, as we will see in the
-following example.
-
-
-Don't expect the fix to be that trivial.
-Just wrapping all access to the shared memory in lock-unlock blocks can fix this problem,
-but remember that we don't want the consumer loop to run amok, taking up resources, so a
-condition variable is ideal. Use the commands for executing the problem 1000 times to
-test the integrity of your solution.
 
 
