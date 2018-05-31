@@ -55,20 +55,41 @@ References:
 - [Faster C++ Move Construction and Perfect Forwarding](https://www.gdcvault.com/play/1015458/Faster-C-Move-Construction-and)
 - [THBecker: rvalue References](http://thbecker.net/articles/rvalue_references/section_01.html)
 
-## The Problem
+We used *rvalue references* to implement move semantics (move-construction and
+move-assignments) in classes. Any function can be overloaded for rvalue
+references:
 
 ~~~c++
-#include <utility>
+void foo(X&  x); // lvalue reference overload
+void foo(X&& x); // rvalue reference overload
 
-template<typename T, typename U>
-std::pair<T, U> make_pair_wrapper(T && t, U && u) {
-  return std::make_pair(std::forward<T>(t),
-                        std::forward<U>(u));
-}
+X x;
+X foobar() { return X { }; }
 
-int  a = 0;
-auto p = make_pair_wrapper(a, 3);
+foo(x);        // argument is lvalue: calls foo(X&)
+foo(foobar()); // argument is rvalue: calls foo(X&&)
 ~~~
+
+Essentially, rvalue references allow to select a function overload at compile
+time depending on whether it is used as *lvalue* or *rvalue* in an expression.
+
+
+## The Problem
+
+With overloads for rvalue references, we would need at least two variants
+of a function taking a single argument to achieve "ideal" avoidance of temporary
+copies.
+
+With two arguments, this is already getting awkward:
+
+~~~c++
+void bar(T &  a, T &  b);
+void bar(T && a, T &  b);
+void bar(T &  a, T && b);
+void bar(T && a, T && b);
+~~~ 
+
+You see where this is going.
 
 
 ## The Solution
@@ -123,6 +144,20 @@ template <class T>
 void wrapper_univ(T && univ_ref);
 ~~~
 
+This is a minimal example of perfect forwarding:
+
+~~~c++
+#include <utility>
+
+template<typename T, typename U>
+std::pair<T, U> make_pair_wrapper(T && t, U && u) {
+  return std::make_pair(std::forward<T>(t),
+                        std::forward<U>(u));
+}
+
+int  a = 0;
+auto p = make_pair_wrapper(a, 3);
+~~~
 
 
 # Functional Programming in C++
