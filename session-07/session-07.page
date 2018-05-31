@@ -179,11 +179,19 @@ auto   w_a_2  = Widget(4);
 ~~~
 
 
-# Functional Programming in C++
+# Compile-Time Evaluation
 
-Recommended talk: [Ivan Cukic: Functional reactive programming in C++](https://www.youtube.com/watch?v=a2MmURgc6cU)
+**Code Examples by Peter Gottschling:**
 
-## std::function
+- [Expression Template Example](https://github.com/petergottschling/discovering_modern_cpp/blob/master/c%2B%2B14/expression_template_example.cpp)
+- [Compile-Time Algorithms](https://github.com/petergottschling/discovering_modern_cpp/blob/master/c%2B%2B14/is_prime.cpp)
+- [Compile-Time Throw](https://github.com/petergottschling/discovering_modern_cpp/blob/master/c%2B%2B14/value_range_vector.cpp)
 
-Article: [Avoiding the performance Hazards of std::function](https://blog.demofox.org/2015/02/25/avoiding-the-performance-hazzards-of-stdfunction/)
+
+# Views and Ranges
+
+Shameless plug:
+
+- [Tobias Fuchs - "The Point of Views: Multidimensional Ranges for HPC"](https://www.youtube.com/watch?v=JsGsgRnbIpU)
+
 
