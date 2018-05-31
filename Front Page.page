@@ -48,11 +48,11 @@ title: Advanced C++ - Summer Term 2018
     [Assignment 05 - due Friday 25. May](/assignment-05/)
 
 - [Session 06](/session-06/session-06) \
-    Expressions revisited, Move-only Types, Smart Pointer, CRTP \
+    Expressions revisited, Move-only Types, Smart Pointer, Polymorphism: CRTP \
     [Assignment 06 - due Friday 01. June](/assignment-06/)
 
 - [Session 07](/session-07/session-07) \
-    Perfect Forwarding, Parallelism, Thread Safety of STL Containers
+    Polymorphism, Perfect Forwarding, Parallelism, Thread Safety of STL Containers
 
 - [Session 08](/session-08/session-08) \
     Expression Templates, constexpr, Views
