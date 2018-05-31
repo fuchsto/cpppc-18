@@ -52,10 +52,10 @@ title: Advanced C++ - Summer Term 2018
     [Assignment 06 - due Friday 01. June](/assignment-06/)
 
 - [Session 07](/session-07/session-07) \
-    Threads, Thread Safety of STL Containers, Atomics, Multithreaded Containers
+    Perfect Forwarding, Expression Templates, constexpr, Views
 
 - [Session 08](/session-08/session-08) \
-    Expression Templates, constexpr, Views
+    Threads, Thread Safety of STL Containers, Atomics
 
 - ...
 
