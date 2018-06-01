@@ -16,9 +16,20 @@ public:
   Base(const std::string & name) : _name(name) { }
 
   // Q: Destructor must be virtual - why?
+  //
+  // A:
+  //
+  //      auto w    = Wombat("Simon");
+  //
+  //      auto * bp = &static_cast<Base>(w);
+  //
+  //      auto & br = *bp;
+  //
+  //      auto   bc = *bp;
+  //
   virtual ~Base() { }
 
-  virtual void ducky() const {
+  virtual void say_name() const {
     std::cout << " named " << _name << std::endl;
   }
 };
@@ -28,9 +39,9 @@ struct Wombat : public Base {
   // Actually virtual once, virtual forever.
   virtual ~Wombat() { }
 
-  virtual void ducky() const {
-    std::cout << "Wombat::ducky()";
-    Base::ducky();
+  virtual void say_name() const {
+    std::cout << "Wombat::say_name()";
+    Base::say_name();
   }
 };
 
@@ -39,9 +50,9 @@ struct Kitten : public Base {
   // Actually virtual once, virtual forever.
   virtual ~Kitten() { }
 
-  virtual void ducky() const {
-    std::cout << "Kitten::ducky()";
-    Base::ducky();
+  virtual void say_name() const {
+    std::cout << "Kitten::say_name()";
+    Base::say_name();
   }
 };
 
