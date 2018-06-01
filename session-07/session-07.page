@@ -121,7 +121,7 @@ The following rules apply:
     $\Rightarrow$ T resolves to A \
     $\Rightarrow$ A&&
 
-### Universal Reference
+### Forwarding Reference
 
 In [lab session 5](/session-05/session-05), we learned declarations of `rvalue` references (actually: `xvalue`):
 
@@ -135,14 +135,27 @@ To tell whether you need `std::move` or not, just remember that it is equivalent
 
 Now I need you to relax and remember that high blood pressure leads to serious disease, so try not to get upset.
 
-In the following example, parameters `rval_ref` and `univ_ref` do not have the same type category:
+In the following example, parameters `rval_ref` and `fwd_ref` do not have the same type category:
 
 ~~~c++
 void wrapper_rval(Foo && rval_ref);
 
 template <class T>
-void wrapper_univ(T && univ_ref);
+void wrapper_fwdr(T && fwd_ref);
 ~~~
+
+In `wrapper_univ`, the parameter is a *forwarding reference*
+
+> Sometimes called *universal reference* in dated references). \
+> Please note that the term *universal reference* has been coined by Scott Meyers and is
+> not official terminology.
+
+The correct definition:
+
+**Forwarding Reference**
+: > rvalue reference in a type deducing context
+
+
 
 
 # Idiom: Function Template Wrappers
