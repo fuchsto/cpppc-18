@@ -36,6 +36,20 @@ and Programmers*](http://ptgmedia.pearsoncmg.com/images/9780134383583/samplepage
 - [*Effective Modern C++*](https://www.safaribooksonline.com/library/view/effective-modern-c/9781491908419/) \
   Scott Meyers, 2014
 
+## Technical References
+
+- [STL Concepts: Complete Index](http://en.cppreference.com/w/cpp/concept)
+- [STL Container Overview Poster](/stl_containers.png)
+  ([source](http://en.cppreference.com/w/File:container-library-overview-2012-12-27.pdf))
+
+- [C++ Language Standard (official working draft)](http://www.open-std.org/Jtc1/sc22/wg21/docs/papers/2013/n3797.pdf), great index on the last pages!
+
+- [C++ Language Overview](http://en.cppreference.com/w/cpp/language)
+- [Peter Gottschling's Modern C++ Examples](https://github.com/petergottschling/discovering_modern_cpp)
+- [C++ Tutorials by STE||AR group](https://github.com/STEllAR-GROUP/cpp_lectures_2016)
+- [Undefined vs. Unspecified](http://en.cppreference.com/w/cpp/language/ub)
+
+
 
 # Lecture Notes
 
@@ -86,21 +100,6 @@ and Programmers*](http://ptgmedia.pearsoncmg.com/images/9780134383583/samplepage
 
 - [Should you Learn C++ in 2018?](https://www.youtube.com/watch?v=7xVrYnyQ04M) \
   He uses simple words, but the right words.
-
-
-## Technical References
-
-- [STL Concepts: Complete Index](http://en.cppreference.com/w/cpp/concept)
-- [STL Container Overview Poster](/stl_containers.png)
-  ([source](http://en.cppreference.com/w/File:container-library-overview-2012-12-27.pdf))
-
-- [C++ Language Standard (official working draft)](http://www.open-std.org/Jtc1/sc22/wg21/docs/papers/2013/n3797.pdf), great index on the last pages!
-
-- [C++ Language Overview](http://en.cppreference.com/w/cpp/language)
-- [Peter Gottschling's Modern C++ Examples](https://github.com/petergottschling/discovering_modern_cpp)
-- [C++ Tutorials by STE||AR group](https://github.com/STEllAR-GROUP/cpp_lectures_2016)
-- [Undefined vs. Unspecified](http://en.cppreference.com/w/cpp/language/ub)
-
 
 # Technical Lab Notes
 
