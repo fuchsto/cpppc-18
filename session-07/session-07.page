@@ -38,17 +38,16 @@ Rockstar system programming: showcasing the swaggiest of reasons to learn C++
 
 # Perfect Forwarding
 
-**References**
-
-- [ISO C++ Document N4161: Forwarding References](https://isocpp.org/files/papers/N4164.pdf) \
-  Brief summary, good first read
-
-The following references explain the same principles in different ways and level
-of detail. 
-
 > The term "universal reference" is somewhat colloquial and has been
 > deprecated in favor of the now-standard naming *forwarding references*
 
+**References**
+
+The following references explain the same principles, just in different ways and
+level of detail.
+
+- [ISO C++ Document N4161: Forwarding References](https://isocpp.org/files/papers/N4164.pdf) \
+  Brief summary, good first read
 - [Thomas Becker: rvalue References](http://thbecker.net/articles/rvalue_references/section_01.html) \
   Highly recommended, excellent in-depth series on rvalues, move semantics and
   perfect forwarding
