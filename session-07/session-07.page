@@ -40,6 +40,8 @@ Rockstar system programming: showcasing the swaggiest of reasons to learn C++
 
 **References**
 
+- [ISO C++ Document N4161: Forwarding References](https://isocpp.org/files/papers/N4164.pdf)
+
 - [Thomas Becker: rvalue References](http://thbecker.net/articles/rvalue_references/section_01.html) \
   Highly recommended, excellent in-depth series on rvalues, move semantics and
   perfect forwarding
