@@ -169,8 +169,7 @@ auto p = make_pair_wrapper(a, 3);
 
 # Type Deduction: auto and decltype
 
-
-(from [Effective Modern C++](https://www.oreilly.com/library/view/effective-modern-c/9781491908419/ch01.html)
+Example from [Effective Modern C++](https://www.oreilly.com/library/view/effective-modern-c/9781491908419/ch01.html):
 
 ~~~c++
 // C++11
