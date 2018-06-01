@@ -38,12 +38,25 @@ Rockstar system programming: showcasing the swaggiest of reasons to learn C++
 
 # Perfect Forwarding
 
-**References**
+**References on Perfect Forwarding**
 
-- [ISO C++ Document N4161: Forwarding References](https://isocpp.org/files/papers/N4164.pdf)
+- [ISO C++ Document N4161: Forwarding References](https://isocpp.org/files/papers/N4164.pdf) \
+  Brief summary, good first read
+
+The following references explain the same principles in different ways and level
+of detail. 
+
+> The term "universal reference" is somewhat colloquial and has been
+> deprecated in favor of the now-standard naming *forwarding references*
+
 - [Thomas Becker: rvalue References](http://thbecker.net/articles/rvalue_references/section_01.html) \
   Highly recommended, excellent in-depth series on rvalues, move semantics and
   perfect forwarding
+- [Effective Modern C++: Chapter 1. Deducing Types](https://www.oreilly.com/library/view/effective-modern-c/9781491908419/ch01.html) \
+  Lengthy but comfortable read, covers all you need to know about type deduction
+  for this course.
+- [Scott Meyers: Universal References in C++11](https://isocpp.org/blog/2012/11/universal-references-in-c11-scott-meyers) \
+- [Perfect Forwarding and Universal References](https://eli.thegreenplace.net/2014/perfect-forwarding-and-universal-references-in-c/)
 
 Talks:
 
@@ -51,13 +64,6 @@ Talks:
   A masterpiece, but requires a basic understanding of forwarding, reference
   categories and reference collapsing rules.
 
-Good, comprehensive articles:
-
-- [Scott Meyers: Universal References in C++11](https://isocpp.org/blog/2012/11/universal-references-in-c11-scott-meyers) \
-- [Perfect Forwarding and Universal References](https://eli.thegreenplace.net/2014/perfect-forwarding-and-universal-references-in-c/)
-
-> The term "universal reference" is somewhat colloquial and has been
-> deprecated in favor of the now-standard naming *forwarding references*
 
 **Secondary References**
 
