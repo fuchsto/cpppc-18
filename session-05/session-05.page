@@ -88,7 +88,7 @@ double val_b = sarray[463];
 # Move Semantics and Rule of 5
 
 
-## References
+**References:**
 
 - [FluentCpp: lvalues, rvalues and their references](https://www.fluentcpp.com/2018/02/06/understanding-lvalues-rvalues-and-their-references/)
 - [Article on Move Assignment on cppreference](http://en.cppreference.com/w/cpp/language/move_assignment)
@@ -102,6 +102,27 @@ double val_b = sarray[463];
       - <https://github.com/electronicarts/EASTL>
       - <https://github.com/ericniebler/range-v3/blob/master/include/range/v3/view_facade.hpp>
 
+
+## Type Declaration and Ownership
+
+~~~c++
+void receive_v  (      Foo    f); // rvalue   - by value
+void receive_cr (const Foo  & f); // ???      - by const reference
+void receive_lr (      Foo  & f); // lvalue   - by reference
+void reveive_rr (      Foo && f); // rvalue   - by reference
+~~~
+
+~~~c++
+auto         foo_val = Foo { };
+auto       & foo_ref = foo_val;
+const auto & foo_cr  = foo_val;
+
+                    // Allowed:                          | Disabled:
+receive_?(Foo { }); // receive_v, receive_cr, receive_rr | receive_lr
+receive_?(foo_val); // receive_v, receive_cr, receive_lr | receive_rr
+receive_?(foo_ref); // receive_v, receive_cr, receive_lr | receive_rr
+receive_?(foo_cr);  // receive_v, receive_cr             | receive_rr, receive_lr
+~~~
 
 
 # Value Categories
