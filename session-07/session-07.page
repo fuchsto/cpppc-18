@@ -149,8 +149,10 @@ void wrapper_fwdr(T && fwd_ref);
 In `wrapper_univ`, the parameter is a *forwarding reference*
 
 > Sometimes called *universal reference* in dated references). \
-> Please note that the term *universal reference* has been coined by Scott Meyers and is
-> not official terminology.
+> Please note that the term *universal reference* has been coined by Scott
+> Meyers and is not official terminology. \
+> In fact, **the term *universal reference* is wrong and misleading**,
+> see [ISO C++ N4164](https://isocpp.org/files/papers/N4164.pdf)
 
 The correct definition:
 
