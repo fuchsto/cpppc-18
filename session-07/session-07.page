@@ -13,6 +13,7 @@ Rockstar system programming: showcasing the swaggiest of reasons to learn C++
 
 [Demo Programming for Beginners](https://www.youtube.com/watch?v=0suToaCS7WU)
 
+- [Arte Documentary on Farbrausch](https://www.youtube.com/watch?v=hqh1iXIlyJk)
 - [Conspiracy - Universal Sequence](https://www.youtube.com/watch?v=1PmRoLFtPRo)
 - [Conspiracy - Chaos Theory](https://www.youtube.com/watch?v=ZfuierUvx1A)
 - [fr-041: debris (live)](https://www.youtube.com/watch?v=4BMH9K1UDK8)
@@ -20,6 +21,7 @@ Rockstar system programming: showcasing the swaggiest of reasons to learn C++
 - [Still - Coronoid](https://www.youtube.com/watch?v=zMInb4MCrm0)
 - [Team PokeMe - SHizZLE](https://www.youtube.com/watch?v=Sgj5npyC068) and the
   [Making of SHizZLE](https://www.youtube.com/watch?v=81278bx1Sz0)
+- [Drool](https://www.youtube.com/watch?v=rnBFEQDwhnk)
 - [EmPatch in Ziphead](https://www.youtube.com/watch?v=rJYVDuEOLLQ)
 - [EmPatch](https://www.youtube.com/watch?v=NKjqfiVlfJ4)
 
@@ -37,6 +39,8 @@ Rockstar system programming: showcasing the swaggiest of reasons to learn C++
 # Perfect Forwarding
 
 **References**
+
+- [ISO C++ Document N4161: Forwarding References](https://isocpp.org/files/papers/N4164.pdf)
 
 - [Thomas Becker: rvalue References](http://thbecker.net/articles/rvalue_references/section_01.html) \
   Highly recommended, excellent in-depth series on rvalues, move semantics and
@@ -119,7 +123,43 @@ The following rules apply:
     $\Rightarrow$ T resolves to A \
     $\Rightarrow$ A&&
 
-### Universal Reference
+
+To illustrate:
+
+~~~c++
+auto          x      = 5;   // -> int
+const auto  & rx     = x;   // -> int, specifier: const int &
+auto       && urx1   = x;   // -> int &, specifier too
+
+auto       && urx2   = 2;   // -> int, specifier: int &&
+
+auto        * px     = &x;  // -> int, specifier: int*
+
+int arr [2] = {1, 2};
+
+auto          a      = arr; // -> int* (array decays)
+auto        & ra     = arr; // -> int (&) [2]
+
+void f(int, std::string);
+
+auto          g      = f;   // -> void (*) (int, std::string)
+auto        & g      = f;   // -> void (&) (int, std::string)
+
+auto          a      = 5;   // -> int
+auto          b(5);         // -> int
+
+// Watch out for initializer lists:
+//
+auto          c      = {5}; // -> std::initializer_list<int>
+auto          d {5};        // -> std::initializer_list<int>
+                            //    or
+                            // -> int (!)
+// Fails (not only one type):
+auto          e      = { 5, 1.0 };
+~~~
+
+
+### Forwarding Reference
 
 In [lab session 5](/session-05/session-05), we learned declarations of `rvalue` references (actually: `xvalue`):
 
@@ -133,14 +173,29 @@ To tell whether you need `std::move` or not, just remember that it is equivalent
 
 Now I need you to relax and remember that high blood pressure leads to serious disease, so try not to get upset.
 
-In the following example, parameters `rval_ref` and `univ_ref` do not have the same type category:
+In the following example, parameters `rval_ref` and `fwd_ref` do not have the same type category:
 
 ~~~c++
 void wrapper_rval(Foo && rval_ref);
 
 template <class T>
-void wrapper_univ(T && univ_ref);
+void wrapper_fwdr(T && fwd_ref);
 ~~~
+
+In `wrapper_univ`, the parameter is a *forwarding reference*
+
+> Sometimes called *universal reference* in dated references). \
+> Please note that the term *universal reference* has been coined by Scott
+> Meyers and is not official terminology. \
+> In fact, **the term *universal reference* is wrong and misleading**,
+> see [ISO C++ N4164](https://isocpp.org/files/papers/N4164.pdf)
+
+The correct definition:
+
+**Forwarding Reference**
+: > rvalue reference in a type deducing context
+
+
 
 
 # Idiom: Function Template Wrappers
@@ -167,7 +222,56 @@ auto p = make_pair_wrapper(a, 3);
 ~~~
 
 
-# Guideline: "almost always auto" (aaa)
+# Type Deduction: auto and decltype
+
+Example from [Effective Modern C++](https://www.oreilly.com/library/view/effective-modern-c/9781491908419/ch01.html):
+
+~~~c++
+// C++11
+template<typename Container, typename Index> // works, but
+auto Access(Container& c, Index i)           // requires
+  -> decltype(c[i])                          // refinement
+{
+  // ...
+  return c[i];
+}
+
+// C++14
+template<typename Container, typename Index> // C++14;
+auto Access(Container& c, Index i)           // not quite
+{                                            // correct
+  // ...
+  return c[i];  // return type deduced from c[i]
+}
+~~~
+
+Using `decltype(auto)`: 
+
+~~~c++
+// Perfect forwarding C++11 version
+template<typename Container, typename Index>
+auto
+authAndAccess(Container&& c, Index i)
+  -> decltype(std::forward<Container>(c)[i])
+{
+  authenticateUser();
+  return std::forward<Container>(c)[i];
+}
+~~~
+
+~~~c++
+// Perfect forwarding C++14 version
+template<typename Container, typename Index>
+decltype(auto)
+authAndAccess(Container&& c, Index i)
+{
+  authenticateUser();
+  return std::forward<Container>(c)[i];
+}
+~~~
+
+
+## Guideline: "almost always auto" (aaa)
 
 Using `auto` when you supposedly know the eventual type of a variable might
 appear sloppy and lazy to you. But quite the opposite is the case:
