@@ -38,7 +38,7 @@ Rockstar system programming: showcasing the swaggiest of reasons to learn C++
 
 # Perfect Forwarding
 
-**References on Perfect Forwarding**
+**References**
 
 - [ISO C++ Document N4161: Forwarding References](https://isocpp.org/files/papers/N4164.pdf) \
   Brief summary, good first read
@@ -72,6 +72,8 @@ Talks:
 - [Faster C++ Move Construction and Perfect Forwarding](https://www.gdcvault.com/play/1015458/Faster-C-Move-Construction-and)
 
 
+## The Problem
+
 We used *rvalue references* to implement move semantics (move-construction and
 move-assignments) in classes. Any function can be overloaded for rvalue
 references:
@@ -89,9 +91,6 @@ foo(foobar()); // argument is rvalue: calls foo(X&&)
 
 Essentially, rvalue references allow to select a function overload at compile
 time depending on whether it is used as *lvalue* or *rvalue* in an expression.
-
-
-## The Problem
 
 With overloads for rvalue references, we would need at least two variants
 of a function taking a single argument to achieve "ideal" avoidance of temporary
