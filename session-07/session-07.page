@@ -123,6 +123,30 @@ The following rules apply:
     $\Rightarrow$ T resolves to A \
     $\Rightarrow$ A&&
 
+
+To illustrate:
+
+~~~c++
+auto          x      = 5;   // auto deduces to int
+const auto  & rx     = x;   // auto deduces to int, the specifier to const int &
+auto       && urx1   = x;   // auto deduces to int &, the specifier too
+
+auto       && urx2   = 2;   // auto decues to int, the specifier to int &&
+
+auto        * px     = &x;  // auto deduces to int, the specifier to int*
+
+int arr [2] = {1, 2};
+
+auto          a      = arr; // auto deduces to int* (array decays)
+auto        & ra     = arr; // auto deduces to int (&) [2]
+
+void f(int, std::string);
+
+auto          g      = f;   // auto deduces to void (*) (int, std::string)
+auto        & g      = f;  // auto deduces to void (&) (int, std::string)
+~~~
+
+
 ### Forwarding Reference
 
 In [lab session 5](/session-05/session-05), we learned declarations of `rvalue` references (actually: `xvalue`):
