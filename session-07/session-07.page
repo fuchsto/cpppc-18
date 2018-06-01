@@ -124,10 +124,6 @@ The following rules apply:
     $\Rightarrow$ A&&
 
 
-For examples of `auto` type deduction in declarations, see
-[this listing](/session-07/03-decltype-auto/auto_examples.h).
-
-
 ### Forwarding Reference
 
 In [lab session 5](/session-05/session-05), we learned declarations of `rvalue` references (actually: `xvalue`):
@@ -192,6 +188,9 @@ auto p = make_pair_wrapper(a, 3);
 
 
 # Type Deduction: auto and decltype
+
+For examples of `auto` type deduction in declarations, see
+[this listing](/session-07/03-decltype-auto/auto_examples.h).
 
 Example from [Effective Modern C++](https://www.oreilly.com/library/view/effective-modern-c/9781491908419/ch01.html):
 
