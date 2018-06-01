@@ -41,13 +41,23 @@ Rockstar system programming: showcasing the swaggiest of reasons to learn C++
 **References**
 
 - [ISO C++ Document N4161: Forwarding References](https://isocpp.org/files/papers/N4164.pdf)
-
 - [Thomas Becker: rvalue References](http://thbecker.net/articles/rvalue_references/section_01.html) \
   Highly recommended, excellent in-depth series on rvalues, move semantics and
   perfect forwarding
-- [Scott Meyers: Universal References in C++11](https://isocpp.org/blog/2012/11/universal-references-in-c11-scott-meyers)
+
+Talks:
+
+- [*Don't help the compiler.*](https://www.youtube.com/watch?v=AKtHxKJRwp4) \
+  A masterpiece, but requires a basic understanding of forwarding, reference
+  categories and reference collapsing rules.
+
+Good, comprehensive articles:
+
+- [Scott Meyers: Universal References in C++11](https://isocpp.org/blog/2012/11/universal-references-in-c11-scott-meyers) \
 - [Perfect Forwarding and Universal References](https://eli.thegreenplace.net/2014/perfect-forwarding-and-universal-references-in-c/)
 
+> The term "universal reference" is somewhat colloquial and has been
+> deprecated in favor of the now-standard naming *forwarding references*
 
 **Secondary References**
 
