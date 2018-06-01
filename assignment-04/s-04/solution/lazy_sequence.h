@@ -1,189 +1,186 @@
-/**
- *  Most useful advice for you at this point:
- *  
- *     When introducing any new type, just pretend
- *     it already exists. Which expressions would
- *     it support?
- *     This will reveal which methods and type
- *     definitions are required
- *
- */
 
-#include <functional>
 #include <iterator>
+#include <functional>
 #include <algorithm>
-#include <stdexcept>
+
 
 
 namespace cpppc {
+
+// Nothing better to do now, let's implement this iterator.
 
 namespace detail {
 
 template <class LazySequence>
 class lazy_sequence_iterator {
-    using self_t            = lazy_sequence_iterator;
-    using lazy_sequence_t   = LazySequence;
-  public:
-    using iterator_category = std::random_access_iterator_tag;
-    using size_type         = std::size_t;
-    using difference_type   = typename std::make_signed<
-                                         size_type
-                                       >::type;
-    using value_type        = typename lazy_sequence_t::value_type;
-    using reference         = const value_type &;
-    using pointer           = const value_type *;
-    using const_reference   = const value_type &;
-    using const_pointer     = const value_type *;
-  public:
-    lazy_sequence_iterator() = default;
-    lazy_sequence_iterator(const lazy_sequence_t & seq, int pos)
-      : _seq(&seq),
-        _pos(pos)
-    { }
+  using self_t          = lazy_sequence_iterator<LazySequence>;
+  using lazy_sequence_t = LazySequence;
 
-    bool operator==(const self_t & rhs) const {
-      return _pos == rhs._pos &&
-             _seq == rhs._seq;
-    }
+public:
+  // Iterators must provide (public) member types.
+  // Again, just look them up on cppreference.
+  using iterator_category = std::random_access_iterator_tag;
+  using value_type 	      = typename LazySequence::value_type;
+  using pointer           = typename LazySequence::pointer;
+  using reference         = typename LazySequence::reference;
+  using difference_type   = std::ptrdiff_t;
 
-    bool operator!=(const self_t & rhs) const {
-      return !(*this == rhs);
-    }
+public:
+  // Remember: iterators are default-constructible.
+  lazy_sequence_iterator()                     = default;
+  ~lazy_sequence_iterator()                    = default;
 
-    value_type operator*() const {
-      return (*_seq)[_pos];
-    }
+  lazy_sequence_iterator(const lazy_sequence_t & seq, int pos)
+  : _seq(&seq)
+  , _pos(pos)
+  { }
 
-    self_t & operator+=(int offset) { 
-      _pos += offset;
-      return *this;
-    }
+  lazy_sequence_iterator(const self_t & other) = default;
+  lazy_sequence_iterator(self_t && other)      = default;
 
-    self_t & operator++(int) { 
-      _pos++;
-      return *this;
-    }
+  self_t & operator=(const self_t & rhs)       = default;
+  self_t & operator=(self_t && rhs)            = default;
 
-    self_t operator++() { 
-      auto old = *this;
-      _pos++;
-      return old;
-    }
+public:
+  // No non-const variant, returning by value
+  // --> no assignment
+  value_type operator*() const {
+    return (*_seq)[_pos];
+  }
+  // Same here
+  value_type operator[](int offset) const {
+    return (*_seq)[_pos + offset];
+  }
 
-    self_t operator+(int offset) const { 
-      auto it = *this;
-      it += offset;
-      return it;
-    }
+  // Ufffzz ... here we go ... :S
 
-    self_t & operator-=(int offset) { 
-      _pos -= offset;
-      return *this;
-    }
+  // *cracking fingers*
+  
+  self_t & operator++() {
+    ++_pos;
+    return *this;
+  }
+  
+  self_t operator++(int) {
+    auto old = *this;
+    ++_pos;
+    return old;
+  }
 
-    self_t & operator--(int) { 
-      _pos--;
-      return *this;
-    }
+  self_t & operator+=(int offset) {
+    _pos += offset;
+    return *this;
+  }
 
-    self_t operator--() { 
-      auto old = *this;
-      _pos--;
-      return old;
-    }
+  self_t operator+(int offset) const {
+    auto it = *this;
+    it += offset;
+    return it;
+  }
 
-    self_t operator-(int offset) const { 
-      auto it = *this;
-      it -= offset;
-      return it;
-    }
+  difference_type operator-(const self_t & rhs) const {
+    return _pos - rhs._pos;
+  }
 
-    difference_type operator-(const self_t & rhs) const { 
-      return _pos - rhs._pos;
-    }
+  bool operator==(const self_t & rhs) const {
+    // These operators look always the same! (signature I mean)
+    return _pos == rhs._pos && _seq == rhs._seq;
+    // Nah, well, for iterators the implementation is actually
+    // also unsurprising every time.
+    // That's why we replace those by CRTP base iterators, right.
+    //
+  }
 
-  private:
-    const lazy_sequence_t * _seq = nullptr;
-    int                     _pos = 0;
+  bool operator!=(const self_t & rhs) const {
+    return not (*this == rhs);
+  }
+
+private:
+  const lazy_sequence_t *  _seq = nullptr;
+  int                      _pos = 0;
 };
 
-} // namespace detail
+}
 
 template <class T>
-class lazy_sequence
-{
-    using self_t            = lazy_sequence<T>;
+class lazy_sequence {
+  using self_t = lazy_sequence<T>;
 
-  public:
-    using size_type         = std::size_t;
-    using difference_type   = typename std::make_signed<
-                                         size_type
-                                       >::type;
-    using value_type        = T;
-    using iterator          = detail::lazy_sequence_iterator<self_t>;
-    using const_iterator    = iterator;
+public:
+  using value_type      = T;
+  using size_type       = std::size_t;
+  using difference_type = std::ptrdiff_t;
 
-  public:
-    lazy_sequence()                        = default;
-    lazy_sequence(const self_t & other)    = default;
-    lazy_sequence(self_t && other)         = default;
+  using       iterator  = detail::lazy_sequence_iterator<const self_t>;
+  using const_iterator  = detail::lazy_sequence_iterator<const self_t>;
 
-    self_t & operator=(const self_t & rhs) = default;
-    self_t & operator=(self_t && rhs)      = default;
+  using       reference = const T &;
+  using const_reference = const T &;
+ 
+  using       pointer   = const T *;
+  using const_pointer   = const T *;
 
-    lazy_sequence(int size, std::function<T(int)> fun)
-      : _size(size)
-      , _fun(fun)
-    { }
+public:
+  lazy_sequence()  = default;
+  ~lazy_sequence() = default;
 
-  public:
-    T operator[](int pos) const {
-      return _fun(pos);
-    }
+  lazy_sequence(const self_t & other)    = default;
+  lazy_sequence(self_t && other)         = default;
 
-    T at(int pos) const {
-      if (pos < 0 || pos >= _size) {
-        throw std::out_of_range("index out of range");
-      }
-      return _fun(pos);
-    }
+  self_t & operator=(const self_t & rhs) = default;
+  self_t & operator=(self_t && rhs)      = default;
 
-    T front() const {
-      return _fun(0);
-    }
+public:
 
-    T back() const {
-      return _fun(size() - 1);
-    }
+  // Obvious from the assignment
+  lazy_sequence(int size, std::function<T(int)> fun)
+  : _size(size)
+  , _fun(fun)
+  { }
 
-    iterator begin() const {
-      return iterator(*this, 0);
-    }
+  size_type size() const {
+    return _size;
+  }
 
-    iterator end() const {
-      return iterator(*this, _size);
-    }
+  bool empty() const {
+    return size() == 0;
+  }
 
-    size_type size() const {
-      return _size;
-    }
+  value_type front() const {
+    return *begin();
+  }
 
-    bool empty() const {
-      return size() == 0;
-    }
+  value_type back() const {
+    return *(begin() + _size - 1);
+  }
 
-    bool operator==(const self_t & rhs) const {
-      return ( _size == rhs._size ) &&
-             std::equal(begin(), end(), rhs.begin());
-    }
+  const_iterator begin() const {
+    return const_iterator(*this, 0);
+  }
 
-    bool operator!=(const self_t & rhs) const {
-      return !(*this == rhs);
-    }
+  const_iterator end() const {
+    return const_iterator(*this, _size);
+  }
 
-  private:
-    int                   _size = 0;
-    std::function<T(int)> _fun;
+  value_type operator[](int offset) const {
+    return _fun(offset);
+  }
+
+  bool operator==(const self_t & rhs) const {
+    if (this == &rhs)       { return true;  }
+    if (_size != rhs._size) { return false; }
+    return std::equal(begin(), end(), rhs.begin());
+  }
+
+  bool operator!=(const self_t & rhs) const {
+    return not (*this == rhs);
+  }
+
+private:
+  int                            _size = 0;
+  std::function<value_type(int)> _fun;
+
 };
 
 } // namespace cpppc
+
