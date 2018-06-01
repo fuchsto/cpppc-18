@@ -167,7 +167,57 @@ auto p = make_pair_wrapper(a, 3);
 ~~~
 
 
-# Guideline: "almost always auto" (aaa)
+# Type Deduction: auto and decltype
+
+
+(from [Effective Modern C++](https://www.oreilly.com/library/view/effective-modern-c/9781491908419/ch01.html)
+
+~~~c++
+// C++11
+template<typename Container, typename Index> // works, but
+auto Access(Container& c, Index i)           // requires
+  -> decltype(c[i])                          // refinement
+{
+  // ...
+  return c[i];
+}
+
+// C++14
+template<typename Container, typename Index> // C++14;
+auto Access(Container& c, Index i)           // not quite
+{                                            // correct
+  // ...
+  return c[i];  // return type deduced from c[i]
+}
+~~~
+
+Using `decltype(auto)`: 
+
+~~~c++
+// Perfect forwarding C++11 version
+template<typename Container, typename Index>
+auto
+authAndAccess(Container&& c, Index i)
+  -> decltype(std::forward<Container>(c)[i])
+{
+  authenticateUser();
+  return std::forward<Container>(c)[i];
+}
+~~~
+
+~~~c++
+// Perfect forwarding C++14 version
+template<typename Container, typename Index>
+decltype(auto)
+authAndAccess(Container&& c, Index i)
+{
+  authenticateUser();
+  return std::forward<Container>(c)[i];
+}
+~~~
+
+
+## Guideline: "almost always auto" (aaa)
 
 Using `auto` when you supposedly know the eventual type of a variable might
 appear sloppy and lazy to you. But quite the opposite is the case:
