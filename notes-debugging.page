@@ -6,8 +6,14 @@ format: Markdown
 
 # GNU Debugger - gdb
 
-- For a browser-based GUI frontend for gdb, see [gdbgui](https://gdbgui.com).
 - [Greg Law "Give me 15 minutes & I'll change your view of GDB"](https://www.youtube.com/watch?v=PorfLSr3DDI)
+
+
+## GDB Graphical Interfaces
+
+- [gdbgui](https://gdbgui.com), starts fabulous GDB interface in local webserver
+- [gdb dashboard](https://www.youtube.com/watch?v=r_VT6e6sa6c), Python-based,
+  gorgeous replacement of GDB command-line interface
 
 ## Installation
 
