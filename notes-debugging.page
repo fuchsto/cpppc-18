@@ -6,6 +6,8 @@ format: Markdown
 
 # GNU Debugger - gdb
 
+For a browser-based GUI frontend for gdb, see [gdbgui](https://gdbgui.com).
+
 ## Installation
 
 Install gdb on the VM:
