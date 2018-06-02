@@ -7,7 +7,7 @@ format: Markdown
 # GNU Debugger - gdb
 
 - For a browser-based GUI frontend for gdb, see [gdbgui](https://gdbgui.com).
-- [Greg Law " Give me 15 minutes & I'll change your view of GDB"](https://www.youtube.com/watch?v=PorfLSr3DDI)
+- [Greg Law "Give me 15 minutes & I'll change your view of GDB"](https://www.youtube.com/watch?v=PorfLSr3DDI)
 
 ## Installation
 
