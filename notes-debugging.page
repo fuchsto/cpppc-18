@@ -12,7 +12,7 @@ format: Markdown
 ## GDB Graphical Interfaces
 
 - [gdbgui](https://gdbgui.com), starts fabulous GDB interface in local webserver
-- [gdb dashboard](https://www.youtube.com/watch?v=r_VT6e6sa6c), Python-based,
+- [gdb dashboard](https://github.com/cyrus-and/gdb-dashboard), Python-based,
   gorgeous replacement of GDB command-line interface
 
 ## Installation
