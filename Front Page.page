@@ -100,9 +100,10 @@ and Programmers*](http://ptgmedia.pearsoncmg.com/images/9780134383583/samplepage
 
 - Why Instagram ported Apache Cassandra from Java to C++: \
   [Open-sourcing a 10x reduction in Apache Cassandra tail latency](/files/Cassandra_Java_to_Cxx.pdf)
-
 - [Should you Learn C++ in 2018?](https://www.youtube.com/watch?v=7xVrYnyQ04M) \
   He uses simple words, but the right words.
+- [The Best Programming Language for High Performance](https://lemire.me/blog/2017/01/16/best-programming-language-for-high-performance-january-2017/) \
+  An unemotional comparison
 
 # Technical Lab Notes
 
