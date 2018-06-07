@@ -22,10 +22,9 @@ private:
 };
 
 
-template <class T, class U>
-void show_param_types(T && a, U && b) {
-  std::cout << "T && a: " << typestr<decltype(std::forward<T>(a))>() << "\n"
-            << "U && a: " << typestr<decltype(std::forward<U>(b))>() << "\n";
+template <class T>
+void show_param_types(T && a) {
+    std::cout << "T && a: " << typestr<decltype(std::forward<T>(a))>() << "\n";
 }
 
 struct A {
@@ -67,7 +66,11 @@ std::unique_ptr<T> make_unique(U &&... u)
 } // namespace cpppc
  
 int main()
-{   
+{
+  show_param_types(A(2));
+  
+  return 0;
+
   std::cout << "make_unique<A>(2)\n";
   auto p1 = cpppc::make_unique<A>(2); // rvalue
   int i   = 1;

@@ -13,7 +13,7 @@ int main()
 {
   std::vector<std::shared_ptr<vrt::Base>> v_vrt;
 
-  std::srand(reinterpret_cast<int>(&v_vrt));
+  std::srand(reinterpret_cast<size_t>(&v_vrt));
 
   if (std::rand() % 2) {
     v_vrt.push_back(std::shared_ptr<vrt::Base>(new vrt::Wombat("Theodore")));
@@ -24,17 +24,6 @@ int main()
 
   for (auto vp : v_vrt) {
     vp->say_name();
-  }
-
-  // CRTP version:
-  if (std::rand() % 2) {
-    v_vrt.push_back(std::shared_ptr<vrt::Base>(
-        make_concrete<vrt::Wombat>("Theodore");
-    );
-  } else {
-    v_vrt.push_back(std::shared_ptr<vrt::Base>(
-        make_concrete<vrt::Kitten>("Agatha");
-    );
   }
 
 }
