@@ -10,7 +10,7 @@ category: course notes, cpppc
 **[Code discussed in this session](/session-08/)**
 
 
-# Forcing Compile-Time Evaluation: `constexpr`
+# Enforcing Compile-Time Evaluation: `constexpr`
 
 
 # Ranges and Views
