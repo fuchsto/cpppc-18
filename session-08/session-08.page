@@ -9,6 +9,68 @@ category: course notes, cpppc
 
 **[Code discussed in this session](/session-08/)**
 
+
+# Forcing Compile-Time Evaluation: `constexpr`
+
+
+# Ranges and Views
+
+Making actual use of `constexpr`, perfect forwarding and expression templates: \
+**wwwrrRHROOM** at compile time, **\*poof\*** at runtime.
+
+- [Tobias Fuchs: *The Point of Views: Multidimensional Ranges for HPC*](https://www.youtube.com/watch?v=JsGsgRnbIpU)
+- [Eric Niebler: *Introducing the Ranges TS*](https://www.youtube.com/watch?v=LNXkPh3Z418)
+
+## Iterator vs. Sentinel
+
+Not without audible weeping and gnashing of teeth we observed that `end` iterators
+are no real iterators. Most otherwise valid expressions on an iterator type are
+not allowed if an instance happens to represent an `end` iterator, such as:
+
+* Dereference: `*it`
+* Member dereference: `it->member`
+* Incrementing: `++it`, `it++`
+* Offset: `it += n`, `it -= n`
+* Random access: `it[n]`
+
+Valid expressions for `end` iterators:
+
+* Random access:
+    * Distance (RAI): `it_a - it_b`
+    * Order: `it_a < it_b`, ...
+* Equality: `it_a == it_b`, `it_a != it_b`
+
+Generally speakig, this leaves us with equality / inequality comparison for `end` 
+iterators.
+Arguably, inequality is the only relevant expression we need for iteration:
+
+~~~c++
+for (auto & val : container) {
+  // ...
+}
+
+// which is syntactic sugar for:
+for (auto it = std::begin(container);
+     it     != std::end(container);
+     ++it) {
+  // ...
+}
+
+// same as:
+for (auto it = container.begin(); it != container.cend(); ++it) {
+  // ...
+}
+~~~
+
+Note that in the last variant of the loop, the type of \
+`it` \
+\ \ \ `-> decltype(container)::iterator` \
+is different from the type of \
+`container.cend()` \
+\ \ \ `-> decltype(container)::const_iterator`.
+
+
+
 # Multithreading and Parallelism
 
 Creating threads is easy:
