@@ -1,6 +1,6 @@
 
 CC=g++
-CFLAGS=--std=c++11 -Wall -Wextra -pedantic -g
+CFLAGS=--std=c++11 -Wall -Wextra -pedantic -g -fpermissive
 LDFLAGS=-lrt
 
 OBJS = main.o
