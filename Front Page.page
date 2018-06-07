@@ -79,7 +79,8 @@ and Programmers*](http://ptgmedia.pearsoncmg.com/images/9780134383583/samplepage
     [Assignment 06 - due Friday 01. June](/assignment-06/)
 
 - [Session 07](/session-07/session-07) \
-    Polymorphism, Perfect Forwarding, Type Deduction (auto, decltype)
+    Polymorphism, Perfect Forwarding, Type Deduction (auto, decltype) \
+    No programming assignment **but**: read *Effective Modern C++*
 
 - [Session 08](/session-08/session-08) \
     Parallelism, Thread Safety of STL Containers
