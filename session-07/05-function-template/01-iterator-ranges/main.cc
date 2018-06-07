@@ -15,7 +15,35 @@ using std::endl;
 
 static const int NElem = 10;
 
-template<typename Iter>
+// Not (until C++20 prolly)
+std::vector v = { 20, 30 };
+
+int x = 4;
+
+auto   c = x; // -> int
+auto & r = x; // -> int &
+const auto & cr = x; // -> const int &
+
+
+using cr_type = decltype(*(&x));
+
+
+template <class T>
+decltype(auto) make_type_deduced_vector(T && ctor_arg) {
+  return std::vector< std::remove_reference<T>::type >(
+            std::forward<T &&>(ctor_arg) );
+}
+
+
+auto v = make_type_deduced_vector(3.4); // -> std::vector<double>
+
+const int & a = x;
+
+std::typeid(x) -> "PK3int"
+
+
+
+template<class Iter>
 Iter find_nth_between(Iter start, Iter end, int n)
 {
   auto range_len = std::distance(start, end);
