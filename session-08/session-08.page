@@ -85,6 +85,15 @@ conceptually independent from containers, however:
   dereferenced \
   (see all index-based iterators we came across)
 
+
+We also discussed why it is important to rely on the least complex iterator category
+for STL-style algorithms, for example using `++it` in favor of `it += 1`.
+
+Input- and forward iterators would suffice to iterate a sequence, but they do not
+provide distance-based expressions.
+
+This is inconvenient for ranges!
+
 Let's revisit the `lazy_sequence` in particular:
 
 ~~~c++
@@ -96,25 +105,26 @@ auto ls = lazy_sequence<int>(
 ~~~
 
 The only reason why we required to specify the size of the sequence and only allow
-indices starting from `0` to mimic the STL sequence container concept. \
+indices starting from `0` was to mimic an STL sequence container. \
 But apart from that, there is no need to restrict the beginning and length of the
-sequence:
+sequence. We could also allow:
 
 ~~~c++
-// open range of squares:
+// half-open range [0...] of squares:
 auto ls = lazy_sequence<int>(
             [](int i) { return i*i; });
-
 ~~~
 
-We also discussed why it is important to rely on the least complex iterator category
-for STL-style algorithms, for example using `++it` in favor of `it += 1`.
+But if no size is specified, there is no `lazy_sequence::end()`, so how could
+we iterate over the sequence?
 
-Input- and forward iterators would suffice to iterate a sequence, but they do not
-provide distance-based expressions. \
-This is inconvenient for ranges: how would you specify an iteration on an
-`std::list` over exactly `n` elements? You would probably use a loop counter. For
-classic loops, this is ugly but would get the job done:
+Perhaps `lazy_sequence` was a bad idea to begin with?
+
+So let's stick to the plain STL: how would you specify an iteration on an
+`std::list` over exactly `n` elements?
+
+You would probably use a loop counter. \
+For classic loops, this is ugly but would get the job done:
 
 ~~~c++
 for (int  ct = 20,
@@ -126,7 +136,8 @@ for (int  ct = 20,
 }
 ~~~
 
-But we don't like class for loops, do we. We prefer:
+But we don't like old-fashioned for loops, do we.\
+We prefer:
 
 - *range-based for* in case of in-order sequential iteration, or
 - algorithms like `std::for_each`, `std::transform`, ... if we can be specific about
