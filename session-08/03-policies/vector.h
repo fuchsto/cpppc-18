@@ -3,6 +3,8 @@
 
 #include <exception>
 #include <stdexcept>
+#include <algorithm>
+
 #include <cstring>
 #include <cstdlib>
 
@@ -11,7 +13,6 @@ namespace cpppc {
 
 class MinimalResizePolicy
 {
-
 public:
 
   int grow(
@@ -48,7 +49,6 @@ class Vector
   typedef ElementType                       value_t;
 
 public:
-
   typedef value_t             value_type;
 
   typedef value_t *           iterator;
@@ -56,14 +56,15 @@ public:
   typedef value_t &           reference;
 
 public:
-
   inline Vector() noexcept = default;
 
   inline Vector(const self_t & other)
   {
     reserve(other._capacity);
     _size = other._size;
-    memcpy(_elements, other._elements, _size * sizeof(value_t));
+    std::copy(other._elements,
+              other._elements + _size,
+              _elements);
   }
 
   inline ~Vector() noexcept
@@ -76,7 +77,9 @@ public:
     clear();
     reserve(rhs._capacity);
     _size = rhs._size;
-    memcpy(_elements, rhs._elements, _size * sizeof(value_t));
+    std::copy(rhs._elements,
+              rhs._elements + _size,
+              _elements);
 
     return *this;
   }
@@ -186,11 +189,13 @@ public:
 
   inline reference at(int offset) const
   {
+    if (offset >= _size || offset < 0) {
+      throw std::out_of_range("cpppc::Vector.at()");
+    }
     return _elements[offset];
   }
 
 private:
-
   ResizePolicy   _resize_policy;
   value_t      * _elements       = nullptr;
   int            _size           = 0;
