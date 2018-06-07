@@ -132,7 +132,9 @@ for (int  ct = 20,
      it != list.end() &&
      ct > 0;
      ++it, --ct) {
-  // yukkk
+  //
+  //   "Kill ... meeee ... *gurgle* ... "
+  //
 }
 ~~~
 
