@@ -70,6 +70,81 @@ is different from the type of \
 \ \ \ `-> decltype(container)::const_iterator`.
 
 
+## Iterator vs. Container
+
+STL container concepts and algorithms depend on iterators.
+
+In the `lazy_sequence` and `sparse_array` assignments, we learned that iterators are
+conceptually independent from containers, however:
+
+- Iterators may have different reference types for const and non-const contexts \
+  (see `sparse_array`)
+- An iterator does not require a container of elements \
+  (see `lazy_sequence`)
+- Values referenced by an iterator do not necessarily have to exist until it is
+  dereferenced \
+  (see all index-based iterators we came across)
+
+Let's revisit the `lazy_sequence` in particular:
+
+~~~c++
+// sequence (here: closed range) of squares:
+auto ls = lazy_sequence<int>(
+              20, // size
+              [](int i) { return i*i; });
+
+~~~
+
+The only reason why we required to specify the size of the sequence and only allow
+indices starting from `0` to mimic the STL sequence container concept. \
+But apart from that, there is no need to restrict the beginning and length of the
+sequence:
+
+~~~c++
+// open range of squares:
+auto ls = lazy_sequence<int>(
+            [](int i) { return i*i; });
+
+~~~
+
+We also discussed why it is important to rely on the least complex iterator category
+for STL-style algorithms, for example using `++it` in favor of `it += 1`.
+
+Input- and forward iterators would suffice to iterate a sequence, but they do not
+provide distance-based expressions. \
+This is inconvenient for ranges: how would you specify an iteration on an
+`std::list` over exactly `n` elements? You would probably use a loop counter. For
+classic loops, this is ugly but would get the job done:
+
+~~~c++
+for (int  ct = 20,
+     auto it = list.begin();
+     it != list.end() &&
+     ct > 0;
+     ++it, --ct) {
+  // yukkk
+}
+~~~
+
+But we don't like class for loops, do we. We prefer:
+
+- *range-based for* in case of in-order sequential iteration, or
+- algorithms like `std::for_each`, `std::transform`, ... if we can be specific about
+  operation semantics
+
+Range-based for loops do not allow decrementing a counter in the loop header, and
+STL algorithms cannot be "canceled" at all.
+This is why there is a `std::<algorithm>_n` variant at least for the most basic
+algorithms.
+
+In conclusion, it would be highly desirable to:
+
+- ... specify iteration for half-open ranges
+- ... decouple sequence length from iterator distance
+- ... use a non-iterator concept for `end`
+
+
+
 
 # Multithreading and Parallelism
 
