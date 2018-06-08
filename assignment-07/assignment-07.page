@@ -94,9 +94,12 @@ for (const auto & value : range) {
 
 
 
-# 7-4 Runtimes / They are a-Changin'
+# 7-4 Iterate, Evaluate, Destroy
 
-## 7-4-0 Prerequisites 
+
+# 7-5 Runtimes / They are a-Changin'
+
+## 7-5-0 Prerequisites 
 
 Clone *Celero* from [https://github.com/DigitalInBlue/Celero]() and experiment with
 the examples in the distribution.
