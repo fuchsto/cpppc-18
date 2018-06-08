@@ -20,6 +20,7 @@ Making actual use of `constexpr`, perfect forwarding and expression templates: \
 
 - [Tobias Fuchs: *The Point of Views: Multidimensional Ranges for HPC*](https://www.youtube.com/watch?v=JsGsgRnbIpU)
 - [Eric Niebler: *Introducing the Ranges TS*](https://www.youtube.com/watch?v=LNXkPh3Z418)
+- [Odin Holmes: *Ranges v3 and microcontrollers, a revolution*](https://www.youtube.com/watch?v=dxRDWgLIAZg)
 
 ## Iterator vs. Sentinel
 
