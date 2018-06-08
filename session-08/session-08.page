@@ -19,8 +19,12 @@ Making actual use of `constexpr`, perfect forwarding and expression templates: \
 **wwwrrRHROOM** at compile time, **\*poof\*** at runtime.
 
 - [Tobias Fuchs: *The Point of Views: Multidimensional Ranges for HPC*](https://www.youtube.com/watch?v=JsGsgRnbIpU)
+
+Talks on the proposed *Ranges Technical Specification*:
+
 - [Eric Niebler: *Introducing the Ranges TS*](https://www.youtube.com/watch?v=LNXkPh3Z418)
 - [Odin Holmes: *Ranges v3 and microcontrollers, a revolution*](https://www.youtube.com/watch?v=dxRDWgLIAZg)
+- [Arno Schödl: *From Iterators to Ranges: The Upcoming Evolution Of the STL*](https://www.youtube.com/watch?v=vrCtS6FDay8)
 
 ## Iterator vs. Sentinel
 
