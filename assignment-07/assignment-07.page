@@ -42,6 +42,36 @@ solution (at [15:29](https://youtu.be/XKu_SEDAykw?t=15m29s) in the video):
 
 # 7-3 Act Like You Got a Pair
 
+The utility template `std::pair<A,B>` is a useful companion due to its utmost
+simplicity and predictability: just a struct of two values `first` and `second`
+with independent types.
+
+Experiment with minimal examples to answer the following questions:
+
+- How do comparison operators of `pair<A,B>` depend on types `A` and `B`?
+- How can we specify comparison of `pair<A0,B0>` and `pair<A1,B1>`? 
+- What is the benefit of `std::get` over `pair.first` / `pair.second` \
+  (use compiler explorer)
+- Why don't we just always use `std::get`?
+
+The most traditional ways to represent a range are:
+- a pair of iterators
+- a pair of an iterator and an offset
+
+Implement as minimal proof-of-concepts:
+
+- Specialize `std::make_pair` for iterator and offset, that is: \
+  Define a variant of `std::make_pair(T, int)` matching parameter types `T` that
+  provide a type definition `iterator_category`
+- Define `std::begin(std::pair<A,B> p)` and `std::end(std::pair<A,B> p),
+  returning \
+  `std::get<0>(p)` and \
+  `std::advance(std::get<0>(p), std::get<1>(p)` respectively.
+
+Use compiler explorer to check that your specializations have no overhead.
+
+
+
 
 # 7-4 The runtimes / they are a-changin'
 
