@@ -28,9 +28,18 @@ solution (at [15:29](https://youtu.be/XKu_SEDAykw?t=15m29s) in the video):
 4. Become aware that you got pretty good at C++
 
 
-# 7-2 The runtimes / they are a-changin'
 
-# 7-2-0 Prerequisites 
+# 7-2 Pass the Resource to the Left-hand Side
+
+# 7-2-1 Move Operator
+
+# 7-2-2 Move Criminal
+
+
+
+# 7-3 The runtimes / they are a-changin'
+
+# 7-3-0 Prerequisites 
 
 Clone *Celero* from [https://github.com/DigitalInBlue/Celero]() and experiment with
 the examples in the distribution.
