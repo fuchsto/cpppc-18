@@ -194,7 +194,16 @@ class seq_length_sentinel {
 };
 ~~~
 
-To specify a sub-range of a `lazy_sequence`, we need a thin wrapper:
+To specify a sub-range of a `lazy_sequence`, we need a thin wrapper type which
+implements the *Range* concept.
+
+A range just provides the expressions:
+
+- `std::begin(range) -> Iterator`
+- `std::end(range)   -> Sentinel`
+
+Applied to `lazy_sequence`, we finally can put the pieces together and fixed
+range iteration for good: 
 
 ~~~c++
 auto ls         = lazy_sequence(generator_fun);
@@ -203,9 +212,9 @@ int  sub_start  = 10;
 int  sub_length =  7;
 auto sub_range  = make_range(ls, index_first, index_final);
 
-auto sub_begin  = std::begin(sub_range );
+auto sub_begin  = std::begin(sub_range);
                   // returns std::advance(std::begin(ls), 10)
-auto sub_end    = std::end(sub_range );
+auto sub_end    = std::end(sub_range);
                   // returns seq_length_sentinel(7)
 ~~~
 
