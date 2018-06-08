@@ -33,14 +33,7 @@ solution (at [15:29](https://youtu.be/XKu_SEDAykw?t=15m29s) in the video):
 
 
 
-# 7-2 Pass the Resource to the Left-hand Side
-
-## 7-2-1 Move Operator
-
-## 7-2-2 Move Criminal
-
-
-# 7-3 Act Like You Got a Pair
+# 7-2 Act Like You Got a Pair
 
 The utility template `std::pair<A,B>` is a useful companion due to its utmost
 simplicity and predictability: just a struct of two values `first` and `second`
@@ -85,6 +78,14 @@ for (const auto & value : range) {
    std::cout << value << '\n';
 }
 ~~~
+
+
+
+# 7-3 Pass the Resource to the Left-hand Side
+
+## 7-3-1 Move Operator
+
+## 7-3-2 Move Criminal
 
 
 
