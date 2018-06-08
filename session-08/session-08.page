@@ -125,8 +125,9 @@ So let's stick to the plain STL: how would you specify an iteration on an
 
 
 > I assume you have acquired a healthy aversion to StackOverflow answers at this
-> point. The wide spectrum of recommended solutions to this very problem
-> discussed in [this StackOverflow discussion](https://stackoverflow.com/questions/30781811/is-there-a-way-to-iterate-over-at-most-n-elements-using-range-based-for-loop)
+> point. \
+> The wide spectrum of recommended solutions to this very problem
+> in [this StackOverflow discussion](https://stackoverflow.com/questions/30781811/is-there-a-way-to-iterate-over-at-most-n-elements-using-range-based-for-loop)
 > - masterfully avoiding any correct or useful insight - should eliminate any
 > residual doubt.
 
