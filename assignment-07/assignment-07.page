@@ -30,8 +30,8 @@ solution \
 2. Provide an improved variant of the `HasPairWithSum` function \
    (feel free to also improve its name)
 3. Provide use cases to explain in which numerous ways the original
-   implementation is lacking and why your improvements are essential -
-   add insult to injury, discuss parallelization aspects in particular
+   implementation is lacking and why your improvements are essential \
+   (add insult to injury: discuss parallelization aspects in particular)
 4. Become aware that you got pretty good at C++
 
 
