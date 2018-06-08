@@ -55,6 +55,7 @@ Experiment with minimal examples to answer the following questions:
 - Why don't we just always use `std::get`?
 
 The most traditional ways to represent a range are:
+
 - a pair of iterators
 - a pair of an iterator and an offset
 
