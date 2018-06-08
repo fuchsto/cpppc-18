@@ -62,12 +62,13 @@ The most traditional ways to represent a range are:
 Implement as minimal proof-of-concepts:
 
 - Specialize `std::make_pair` for iterator and offset, that is: \
-  Define a variant of `std::make_pair(T, int)` matching parameter types `T` that
-  provide a type definition `iterator_category`
-- Define `std::begin(std::pair<A,B> p)` and `std::end(std::pair<A,B> p),
-  returning \
-  `std::get<0>(p)` and \
-  `std::advance(std::get<0>(p), std::get<1>(p)` respectively.
+  Define a variant of `std::make_pair(Iter,int)` which only matches parameter
+  types `Iter` that provide a type definition `iterator_category`
+- Define 
+    - `std::begin(std::pair<Iter,int> p)` \
+      returning `std::get<0>(p)`
+    - `std::end(std::pair<Iter,int> p)` \
+      returning `std::advance(std::get<0>(p), std::get<1>(p))`
 
 Use compiler explorer to check that your specializations have no overhead.
 
