@@ -208,9 +208,9 @@ range iteration for good:
 ~~~c++
 auto ls         = lazy_sequence(generator_fun);
 
-int  sub_start  = 10;
+int  sub_offset = 10;
 int  sub_length =  7;
-auto sub_range  = make_range(ls, index_first, index_final);
+auto sub_range  = make_range(ls, sub_offset, sub_length);
 
 auto sub_begin  = std::begin(sub_range);
                   // returns std::advance(std::begin(ls), 10)
