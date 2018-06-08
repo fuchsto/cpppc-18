@@ -23,7 +23,8 @@ demonstrate what Google would expect from candidates:
 Regrettably, comments have been disabled for this video.
 
 Wipe the floor with the C++ implementation that is showcased as an acceptable
-solution (at [15:29](https://youtu.be/XKu_SEDAykw?t=15m29s) in the video):
+solution \
+(at [15:29](https://youtu.be/XKu_SEDAykw?t=15m29s) in the video):
 
 1. Shake your head in disbelief and disgust
 2. Provide an improved variant of the `HasPairWithSum` function \
