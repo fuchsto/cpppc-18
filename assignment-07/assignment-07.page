@@ -21,11 +21,11 @@ Wipe the floor with the C++ implementation that is showcased as an acceptable
 solution (at [15:29](https://youtu.be/XKu_SEDAykw?t=15m29s) in the video):
 
 1. Shake your head in disbelief and disgust
-2. Provide an improved variant of the `HasPairWithSum` \
+2. Provide an improved variant of the `HasPairWithSum` function \
    (feel free to also improve its name)
-3. Explain in which numerous ways the original implementation is lacking and
-   why your improvements are necessary
-4. Become aware that you are actually good at C++
+3. Provide use cases to explain in which numerous ways the original
+   implementation is lacking and why your improvements are essential
+4. Become aware that you got pretty good at C++
 
 
 # 7-2
