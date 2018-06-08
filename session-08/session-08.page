@@ -170,6 +170,44 @@ In conclusion, it would be highly desirable to:
 - ... decouple sequence length from iterator distance
 - ... use a non-iterator concept for `end`
 
+**Sentinels** as a concept replacing `end` iterators achieve all of this,
+and much more. They only provide equality comparison operators which effectively
+serve as a break condition.
+
+~~~c++
+class seq_length_sentinel {
+  public:
+    seq_length_sentinel (int n) : _num_compare(n) { }
+
+    template <class Iter>
+    bool operator!=(const Iter &) const noexcept {
+      return --_num_compare > 0;
+    }
+
+    template <class Iter>
+    bool operator==(const Iter & rhs) const noexcept {
+      return not (this->operator!=(x));
+    }
+
+  private:
+    mutable int _num_compare = 0;
+};
+~~~
+
+To specify a sub-range of a `lazy_sequence`, we need a thin wrapper:
+
+~~~c++
+auto ls         = lazy_sequence(generator_fun);
+
+int  sub_start  = 10;
+int  sub_length =  7;
+auto sub_range  = make_range(ls, index_first, index_final);
+
+auto sub_begin  = std::begin(sub_range );
+                  // returns std::advance(std::begin(ls), 10)
+auto sub_end    = std::end(sub_range );
+                  // returns seq_length_sentinel(7)
+~~~
 
 
 # Multithreading and Parallelism
