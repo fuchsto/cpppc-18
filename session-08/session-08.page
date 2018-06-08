@@ -147,7 +147,7 @@ for (int  ct = 20,
      ct > 0;
      ++it, --ct) {
   //
-  //   "Kill ... meeee ... *gurgle* ... "
+  //   This is just as useful as it looks
   //
 }
 ~~~
