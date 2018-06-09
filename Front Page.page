@@ -84,12 +84,11 @@ and Programmers*](http://ptgmedia.pearsoncmg.com/images/9780134383583/samplepage
     [*Effective Modern C++*](http://www.mnm-team.org/teaching/Praktika/2018ss/cpppc/internal/2014-EMCxx.pdf)
 
 - [Session 08](/session-08/session-08) \
-    Ranges, constexpr, Parallelism, Thread Safety of STL Containers \
+    Ranges, constexpr, Multithreading and Tasks \
     [Assignment 07 - due Wednesday 20. June](/assignment-07/)
 
 - [Session 09](/session-09/session-09) \
-    Expression Templates, constexpr, Views
-
+    Expression Templates, Thread Safety of STL Containers
 
 - ...
 
