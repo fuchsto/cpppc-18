@@ -83,16 +83,6 @@ for (const auto & value : range) {
 }
 ~~~
 
-
-
-# 7-3 Pass the Resource to the Left-hand Side
-
-## 7-3-1 Move Operator
-
-## 7-3-2 Move Criminal
-
-
-
 # 7-4 Iterate, Evaluate, Destroy
 
 References:
