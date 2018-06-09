@@ -95,6 +95,34 @@ for (const auto & value : range) {
 
 # 7-4 Iterate, Evaluate, Destroy
 
+References:
+
+- [http://en.cppreference.com/w/cpp/algorithm]()
+
+## 7-4-1 Algorithm Categories
+
+Like container categories (sequential, associative, wrapper), STL algorithms
+are categorized into conceptual groups.
+
+Two of those are *Modifying Sequence Operation* and *Non-Modifying Sequence Operation*.
+
+- In the [overview of STL algorithms](http://en.cppreference.com/w/cpp/algorithm),
+  algorithms like `std::sort` and `std::partition` are not in die *Modifying*
+  category. Why?
+- Are there algorithms that return their result as a new sequence? Why?
+
+## 7-4-2 Iterator Invalidation
+
+- Which algorithms allow to add or remove elements from their input ranges?
+- Explain how `std::list`, `std::deque`, `std::vector` and `std::map` differ
+  in iterator invalidation rules. \
+  Also discuss the differences between iterator invalidation rules for erasure
+  (removing container elements) and insertion (adding elements).
+
+
+
+## Iterator Invalidation
+
 
 # 7-5 Runtimes / They are a-Changin'
 
