@@ -1,0 +1,17 @@
+---
+format: Markdown
+title: Assignment 8
+categories: cpppc, teaching
+...
+
+**C++ Programming Course, Summer Term 2018**
+
+
+# 8-1 Pass the Resource to the Left-hand Side
+
+
+# 8-2 
+
+
+Implement the function templates `cpppc::prefix` and `cpppc::suffix`
+
