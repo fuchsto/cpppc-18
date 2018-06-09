@@ -112,9 +112,6 @@ Two of those are *Modifying Sequence Operation* and *Non-Modifying Sequence Oper
 
 
 
-## Iterator Invalidation
-
-
 # 7-4 Runtimes / They are a-Changin'
 
 ## 7-4-0 Prerequisites 
