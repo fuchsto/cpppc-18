@@ -15,8 +15,11 @@ category: course notes, cpppc
 
 # Ranges and Views
 
+- Highly recommended talk, summarizes everything in this section comprehensively: \
+  [Arno Schödl: From Iterators to Ranges: The Upcoming Evolution Of the STL](https://www.youtube.com/watch?v=vrCtS6FDay8)
+
 Making actual use of `constexpr`, perfect forwarding and expression templates: \
-**wwwrrRHROOM** at compile time, **\*poof\*** at runtime.
+ranges and view:
 
 - [Tobias Fuchs: *The Point of Views: Multidimensional Ranges for HPC*](https://www.youtube.com/watch?v=JsGsgRnbIpU)
 
