@@ -83,13 +83,13 @@ for (const auto & value : range) {
 }
 ~~~
 
-# 7-4 Iterate, Evaluate, Destroy
+# 7-3 Iterate, Evaluate, Destroy
 
 References:
 
 - [http://en.cppreference.com/w/cpp/algorithm]()
 
-## 7-4-1 Algorithm Categories
+## 7-3-1 Algorithm Categories
 
 Like container categories (sequential, associative, wrapper), STL algorithms
 are categorized into conceptual groups.
@@ -102,7 +102,7 @@ Two of those are *Modifying Sequence Operation* and *Non-Modifying Sequence Oper
 - Are there algorithms that return their result as a new sequence? Why?
   Discuss a minimal use-case to illustrate this.
 
-## 7-4-2 Iterator Invalidation
+## 7-3-2 Iterator Invalidation
 
 - Which algorithms allow to add or remove elements from their input ranges?
 - Explain how `std::list`, `std::deque`, `std::vector` and `std::map` differ
@@ -115,10 +115,23 @@ Two of those are *Modifying Sequence Operation* and *Non-Modifying Sequence Oper
 ## Iterator Invalidation
 
 
-# 7-5 Runtimes / They are a-Changin'
+# 7-4 Runtimes / They are a-Changin'
 
-## 7-5-0 Prerequisites 
+## 7-4-0 Prerequisites 
 
 Clone *Celero* from [https://github.com/DigitalInBlue/Celero]() and experiment with
 the examples in the distribution.
+
+## 7-4-1 Shaming Virtual
+
+Let's assume a colleague of yours uses virtual for virtually everything.
+
+- Implement micro-benchmarks using Celero that demonstrate the disadvantages
+  of `virtual` (runtime polymorphism) in the most drastic way you can.
+
+- Evaluate performance of CRTP vs. virtual in a micro-benchmark. \
+  You can use the CRTP iterator base classes from your solution to assignment 6
+  if you want.
+
+
 
