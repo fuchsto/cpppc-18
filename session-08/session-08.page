@@ -222,6 +222,9 @@ auto sub_end    = std::end(sub_range);
 ~~~
 
 
+Range adaptors are explained in [this article](https://arne-mertz.de/2017/01/ranges-stl-next-level/) in more detail.
+
+
 # Multithreading and Parallelism
 
 Creating threads is easy:
