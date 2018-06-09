@@ -110,6 +110,7 @@ Two of those are *Modifying Sequence Operation* and *Non-Modifying Sequence Oper
   algorithms like `std::sort` and `std::partition` are not in die *Modifying*
   category. Why?
 - Are there algorithms that return their result as a new sequence? Why?
+  Discuss a minimal use-case to illustrate this.
 
 ## 7-4-2 Iterator Invalidation
 
