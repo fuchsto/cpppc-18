@@ -80,11 +80,8 @@ public:
       else {
         // Element is filtered, advancing to next position in input
         // range.
-        auto next = self_t(++(*this));
-        return *next;
-        // But wait ... what if `next` is at the end of the input range?
-        // If no element matches, for example, the user had to know that
-        // the filtered range is empty.
+        ++(*this);
+        return *(*this);
       }
     }
 
@@ -193,8 +190,6 @@ decltype(auto) filter_impl(
                input)));
 }
 
-
-
 int main() {
   using std::cout;
   using std::endl;
@@ -215,10 +210,10 @@ int main() {
   cout_range(values_a);
   cout << '\n';
 
-  auto filtered = filter_impl([](int v) { return v > 10; },
+  auto filtered = filter_impl([](int v) { return v < 10; },
                               values_a);
   cout << "filtered: ";
-  cout_range(filtered); // Now the thing will crash and burn.
+  cout_range(filtered);
   cout << '\n';
 
   cout << "values_b: ";
@@ -254,9 +249,7 @@ int main() {
   
   // So this is the most simplistic first approach I can come up with
   // right now (it's not what you should do):
-
-
-  // So this is a "for_each_if" that coincidentally implements a filter.
+  // This "for_each_if" coincidentally implements a filter.
   //
   std::vector<int> values_a_filtered;
   std::for_each( // you should already feel a bit guilty here
