@@ -11,6 +11,7 @@ title: Advanced C++ - Summer Term 2018
     - [\#01: Getting started with sparse_array](https://www.youtube.com/watch?v=BRzWQTYMUtw)
     - [\#02: Lazy Sequence](https://www.youtube.com/watch?v=XH6qkFQ-gQI)
     - [\#03: Range Basics (Live Stream)](https://www.youtube.com/watch?v=UClJm15Ehes)
+          | [code: 01-ranges](/streams/01-ranges/)
     - \#04: Debugging, Assembly Analysis, Benchmarking, Profiling
     - \#05: View Concepts and constexpr
     - \#06: Static Polymorphism (CRTP)
