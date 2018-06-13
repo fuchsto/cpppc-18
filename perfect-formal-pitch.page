@@ -7,3 +7,6 @@ title: Notes on Perfect Formal Pitch
 
 > Post-publication peer review, a staple of open science, has been criticized as
 > promoting the production of lower quality papers that are extremely voluminous.
+
+- ["All methods are const because there is no ownership"](https://github.com/dash-project/dash/blame/development/dash/include/dash/atomic/GlobAtomicRef.h#L19)
+
