@@ -10,4 +10,5 @@ title: Notes on Perfect Formal Pitch
 
 - ["All methods are const because there is no ownership"](https://github.com/dash-project/dash/blame/development/dash/include/dash/atomic/GlobAtomicRef.h#L19)
 
-- ["Assignment to const? Sure! But return a `const self_t &` then."](https://github.com/dash-project/dash/blame/development/dash/include/dash/GlobRef.h#L177)
+- ["Assignment to const? Sure! But return a `const self_t &` then."](https://github.com/dash-project/dash/blame/development/dash/include/dash/GlobRef.h#L177) \
+  ["But if we detect assignment to const, then we static_assert against it"](https://github.com/dash-project/dash/blame/development/dash/include/dash/GlobRef.h#L216)
