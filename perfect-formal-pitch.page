@@ -10,3 +10,4 @@ title: Notes on Perfect Formal Pitch
 
 - ["All methods are const because there is no ownership"](https://github.com/dash-project/dash/blame/development/dash/include/dash/atomic/GlobAtomicRef.h#L19)
 
+- ["Assignment to const? Sure! But return a `const self_t &` then."](https://github.com/dash-project/dash/blame/development/dash/include/dash/GlobRef.h#L177)
