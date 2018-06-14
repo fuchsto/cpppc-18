@@ -93,7 +93,11 @@ and Programmers*](http://ptgmedia.pearsoncmg.com/images/9780134383583/samplepage
     [Live Stream: Range Basics](https://www.youtube.com/watch?v=UClJm15Ehes)
 
 - [Session 09](/session-09/session-09) \
-    Expression Templates, Thread Safety of STL Containers
+    Perfect Forwarding, Template Type Deduction,
+    Expression Templates
+
+- [Session 10](/session-10/session-10) \
+    Thread Safety of STL Containers
 
 - ...
 
