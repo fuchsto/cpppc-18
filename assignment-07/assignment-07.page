@@ -6,6 +6,11 @@ categories: cpppc, teaching
 
 **C++ Programming Course, Summer Term 2018**
 
+> "Because I'm hard, you will not like me. \
+> \ But the more you hate me, the more you will learn." \
+> -- [Gunnery Sgt. Hartman](https://www.youtube.com/watch?v=3j3_iPskjxk) \
+> \ \ \ (gunned down by one of his recruits a few weeks later, so ... because of a private)
+
 
 # 7-1 Fixing the Google Tech Interview
 
@@ -15,32 +20,115 @@ demonstrate what Google would expect from candidates:
 
 [https://www.youtube.com/watch?v=XKu_SEDAykw]()
 
-Regrettably, comments have been disabled for this video.
+For reasons one can only speculate about, comments have been disabled for
+this video.
 
 Wipe the floor with the C++ implementation that is showcased as an acceptable
-solution (at [15:29](https://youtu.be/XKu_SEDAykw?t=15m29s) in the video):
+solution \
+(at [15:29](https://youtu.be/XKu_SEDAykw?t=15m29s) in the video):
 
 1. Shake your head in disbelief and disgust
 2. Provide an improved variant of the `HasPairWithSum` function \
    (feel free to also improve its name)
 3. Provide use cases to explain in which numerous ways the original
-   implementation is lacking and why your improvements are essential
+   implementation is lacking and why your improvements are essential \
+   (add insult to injury: discuss parallelization aspects in particular)
 4. Become aware that you got pretty good at C++
 
 
 
-# 7-2 Pass the Resource to the Left-hand Side
+# 7-2 Act Like You Got a Pair
 
-## 7-2-1 Move Operator
+The utility template `std::pair<A,B>` is a useful companion due to its utmost
+simplicity and predictability: just a struct of two values `first` and `second`
+with independent types.
 
-## 7-2-2 Move Criminal
+Experiment with minimal examples to answer the following questions:
+
+- How do comparison operators of `pair<A,B>` depend on types `A` and `B`?
+- How can we specify comparison of `pair<A0,B0>` and `pair<A1,B1>`? 
+- What is the benefit of `std::get` over `pair.first` / `pair.second` \
+  (use compiler explorer)
+- Why don't we just always use `std::get`?
+
+The most traditional ways to represent a range are:
+
+- a pair of iterators
+- a pair of an iterator and an offset
+
+Implement as minimal proof-of-concepts:
+
+- Specialize `std::make_pair` for iterator and offset, that is: \
+  Define a variant of `std::make_pair(Iter,int)` which only matches parameter
+  types `Iter` that provide a type definition `iterator_category`
+- Define 
+    - `std::begin(std::pair<Iter,int> p)` \
+      returning `std::get<0>(p)`
+    - `std::end(std::pair<Iter,int> p)` \
+      returning `std::advance(std::get<0>(p), std::get<1>(p))`
+
+Use compiler explorer to check that your specializations have no overhead.
+
+A usage example:
+
+~~~c++
+std::vector<std::string> v {
+   "Monday", "Tuesday", "Wednesday",
+   "Thursday", "Brainfryday", "Saturday", "Sunday" };
+
+auto range = std::make_pair(v.begin(), 6);
+
+for (const auto & value : range) {
+   std::cout << value << '\n';
+}
+~~~
+
+# 7-3 Iterate, Evaluate, Destroy
+
+References:
+
+- [http://en.cppreference.com/w/cpp/algorithm]()
+
+## 7-3-1 Algorithm Categories
+
+Like container categories (sequential, associative, wrapper), STL algorithms
+are categorized into conceptual groups.
+
+Two of those are *Modifying Sequence Operation* and *Non-Modifying Sequence Operation*.
+
+- In the [overview of STL algorithms](http://en.cppreference.com/w/cpp/algorithm),
+  algorithms like `std::sort` and `std::partition` are not in die *Modifying*
+  category. Why?
+- Are there algorithms that return their result as a new sequence? Why?
+  Discuss a minimal use-case to illustrate this.
+
+## 7-3-2 Iterator Invalidation
+
+- Which algorithms allow to add or remove elements from their input ranges?
+- Explain how `std::list`, `std::deque`, `std::vector` and `std::map` differ
+  in iterator invalidation rules. \
+  Also discuss the differences between iterator invalidation rules for erasure
+  (removing container elements) and insertion (adding elements).
 
 
 
-# 7-3 The runtimes / they are a-changin'
+# 7-4 Runtimes / They are a-Changin'
 
-## 7-3-0 Prerequisites 
+## 7-4-0 Prerequisites 
 
 Clone *Celero* from [https://github.com/DigitalInBlue/Celero]() and experiment with
 the examples in the distribution.
+
+## 7-4-1 Shaming Virtual
+
+Let's assume a colleague of yours uses virtual for virtually everything.
+
+- Implement micro-benchmarks using Celero that demonstrate the disadvantages
+  of `virtual` (runtime polymorphism) in the most drastic way you can.
+
+- Evaluate performance of CRTP vs. virtual in a micro-benchmark. \
+  You can use the CRTP iterator base classes from your solution to assignment 6
+  if you want.
+
+
 

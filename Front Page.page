@@ -7,13 +7,14 @@ title: Advanced C++ - Summer Term 2018
 
 **[GitHub Repository](https://github.com/fuchsto/cpppc-18/)**
 
-- **[CppPC Livestreams on YouTube](https://www.youtube.com/channel/UCPpWJiykrqqm5N_OLApbO2w)**
+- **[CppPC on YouTube](https://www.youtube.com/channel/UCPpWJiykrqqm5N_OLApbO2w)**
     - [\#01: Getting started with sparse_array](https://www.youtube.com/watch?v=BRzWQTYMUtw)
     - [\#02: Lazy Sequence](https://www.youtube.com/watch?v=XH6qkFQ-gQI)
-    - \#03: Debugging, Assembly Analysis, Benchmarking, Profiling
-    - \#04: Static Polymorphism (CRTP)
-    - \#05: STL Container Thread Safety, STL Parallelism Concepts
-    - \#06: View Concepts and constexpr
+    - [\#03: Range Basics (Live Stream)](https://www.youtube.com/watch?v=UClJm15Ehes)
+    - \#04: Debugging, Assembly Analysis, Benchmarking, Profiling
+    - \#05: View Concepts and constexpr
+    - \#06: Static Polymorphism (CRTP)
+    - \#07: STL Container Thread Safety, STL Parallelism Concepts
 
 - [Course website](http://www.mnm-team.org/teaching/Praktika/2018ss/cpppc/)
 - [Internal Area on Course Website](http://www.mnm-team.org/teaching/Praktika/2018ss/cpppc/internal)
@@ -35,6 +36,8 @@ and Programmers*](http://ptgmedia.pearsoncmg.com/images/9780134383583/samplepage
   Peter Gottschling, 2016
 - [*Effective Modern C++*](http://www.mnm-team.org/teaching/Praktika/2018ss/cpppc/internal/2014-EMCxx.pdf) \
   Scott Meyers, 2014
+- [*What is Meaning? Fundamentals of Formal Semantics*](https://yanjianghk.files.wordpress.com/2014/09/paul-portner-what-is-meaning-fundamentals-of-formal-semantics-fundamentals-of-linguistics-2005.pdf) \
+  Paul H. Portner, 2005
 
 ## Technical References
 
@@ -84,12 +87,12 @@ and Programmers*](http://ptgmedia.pearsoncmg.com/images/9780134383583/samplepage
     [*Effective Modern C++*](http://www.mnm-team.org/teaching/Praktika/2018ss/cpppc/internal/2014-EMCxx.pdf)
 
 - [Session 08](/session-08/session-08) \
-    Ranges, constexpr, Parallelism, Thread Safety of STL Containers \
-    [Assignment 07 - due Wednesday 20. June](/assignment-07/)
+    Ranges, constexpr, Multithreading and Tasks \
+    [Assignment 07 - due Wednesday 20. June](/assignment-07/) \
+    [Live Stream: Range Basics](https://www.youtube.com/watch?v=UClJm15Ehes)
 
 - [Session 09](/session-09/session-09) \
-    Expression Templates, constexpr, Views
-
+    Expression Templates, Thread Safety of STL Containers
 
 - ...
 
@@ -126,6 +129,10 @@ and Programmers*](http://ptgmedia.pearsoncmg.com/images/9780134383583/samplepage
 - [Type Systems (PD Dr. Ulrich Schöpp)](https://www.tcs.ifi.lmu.de/lehre/ss-2018/typen/typen), with [excellent lab notes](https://gitlab.cip.ifi.lmu.de/schoepp/Typsysteme/tree/master) available
 - [Formal Specification and Verification (Prof. Dr. Dirk Beyer)](https://www.sosy-lab.org/Teaching/2018-SS-FormaleSpezifikationVerifikation/)
 
+
+# Inspiration for Demo Projects
+
+- [Making Audio Plugins: Receiving MIDI](http://martin-finke.de/blog/articles/audio-plugins-009-receiving-midi/)
 
 
 # Selected Talks:
