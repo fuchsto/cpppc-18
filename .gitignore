@@ -5,6 +5,7 @@
 *.o
 *.a
 *.bin
+*.out
 *.tmp
 
 .gdb*
