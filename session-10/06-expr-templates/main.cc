@@ -7,8 +7,6 @@
 int main()
 {
   // Now everybody, sing along!
-  
-  
   //
   // "With your state on the stack and your op well-defined ..."
   //
@@ -16,7 +14,7 @@ int main()
   cpppc::vector<int> v2 { 5, 6, 7, 8 };
   cpppc::vector<int> v3 { 9, 0, 1, 2 };
 
-  // 
+  //
   // "You try this trick, and spin it, yeah ..."
   //
   std::cout << "instantiate vector_sum:" << std::endl;
@@ -35,7 +33,7 @@ int main()
   v3 = vsum;
 
   //
-  //  log it out, on the stream, see it streamin' ...
+  //  write it out, to command line, see it streamin' ...
   //
   for (auto e : v3) { std::cout << e << " "; }
   std::cout << std::endl;
