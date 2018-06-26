@@ -61,7 +61,7 @@ int main(int argc, char * argv[])
 
   using namespace metric;
 
-  auto work = meters(10) * kilo.grams(12);
+//  auto work = meters(10) * kilo.grams(12);
 
   return EXIT_SUCCESS;
 }
