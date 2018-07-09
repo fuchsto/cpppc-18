@@ -4,6 +4,19 @@ title: Session 10 Summary
 categories: lab notes
 ...
 
+# Excursions: "Back in my day"
+
+- [C++ in 2010](https://github.com/open-bldc/open-bldc/blob/master/source/utils/yamlgen/src/config_node.cpp)
+
+
+# Futures and Promises
+
+
+# Thread-Safety of STL Containers
+
+
 # Allocators
 
 [https://www.youtube.com/watch?v=v3dz-AKOVL8]()
+
+# Thread-Save Allocation
